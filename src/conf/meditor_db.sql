@@ -8,7 +8,7 @@
  * Created: Apr 17, 2016
  */
 
-CREATE TABLE `Visitor` (
+CREATE TABLE Visitor (
   id           int NOT NULL AUTO_INCREMENT,
   firstname    varchar(50) NOT NULL,
   surname      varchar(50) NOT NULL,
@@ -32,15 +32,41 @@ CREATE TABLE `Admin` (
 ) ;
 
 CREATE TABLE `User` (
-  email      varchar(50) NOT NULL,
-  visit_id   int,
-  admin_id   int, 
-  user_type  varchar(50) NOT NULL,
-  PRIMARY KEY (`email`, user_type),
-  constraint fk_vstemail FOREIGN KEY (`email`) REFERENCES `Visitor` (email) 
+  id         int NOT NULL AUTO_INCREMENT,
+  vst_email  varchar(50),
+  adm_email  varchar(50),  
+  user_type  varchar(50) NOT NULL CHECK (user_type = 'admin' OR user_type = 'visitor'),
+  PRIMARY KEY (id),
+  constraint fk_vstemail FOREIGN KEY (vst_email) REFERENCES Visitor (email) 
   ON DELETE CASCADE ON UPDATE CASCADE,
-  constraint fk_admemail FOREIGN KEY (`email`) REFERENCES `Admin` (email) 
-  ON DELETE CASCADE ON UPDATE CASCADE,
-  constraint fk_vstid FOREIGN KEY (visit_id) REFERENCES Visitor (id) ON DELETE CASCADE ON UPDATE CASCADE,
-  constraint fk_admid FOREIGN KEY (admin_id) REFERENCES `Admin` (id) ON DELETE CASCADE ON UPDATE CASCADE
+  constraint fk_admemail FOREIGN KEY (adm_email) REFERENCES `Admin` (email) 
+  ON DELETE CASCADE ON UPDATE CASCADE
 ) ;
+
+INSERT INTO `Admin`
+(firstname, surname, email, username, passwd)
+VALUES ('Tom', 'Tsontas','tomtsontas@deemail.com','tomtsont','1233456');
+
+INSERT INTO `Visitor`
+(firstname, surname, email, username, passwd, clearance)
+VALUES ('Mitsos', 'Papadopoulos','mitspap@deemail.com','mpap','1233456', 'senior');
+
+INSERT INTO `Visitor`
+(firstname, surname, email, username, passwd, clearance)
+VALUES ('Kitsos', 'Avramidis', 'kitsavram@deemail.com', 'kavram', '1233456', 'senior');
+
+INSERT INTO `Visitor`
+(firstname, surname, email, username, passwd, clearance)
+VALUES ('John', 'Dallas', 'jdallas@deemail.com','jdal','1233456', 'trainee');
+
+INSERT INTO User (vst_email, adm_email, user_type) values 
+(null, 'tomtsontas@deemail.com', 'admin');
+
+INSERT INTO User (vst_email, adm_email, user_type) values 
+('mitspap@deemail.com', null, 'visitor');
+
+INSERT INTO User (vst_email, adm_email, user_type) values 
+('kitsavram@deemail.com', null, 'visitor');
+
+INSERT INTO User (vst_email, adm_email, user_type) values 
+('jdallas@deemail.com', null, 'visitor');
