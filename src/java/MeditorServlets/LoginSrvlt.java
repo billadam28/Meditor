@@ -57,8 +57,9 @@ public class LoginSrvlt extends HttpServlet {
         String userId = request.getParameter("userId");   
         String password = request.getParameter("password");
         LoginService loginService = new LoginService((String)request.getParameter("userId"), (String)request.getParameter("password"));
-        boolean result = loginService.authenticateUser();
-        User user = loginService.getUserByEmailOrUsername((String)request.getParameter("userId"));
+        User user = loginService.getUserByEmailOrUsername();
+        boolean result = loginService.authenticateUser(user);
+        
         
         try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */

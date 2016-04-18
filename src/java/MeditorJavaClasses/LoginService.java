@@ -17,27 +17,28 @@ import org.hibernate.Transaction;
  * @author adamopoulo
  */
 public class LoginService {
-    private final String userEmail;
+    private final String userInputId;
     private final String password;
     
-    public LoginService (String userEmail, String password) 
+    public LoginService (String userInputId, String password) 
     {
-        this.userEmail = userEmail;
+        this.userInputId = userInputId;
         this.password = password;
     }
     
-    public boolean authenticateUser() {
-        User user = getUserByEmailOrUsername(userEmail);         
-        return (user!=null && user.getEmail().equals(userEmail) && user.getPasswd().equals(password));
+    public boolean authenticateUser(User user) {
+        //User user = getUserByEmailOrUsername();         
+        return (user!=null && (user.getEmail().equals(userInputId) || user.getUsername().equals(userInputId)) 
+                && user.getPasswd().equals(password));
     }
  
-    public User getUserByEmailOrUsername(String userId) {
+    public User getUserByEmailOrUsername() {
         Session session = NewHibernateUtil.getSessionFactory().openSession();
         Transaction tx = null;
         User user = null;
         try {
             tx = session.beginTransaction();
-            Query query = session.createQuery("from User where email='"+userId+"'");
+            Query query = session.createQuery("from User where email='"+userInputId+"' or username='"+userInputId+"'");
             user = (User)query.uniqueResult();
             tx.commit();
         } catch (HibernateException e) {
