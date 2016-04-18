@@ -5,7 +5,9 @@
  */
 package MeditorServlets;
 
+import MeditorJavaClasses.LoginService;
 import MeditorPersistence.NewHibernateUtil;
+import MeditorPersistence.User;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
@@ -52,11 +54,39 @@ public class LoginSrvlt extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         
+        String userId = request.getParameter("userId");   
+        String password = request.getParameter("password");
+        LoginService loginService = new LoginService((String)request.getParameter("userId"), (String)request.getParameter("password"));
+        boolean result = loginService.authenticateUser();
+        User user = loginService.getUserByEmailOrUsername((String)request.getParameter("userId"));
         
         try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
+            
+        if(result == true){
+            //request.getSession().setAttribute("user", user);      
+            //response.sendRedirect("home.jsp");
+            String surname = user.getSurname();
+            out.println("<!DOCTYPE html>");
+            out.println("<html>");
+            out.println("<head>");
+            out.println("<title>Servlet TestHibernate</title>");            
+            out.println("</head>");
+            out.println("<body>");
+            out.println("<h1>User logged in. User Surname: " + surname + "</h1>");
+            out.println("</body>");
+            out.println("</html>");
+        }
+        else
+        {
+         //response.sendRedirect("error.jsp");
+            out.println("Wrong user, try again");
+        }
 
         }
+        
+        
+        
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

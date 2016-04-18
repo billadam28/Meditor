@@ -8,65 +8,66 @@
  * Created: Apr 17, 2016
  */
 
-CREATE TABLE Visitor (
+CREATE TABLE User_Type (
+  id           int NOT NULL AUTO_INCREMENT,
+  usr_type     varchar(20) NOT NULL CHECK (usr_type='admin' OR usr_type= 'visitor'),
+  PRIMARY KEY (id)
+);
+
+CREATE TABLE `User` (
   id           int NOT NULL AUTO_INCREMENT,
   firstname    varchar(50) NOT NULL,
   surname      varchar(50) NOT NULL,
   email        varchar(50) NOT NULL,
   username     varchar(50) NOT NULL,
-  clearance    varchar(50) NOT NULL CHECK (clearance=`trainee` OR clearance=`senior`),
   passwd       varchar(50) NOT NULL,
+  user_type    int NOT NULL,
+  unique (email),
   PRIMARY KEY (id),
-  UNIQUE (email)
-);
-
-CREATE TABLE `Admin` (
-  id           int NOT NULL AUTO_INCREMENT,
-  firstname    varchar(50) NOT NULL,
-  surname      varchar(50) NOT NULL,
-  email        varchar(50) NOT NULL, 
-  username     varchar(50) NOT NULL,
-  passwd       varchar(50) NOT NULL,
-  PRIMARY KEY (id),
-  UNIQUE (email)
-) ;
-
-CREATE TABLE `User` (
-  id         int NOT NULL AUTO_INCREMENT,
-  vst_email  varchar(50),
-  adm_email  varchar(50),  
-  user_type  varchar(50) NOT NULL CHECK (user_type = 'admin' OR user_type = 'visitor'),
-  PRIMARY KEY (id),
-  constraint fk_vstemail FOREIGN KEY (vst_email) REFERENCES Visitor (email) 
-  ON DELETE CASCADE ON UPDATE CASCADE,
-  constraint fk_admemail FOREIGN KEY (adm_email) REFERENCES `Admin` (email) 
+  constraint fk_usertype FOREIGN KEY (user_type) REFERENCES User_Type (id) 
   ON DELETE CASCADE ON UPDATE CASCADE
 ) ;
 
+CREATE TABLE Visitor (
+  id               int NOT NULL AUTO_INCREMENT,
+  user_id          int NOT NULL,
+  visitor_level    varchar(50) NOT NULL CHECK (visitor_level= 'trainee' OR visitor_level= 'senior'),
+  PRIMARY KEY (id),
+  UNIQUE (user_id),
+  constraint fk_userid FOREIGN KEY (user_id) REFERENCES User (id) 
+  ON DELETE CASCADE ON UPDATE CASCADE
+);
+
+CREATE TABLE `Admin` (
+  id               int NOT NULL AUTO_INCREMENT,
+  user_id          int NOT NULL,
+  access_level     int NOT NULL,
+  PRIMARY KEY (id),
+  UNIQUE (user_id),
+  constraint fk_userid_adm FOREIGN KEY (user_id) REFERENCES User (id) 
+  ON DELETE CASCADE ON UPDATE CASCADE
+) ;
+
+
+INSERT INTO User_Type
+(usr_type) VALUES ('admin');
+
+INSERT INTO User_Type
+(usr_type) VALUES ('visitor');
+
+INSERT INTO User
+(firstname, surname, email, username, passwd, user_type)
+VALUES ('Vassilis', 'Adamopoulos','bill@bill.com','bill','123', 1);
+
+INSERT INTO User
+(firstname, surname, email, username, passwd, user_type)
+VALUES ('George', 'Lalas','george@george.com','george','123', 2);
+
+INSERT INTO `Visitor`
+(user_id, visitor_level)
+VALUES (2, 'senior');
+
 INSERT INTO `Admin`
-(firstname, surname, email, username, passwd)
-VALUES ('Tom', 'Tsontas','tomtsontas@deemail.com','tomtsont','1233456');
+(user_id, access_level)
+VALUES (1, 1);
 
-INSERT INTO `Visitor`
-(firstname, surname, email, username, passwd, clearance)
-VALUES ('Mitsos', 'Papadopoulos','mitspap@deemail.com','mpap','1233456', 'senior');
-
-INSERT INTO `Visitor`
-(firstname, surname, email, username, passwd, clearance)
-VALUES ('Kitsos', 'Avramidis', 'kitsavram@deemail.com', 'kavram', '1233456', 'senior');
-
-INSERT INTO `Visitor`
-(firstname, surname, email, username, passwd, clearance)
-VALUES ('John', 'Dallas', 'jdallas@deemail.com','jdal','1233456', 'trainee');
-
-INSERT INTO User (vst_email, adm_email, user_type) values 
-(null, 'tomtsontas@deemail.com', 'admin');
-
-INSERT INTO User (vst_email, adm_email, user_type) values 
-('mitspap@deemail.com', null, 'visitor');
-
-INSERT INTO User (vst_email, adm_email, user_type) values 
-('kitsavram@deemail.com', null, 'visitor');
-
-INSERT INTO User (vst_email, adm_email, user_type) values 
-('jdallas@deemail.com', null, 'visitor');
