@@ -28,7 +28,9 @@
                     <input type="text" name="userId" id="login_text" placeholder="Username or email" />
                     <input type="password" name="password" id="password" placeholder="Password" />
                     <input type="submit" value="Login" />
-			</form>
+		</form>
+                <p><h7>Invalid username, email or password! Please try again...</h7></p>
+                
 
 		<!-- Footer -->
 			<footer id="footer">

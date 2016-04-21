@@ -80,8 +80,8 @@ public class LoginSrvlt extends HttpServlet {
         }
         else
         {
-         //response.sendRedirect("error.jsp");
-            out.println("Wrong user, try again");
+         response.sendRedirect("error.jsp");
+            //out.println("Wrong user, try again");
         }
 
         }
