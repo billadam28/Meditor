@@ -65,18 +65,23 @@ public class LoginSrvlt extends HttpServlet {
             /* TODO output your page here. You may use following sample code. */
             
         if(result == true){
-            //request.getSession().setAttribute("user", user);      
-            //response.sendRedirect("home.jsp");
-            String surname = user.getSurname();
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet TestHibernate</title>");            
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>User logged in. User Surname: " + surname + "</h1>");
-            out.println("</body>");
-            out.println("</html>");
+            request.getSession().setAttribute("user", user);      
+            //String surname = user.getSurname();
+            int type = user.getUserType();
+            if (type == 1){
+                response.sendRedirect("admin.jsp");
+                /*out.println("<!DOCTYPE html>");
+                out.println("<html>");
+                out.println("<head>");
+                out.println("<title>Servlet TestHibernate</title>");            
+                out.println("</head>");
+                out.println("<body>");
+                out.println("<h1>User logged in. User Surname: " + surname +  type + "</h1>");
+                out.println("</body>");
+                out.println("</html>"); */
+            } else {
+                response.sendRedirect("visitor.jsp");
+            }
         }
         else
         {
