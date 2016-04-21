@@ -64,30 +64,29 @@ public class LoginSrvlt extends HttpServlet {
         try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
             
-        if(result == true){
-            request.getSession().setAttribute("user", user);      
-            //String surname = user.getSurname();
-            int type = user.getUserType();
-            if (type == 1){
-                response.sendRedirect("admin.jsp");
-                /*out.println("<!DOCTYPE html>");
-                out.println("<html>");
-                out.println("<head>");
-                out.println("<title>Servlet TestHibernate</title>");            
-                out.println("</head>");
-                out.println("<body>");
-                out.println("<h1>User logged in. User Surname: " + surname +  type + "</h1>");
-                out.println("</body>");
-                out.println("</html>"); */
-            } else {
-                response.sendRedirect("visitor.jsp");
+            if(result == true){
+                request.getSession().setAttribute("user", user);      
+                //String surname = user.getSurname();
+                int type = user.getUserType();
+                if (type == 1){
+                    response.sendRedirect("admin.jsp");
+                    /*out.println("<!DOCTYPE html>");
+                    out.println("<html>");
+                    out.println("<head>");
+                    out.println("<title>Servlet TestHibernate</title>");            
+                    out.println("</head>");
+                    out.println("<body>");
+                    out.println("<h1>User logged in. User Surname: " + surname +  type + "</h1>");
+                    out.println("</body>");
+                    out.println("</html>"); */
+                } else {
+                    response.sendRedirect("visitor.jsp");
+                }
+                
+            } else{
+                response.sendRedirect("error.jsp");
+                //out.println("Wrong user, try again");
             }
-        }
-        else
-        {
-         response.sendRedirect("error.jsp");
-            //out.println("Wrong user, try again");
-        }
 
         }
         
