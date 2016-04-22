@@ -8,7 +8,7 @@ html, body {
 height: 100%;
 margin: 0;
 padding: 0;
-font-family: "Helvetica Neue", Helvetica, Arial, Verdana, sans-serif;
+font-family: "Roboto", sans-serif;
 background: #F8F8F8;
 font-size: 12px;
 }
@@ -21,13 +21,20 @@ clear: both;
 height: 20px;
 }
 
-a:link, a:visited {
-color: #77BACE;
-text-decoration: none;
-}
+a   {
+    -moz-transition: border-bottom-color 0.2s ease, color 0.2s ease;
+    -webkit-transition: border-bottom-color 0.2s ease, color 0.2s ease;
+    -ms-transition: border-bottom-color 0.2s ease, color 0.2s ease;
+    transition: border-bottom-color 0.2s ease, color 0.2s ease;
+    border-bottom: dotted 1px rgba(255, 255, 255, 0.25);
+    color: #1cb495;
+    text-decoration: none;
+    }
 
 a:hover {
-text-decoration: underline;
+    border-bottom-color: transparent;
+    color: #1cb495 !important;
+    text-decoration: none;
 }
 
 
@@ -217,25 +224,26 @@ padding: 14px 0 10px 0;
 }
 
 .quick_search input[type=text] {
--webkit-border-radius: 20px;
--moz-border-radius: 20px;
-border-radius: 20px;
-border: 1px solid #bbb;
-height: 26px;
-width: 90%;
-color: #ccc;
--webkit-box-shadow: inset 0 2px 2px #ccc, 0 1px 0 #fff;
--moz-box-shadow: inset 0 2px 2px #ccc, 0 1px 0 #fff;
-box-shadow: inset 0 2px 2px #ccc, 0 1px 0 #fff;
-text-indent: 30px;
-background: #fff url(../images/icn_search.png) no-repeat;
-background-position: 10px 6px;
+    -webkit-border-radius: 20px;
+    -moz-border-radius: 20px;
+    border-radius: 20px;
+    border: 1px solid #bbb;
+    height: 26px;
+    width: 90%;
+    color: #ccc;
+    -webkit-box-shadow: inset 0 2px 2px #ccc, 0 1px 0 #fff;
+    -moz-box-shadow: inset 0 2px 2px #ccc, 0 1px 0 #fff;
+    box-shadow: inset 0 2px 2px #ccc, 0 1px 0 #fff;
+    text-indent: 30px;
+    background: #fff url(../images/icn_search.png) no-repeat;
+    background-position: 10px 6px;
 }
 
 .quick_search input[type=text]:focus {
 outline: none;
-color: #666666;
-border: 1px solid #77BACE;
+background-color: rgba(255, 255, 255, 0.125);
+color: #000;
+border: 1px solid #1cb495;
 -webkit-box-shadow: inset 0 2px 2px #ccc, 0 0 10px #ADDCE6;
 -moz-box-shadow: inset 0 2px 2px #ccc, 0 0 10px #ADDCE6;
 box-shadow: inset 0 2px 2px #ccc, 0 0 10px #ADDCE6;
@@ -298,8 +306,20 @@ color: #444444;
 #sidebar li.icn_new_article a {
 background: url(../images/icn_new_article.png) no-repeat center left;
 }
+#sidebar li.icn_trash a {
+background: url(../images/icn_trash.png) no-repeat center left;
+}
+#sidebar li.icn_edit a {
+background: url(../images/icn_edit.png) no-repeat center left;
+}
 #sidebar li.icn_edit_article a {
 background: url(../images/icn_edit_article.png) no-repeat center left;
+}
+#sidebar li.icn_logout a {
+background: url(../images/icn_logout.png) no-repeat center left;
+}
+#sidebar li.icn_alert_info a {
+background: url(../images/icn_alert_info.png) no-repeat center left;
 }
 #sidebar li.icn_categories a {
 background: url(../images/icn_categories.png) no-repeat center left;
@@ -315,6 +335,9 @@ background: url(../images/icn_view_users.png) no-repeat center left;
 }
 #sidebar li.icn_profile a {
 background: url(../images/icn_profile.png) no-repeat center left;
+}
+#sidebar li.icn_search a {
+background: url(../images/icn_search.png) no-repeat center left;
 }
 #sidebar li.icn_folder a {
 background: url(../images/icn_folder.png) no-repeat center left;

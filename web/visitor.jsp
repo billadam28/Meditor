@@ -70,26 +70,26 @@
 			<!-- <a class="logout_user" href="#" title="Logout">Logout</a> -->
 		</div>
 		<div class="breadcrumbs_container">
-			<article class="breadcrumbs"><a href="admin.jsp">Meditor Medical Visitor</a> <div class="breadcrumb_                         divider"></div> <a class="current">Dashboard</a></article>
+			<!--<article class="breadcrumbs"><a href="admin.jsp">Meditor Medical Visitor</a> <div class="breadcrumb_                         divider"></div> <a class="current">Dashboard</a></article> -->
 		</div>
 	</section><!-- end of secondary bar -->
         
         <aside id="sidebar" class="column">
 		<form class="quick_search">
-			<input type="text" value="Quick Search" onfocus="if(!this._haschanged){this.value=''};
+			<input type="text" placeholder="Search" onfocus="if(!this._haschanged){this.value=''};
                             this._haschanged=true;">
 		</form>
 		<hr/>
 		<h3>Visits</h3>
 		<ul class="toggle">
 			<li class="icn_edit_article"><a href="#">Enter info</a></li>
-			<li class="icn_categories"><a href="#">View info</a></li>
+			<li class="icn_alert_info"><a href="#">View info</a></li>
 		</ul>
 		<h3>Doctors</h3>
 		<ul class="toggle">
-			<li class="icn_add_user"><a href="#">Search</a></li>
-			<li class="icn_view_users"><a href="#">Create</a></li>
-			<li class="icn_profile"><a href="#">Edit</a></li>
+			<li class="icn_search"><a href="#">Search</a></li>
+			<li class="icn_add_user"><a href="#">Create</a></li>
+			<li class="icn_edit"><a href="#">Edit</a></li>
 		</ul>
 		<h3>Medical Visitor</h3>
 		<ul class="toggle">
@@ -103,5 +103,11 @@
 			<p>Theme by <a href="http://www.medialoot.com">MediaLoot</a></p>
 		</footer>
 	</aside><!-- end of sidebar -->
+        
+        <section id="main" class="column">
+				
+		<div class="spacer"></div>
+	</section>
+        
     </body>
 </html>

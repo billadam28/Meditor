@@ -10,9 +10,10 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
         <title>Dashboard | Admin Panel</title>
-        <link rel="stylesheet" href="css/admin.css" type="text/css" media="screen" />
+        <link rel="stylesheet" href="css/admin.css"  />
         <!--[if lt IE 9]>
 	<link rel="stylesheet" href="css/admin_ie.css" type="text/css" media="screen" />
 	<script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
@@ -70,35 +71,34 @@
 			<!-- <a class="logout_user" href="#" title="Logout">Logout</a> -->
 		</div>
 		<div class="breadcrumbs_container">
-			<article class="breadcrumbs"><a href="admin.jsp">Meditor Admin</a> <div class="breadcrumb_                         divider"></div> <a class="current">Dashboard</a></article>
+			<!--<article class="breadcrumbs"><a href="admin.jsp">Meditor Admin</a> <div class="breadcrumb_                         divider"></div> <a class="current">Dashboard</a></article> -->
 		</div>
 	</section><!-- end of secondary bar -->
         
         <aside id="sidebar" class="column">
 		<form class="quick_search">
-			<input type="text" value="Quick Search" onfocus="if(!this._haschanged){this.value=''};
-                            this._haschanged=true;">
+			<input type="text" placeholder="Search" onfocus="if(!this._haschanged){this.value=''};this._haschanged=true;">
 		</form>
 		<hr/>
 		<h3>General Tasks</h3>
 		<ul class="toggle">
-			<li class="icn_edit_article"><a href="#">Create New Cycle of Schedules</a></li>
-			<li class="icn_categories"><a href="#">Delete a Doctor</a></li>
-			<li class="icn_tags"><a href="#">Delete visit</a></li>
+			<li class="icn_new_article"><a href="#">Create New Cycle of Schedules</a></li>
+			<li class="icn_logout"><a href="#">Delete a Doctor</a></li>
+			<li class="icn_logout"><a href="#">Delete visit</a></li>
 		</ul>
 		<h3>Medical Visitors</h3>
 		<ul class="toggle">
 			<li class="icn_add_user"><a href="#">Create new</a></li>
-			<li class="icn_view_users"><a href="#">Edit</a></li>
-			<li class="icn_profile"><a href="#">Delete</a></li>
-                        <li class="icn_profile"><a href="#">Set visitor as group leader</a></li>
+			<li class="icn_edit"><a href="#">Edit</a></li>
+			<li class="icn_logout"><a href="#">Delete</a></li>
+                        <li class="icn_tags"><a href="#">Set visitor as group leader</a></li>
 		</ul>
                 <h3>Groups</h3>
 		<ul class="toggle">
-			<li class="icn_add_user"><a href="#">Create new</a></li>
-			<li class="icn_view_users"><a href="#">Edit</a></li>
-			<li class="icn_profile"><a href="#">Delete</a></li>
-                        <li class="icn_profile"><a href="#">Assign visitor to a group</a></li>
+			<li class="icn_new_article"><a href="#">Create new</a></li>
+			<li class="icn_edit_article"><a href="#">Edit</a></li>
+			<li class="icn_logout"><a href="#">Delete</a></li>
+                        <li class="icn_categories"><a href="#">Assign visitor to a group</a></li>
 		</ul>
 		<h3>Reports</h3>
 		<ul class="toggle">
@@ -119,5 +119,11 @@
 			<p>Theme by <a href="http://www.medialoot.com">MediaLoot</a></p>
 		</footer>
 	</aside><!-- end of sidebar -->
+        
+        <section id="main" class="column">
+				
+		<div class="spacer"></div>
+	</section>
+        
     </body>
 </html>
