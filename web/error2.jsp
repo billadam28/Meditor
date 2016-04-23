@@ -24,7 +24,7 @@
 			</header>
 
 		<!-- Login Form -->
-                <form id="login-form" method="post" action="LoginSrvlt">
+                <form id="login-form" method="post" action="Login">
                     <input type="text" name="userId" id="login_text" placeholder="Username or email" />
                     <input type="password" name="password" id="password" placeholder="Password" />
                     <input type="submit" value="Login" />

@@ -33,15 +33,12 @@ public class LogoutSrvlt extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        try (PrintWriter out = response.getWriter()) {
-            
-            HttpSession session=request.getSession();
+       
+        HttpSession session = request.getSession(false);
+        if (session != null) {
             session.invalidate();
-            //out.print("You are successfully logged out!");    
-            //out.close();
-            response.sendRedirect("index.html");
-            
         }
+        this.getServletConfig().getServletContext().getRequestDispatcher("/index.html").forward(request, response);  
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

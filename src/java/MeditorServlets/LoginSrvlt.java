@@ -5,11 +5,13 @@
  */
 package MeditorServlets;
 
+import static MeditorJavaClasses.GlobalConstants.TYPE_ADMIN;
+import static MeditorJavaClasses.GlobalConstants.TYPE_VISITOR;
 import MeditorJavaClasses.LoginService;
 import MeditorPersistence.NewHibernateUtil;
 import MeditorPersistence.User;
 import java.io.IOException;
-import java.io.PrintWriter;
+import java.util.Date;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -55,46 +57,37 @@ public class LoginSrvlt extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         
+        HttpSession session = request.getSession(true);
+        Date createTime = new Date(session.getCreationTime());
+        Date lastAccessTime = new Date(session.getLastAccessedTime());
+        
         String userId = request.getParameter("userId");   
         String password = request.getParameter("password");
         LoginService loginService = new LoginService((String)request.getParameter("userId"), (String)request.getParameter("password"));
         User user = loginService.getUserByEmailOrUsername();
         boolean result = loginService.authenticateUser(user);
-        
-        
-        try (PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
-            
-            if(result == true){
-                HttpSession session=request.getSession();
-                session.setAttribute("user", user);
-                //request.getSession().setAttribute("user", user);      
-                //String surname = user.getSurname();
-                int type = user.getUserType();
-                if (type == 1){
-                    response.sendRedirect("admin.jsp");
-                    /*out.println("<!DOCTYPE html>");
-                    out.println("<html>");
-                    out.println("<head>");
-                    out.println("<title>Servlet TestHibernate</title>");            
-                    out.println("</head>");
-                    out.println("<body>");
-                    out.println("<h1>User logged in. User Surname: " + surname +  type + "</h1>");
-                    out.println("</body>");
-                    out.println("</html>"); */
-                } else {
-                    response.sendRedirect("visitor.jsp");
-                }
-                
-            } else{
-                response.sendRedirect("error.jsp");
-                //out.println("Wrong user, try again");
+           
+        if(result == true){
+            if (session.isNew()) {
+                session.setAttribute("userId", user.getId());
             }
 
-        }
-        
-        
-        
+            request.setAttribute("user", user);
+
+            switch (user.getUserType()) {
+                case TYPE_ADMIN:
+                    this.getServletConfig().getServletContext().getRequestDispatcher("/admin.jsp").forward(request, response);
+                    break;
+                case TYPE_VISITOR:
+                    this.getServletConfig().getServletContext().getRequestDispatcher("/visitor.jsp").forward(request, response);
+                    break;
+                default:
+                    break;
+            }
+
+        } else {
+            this.getServletConfig().getServletContext().getRequestDispatcher("/error.jsp").forward(request, response);
+        }   
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

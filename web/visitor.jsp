@@ -9,7 +9,7 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
-    <%if (session.getAttribute("user") == null){%>
+    <%if (request.getAttribute("user") == null){%>
         <jsp:forward page="error2.jsp" />
     <%}%>
     
@@ -69,7 +69,7 @@
 	
 	<section id="secondary_bar">
 		<div class="user">
-                        <%User user = (User) session.getAttribute("user");%>
+                        <%User user = (User) request.getAttribute("user");%>
 			<p>Welcome <%= user.getFirstname() + " " + user.getSurname()%></p>
 			<!-- <a class="logout_user" href="#" title="Logout">Logout</a> -->
 		</div>
@@ -98,7 +98,7 @@
 		<h3>Medical Visitor</h3>
 		<ul class="toggle">
 			<li class="icn_settings"><a href="#">Options</a></li>
-			<li class="icn_jump_back"><a href="LogoutSrvlt">Logout</a></li>
+			<li class="icn_jump_back"><a href="Logout">Logout</a></li>
 		</ul>
 		
 		<footer>
