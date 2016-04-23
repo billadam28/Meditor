@@ -72,6 +72,7 @@ public class LoginSrvlt extends HttpServlet {
                 //String surname = user.getSurname();
                 int type = user.getUserType();
                 if (type == 1){
+                    //out.print("You are successfully logged out!");
                     response.sendRedirect("admin.jsp");
                     /*out.println("<!DOCTYPE html>");
                     out.println("<html>");
@@ -83,6 +84,7 @@ public class LoginSrvlt extends HttpServlet {
                     out.println("</body>");
                     out.println("</html>"); */
                 } else {
+                    session.setAttribute("type", type);
                     response.sendRedirect("visitor.jsp");
                 }
                 
