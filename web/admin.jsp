@@ -9,6 +9,10 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
+    <%if (session.getAttribute("user") == null){%>
+        <jsp:forward page="error2.jsp" />
+    <%}%>
+
     <head>
         <meta charset="utf-8" />
 	<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
@@ -110,7 +114,7 @@
 		<h3>Admin</h3>
 		<ul class="toggle">
 			<li class="icn_settings"><a href="#">Options</a></li>
-			<li class="icn_jump_back"><a href="#">Logout</a></li>
+			<li class="icn_jump_back"><a href="LogoutSrvlt">Logout</a></li>
 		</ul>
 		
 		<footer>
