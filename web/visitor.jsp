@@ -9,25 +9,8 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
-<<<<<<< HEAD
+
     <%if (request.getAttribute("user") == null){%>
-=======
-    
-    <%
-        response.setHeader( "Expires", "Sat, 6 May 1995 12:00:00 GMT" );
-     
-        // set standard HTTP/1.1 no-cache headers
-        response.setHeader( "Cache-Control", "no-store, no-cache, must-revalidate" );
-
-        // set IE extended HTTP/1.1 no-cache headers
-        response.addHeader( "Cache-Control", "post-check=0, pre-check=0" );
-
-        // set standard HTTP/1.0 no-cache header
-        response.setHeader( "Pragma", "no-cache" );
-    %>
-    
-    <%if (session.getAttribute("user") == null){%>
->>>>>>> origin/feature1
         <jsp:forward page="error2.jsp" />
     <%}%>
     
