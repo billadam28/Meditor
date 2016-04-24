@@ -28,8 +28,20 @@
                     <input type="text" name="userId" id="login_text" placeholder="Username or email" />
                     <input type="password" name="password" id="password" placeholder="Password" />
                     <input type="submit" value="Login" />
-			</form>
+		</form>
 
+                <p><h7> <%if (request.getAttribute("invalidUser") == "invalid"){%>
+                            Invalid username, email or password! Please try again...
+                        <% }
+                        String myval = request.getParameter("nullUser");
+                        //System.out.println(myval);
+                        if ((myval!= null) && (myval.equals("1"))) {
+                            //System.out.println("sas gamaw");%>
+                            You have to log in to access this page!
+                        <% }%>
+                         
+                
+                </h7></p>
 		<!-- Footer -->
 			<footer id="footer">
 				<ul class="copyright">

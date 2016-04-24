@@ -10,9 +10,14 @@
 <!DOCTYPE html>
 <html>
     
-    <%if (request.getAttribute("user") == null){%>
-        <jsp:forward page="error2.jsp" />
-    <%}%>
+    <p><h7><%if (request.getAttribute("user") == null){%>
+                <jsp:forward page="/index.jsp" >
+                    <jsp:param name="nullUser" value="1" />
+                </jsp:forward>
+            <%}%>
+    
+    </h7></p>
+    
 
     <head>
         <meta charset="utf-8" />

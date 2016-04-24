@@ -66,13 +66,15 @@ public class LoginSrvlt extends HttpServlet {
         LoginService loginService = new LoginService((String)request.getParameter("userId"), (String)request.getParameter("password"));
         User user = loginService.getUserByEmailOrUsername();
         boolean result = loginService.authenticateUser(user);
-           
+        
+        request.setAttribute("user", user);
+        
         if(result == true){
             if (session.isNew()) {
                 session.setAttribute("userId", user.getId());
             }
 
-            request.setAttribute("user", user);
+            
 
             switch (user.getUserType()) {
                 case TYPE_ADMIN:
@@ -86,7 +88,8 @@ public class LoginSrvlt extends HttpServlet {
             }
 
         } else {
-            this.getServletConfig().getServletContext().getRequestDispatcher("/error.jsp").forward(request, response);
+            request.setAttribute("invalidUser", "invalid");
+            this.getServletConfig().getServletContext().getRequestDispatcher("/index.jsp").forward(request, response);
         }   
     }
 
