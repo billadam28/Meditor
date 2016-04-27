@@ -23,7 +23,7 @@ public class LoginService {
         this.password = password;
     }
     
-     public static String toSha(String pass){
+     public String toSha(String pass){
              String hexedpass = null;
         try {
             MessageDigest md = MessageDigest.getInstance("SHA-1");
@@ -41,7 +41,7 @@ public class LoginService {
     public boolean authenticateUser(User user) {
         //User user = getUserByEmailOrUsername();         
         return (user!=null && (user.getEmail().equals(userInputId) || user.getUsername().equals(userInputId)) 
-                && user.getPasswd().equals(password));
+                && user.getPasswd().equals(toSha(password)));
     }
  
     public User getUserByEmailOrUsername() {
