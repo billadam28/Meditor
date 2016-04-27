@@ -55,13 +55,21 @@ INSERT INTO User_Type
 INSERT INTO User_Type
 (usr_type) VALUES ('visitor');
 
-INSERT INTO User
-(firstname, surname, email, username, passwd, user_type)
-VALUES ('Vassilis', 'Adamopoulos','bill@bill.com','bill','123', 1);
 
 INSERT INTO User
 (firstname, surname, email, username, passwd, user_type)
-VALUES ('George', 'Lalas','george@george.com','george','123', 2);
+VALUES ('Vassilis', 'Adamopoulos','bill@bill.com','bill',SHA('123'), 1);
+
+INSERT INTO User
+(firstname, surname, email, username, passwd, user_type)
+VALUES ('George', 'Lalas','george@george.com','george',SHA1('123'), 2);
+/*SECURITY test */
+
+INSERT INTO User
+(firstname, surname, email, username, passwd, user_type)
+VALUES ('Tom', 'Tsontas','tomtsontas@tom.com','tomtsontas', SHA1('123'), 1);
+/* ******* END test */
+
 
 INSERT INTO `Visitor`
 (user_id, visitor_level)
