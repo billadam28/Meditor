@@ -6,7 +6,15 @@
     </servlet>
     <servlet-mapping>
         <servlet-name>LoginSrvlt</servlet-name>
-        <url-pattern>/LoginSrvlt</url-pattern>
+        <url-pattern>/Login</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>LogoutSrvlt</servlet-name>
+        <servlet-class>MeditorServlets.LogoutSrvlt</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>LogoutSrvlt</servlet-name>
+        <url-pattern>/Logout</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
@@ -14,6 +22,6 @@
         </session-timeout>
     </session-config>
     <welcome-file-list>
-        <welcome-file>index.html</welcome-file>
+        <welcome-file>index.jsp</welcome-file>
     </welcome-file-list>
 </web-app>

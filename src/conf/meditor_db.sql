@@ -8,6 +8,11 @@
  * Created: Apr 17, 2016
  */
 
+drop table Visitor;
+drop table Admin;
+drop table User;
+drop table User_Type;
+
 CREATE TABLE User_Type (
   id           int NOT NULL AUTO_INCREMENT,
   usr_type     varchar(20) NOT NULL CHECK (usr_type='admin' OR usr_type= 'visitor'),
@@ -57,11 +62,11 @@ INSERT INTO User_Type
 
 INSERT INTO User
 (firstname, surname, email, username, passwd, user_type)
-VALUES ('Vassilis', 'Adamopoulos','bill@bill.com','bill','123', 1);
+VALUES ('Vassilis', 'Adamopoulos','bill@bill.com','bill',SHA1('123'), 1);
 
 INSERT INTO User
 (firstname, surname, email, username, passwd, user_type)
-VALUES ('George', 'Lalas','george@george.com','george','123', 2);
+VALUES ('George', 'Lalas','george@george.com','george',SHA1('1234'), 2);
 
 INSERT INTO `Visitor`
 (user_id, visitor_level)

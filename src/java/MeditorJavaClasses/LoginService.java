@@ -1,21 +1,18 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package MeditorJavaClasses;
 
 import MeditorPersistence.NewHibernateUtil;
 import MeditorPersistence.User;
+import java.math.BigInteger;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import org.hibernate.HibernateException;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
-/**
- *
- * @author adamopoulo
- */
+
+
 public class LoginService {
     private final String userInputId;
     private final String password;
@@ -26,10 +23,25 @@ public class LoginService {
         this.password = password;
     }
     
+     public String toSha(String pass){
+             String hexedpass = null;
+        try {
+            MessageDigest md = MessageDigest.getInstance("SHA-1");
+            md.update(pass.getBytes());
+            BigInteger hash = new BigInteger(1, md.digest());
+            hexedpass = hash.toString(16);                 
+         } 
+        catch (NoSuchAlgorithmException e) { 
+            e.printStackTrace();
+        }
+      
+        return hexedpass;
+    }  
+    
     public boolean authenticateUser(User user) {
         //User user = getUserByEmailOrUsername();         
         return (user!=null && (user.getEmail().equals(userInputId) || user.getUsername().equals(userInputId)) 
-                && user.getPasswd().equals(password));
+                && user.getPasswd().equals(toSha(password)));
     }
  
     public User getUserByEmailOrUsername() {
