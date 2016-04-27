@@ -89,7 +89,7 @@
 		
 		<footer>
 			<hr />
-			<p><strong>Copyright &copy; 2011 Meditor Admin</strong></p>
+			<p><strong>&copy; Meditor</strong></p>
 			<p>Theme by <a href="http://www.medialoot.com">MediaLoot</a></p>
 		</footer>
 	</aside><!-- end of sidebar -->
