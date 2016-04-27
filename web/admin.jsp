@@ -33,8 +33,8 @@
     <body> 
         <header id="header">
 		<hgroup>
-			<h1 class="site_title">Meditor Admin</h1>
-			<h2 class="section_title">Dashboard</h2><div class="btn_view_site"></div>
+			<h1 class="site_title">Meditor</h1>
+			<h2 class="section_title">Administrator</h2><div class="btn_view_site"></div>
 		</hgroup>
 	</header> <!-- end of header bar -->
 	
@@ -42,7 +42,7 @@
 		<div class="user">
                         <%User user = (User) request.getAttribute("user");%>
 			<p>Welcome <%= user.getFirstname() + " " + user.getSurname()%></p>
-			<!-- <a class="logout_user" href="#" title="Logout">Logout</a> -->
+			<!--<a class="logout_user" href="#" title="Logout">Logout</a> -->
 		</div>
 		<div class="breadcrumbs_container">
 			<!--<article class="breadcrumbs"><a href="admin.jsp">Meditor Admin</a> <div class="breadcrumb_                         divider"></div> <a class="current">Dashboard</a></article> -->
@@ -51,28 +51,20 @@
         
         <aside id="sidebar" class="column">
 		<form class="quick_search">
-			<input type="text" placeholder="Search" onfocus="if(!this._haschanged){this.value=''};this._haschanged=true;">
+                    <input type="text" placeholder="Search" onfocus="if(!this._haschanged){this.value=''};this._haschanged=true;">
 		</form>
 		<hr/>
 		<h3>General Tasks</h3>
 		<ul class="toggle">
-			<li class="icn_new_article"><a href="#">Create New Cycle of Schedules</a></li>
+                        <li class="icn_new_article"><a href="#">Assign Visitor to a Doctor</a></li>
+			<li class="icn_new_article"><a href="#">Create New Cycle of Scheduled Visits</a></li>
 			<li class="icn_logout"><a href="#">Delete a Doctor</a></li>
-			<li class="icn_logout"><a href="#">Delete visit</a></li>
-		</ul>
-		<h3>Medical Visitors</h3>
-		<ul class="toggle">
-			<li class="icn_add_user"><a href="#">Create new</a></li>
-			<li class="icn_edit"><a href="#">Edit</a></li>
-			<li class="icn_logout"><a href="#">Delete</a></li>
-                        <li class="icn_tags"><a href="#">Set visitor as group leader</a></li>
 		</ul>
                 <h3>Groups</h3>
 		<ul class="toggle">
 			<li class="icn_new_article"><a href="#">Create new</a></li>
-			<li class="icn_edit_article"><a href="#">Edit</a></li>
-			<li class="icn_logout"><a href="#">Delete</a></li>
                         <li class="icn_categories"><a href="#">Assign visitor to a group</a></li>
+                        <li class="icn_profile"><a href="#">Set visitor as a group leader</a></li>
 		</ul>
 		<h3>Reports</h3>
 		<ul class="toggle">
@@ -81,7 +73,7 @@
 			<li class="icn_audio"><a href="#">3</a></li>
 			<li class="icn_video"><a href="#">4</a></li>
 		</ul>
-		<h3>Admin</h3>
+		<h3>Account</h3>
 		<ul class="toggle">
 			<li class="icn_settings"><a href="#">Options</a></li>
 			<li class="icn_jump_back"><a href="Logout">Logout</a></li>

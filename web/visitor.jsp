@@ -32,8 +32,8 @@
     <body> 
         <header id="header">
 		<hgroup>
-			<h1 class="site_title">Meditor Medical Visitor</h1>
-			<h2 class="section_title">Dashboard</h2><div class="btn_view_site"></div>
+			<h1 class="site_title">Meditor</h1>
+			<h2 class="section_title">Medical Visitor</h2><div class="btn_view_site"></div>
 		</hgroup>
 	</header> <!-- end of header bar -->
 	
@@ -54,18 +54,17 @@
                             this._haschanged=true;">
 		</form>
 		<hr/>
-		<h3>Visits</h3>
+		<h3>My Visits</h3>
 		<ul class="toggle">
-			<li class="icn_edit_article"><a href="#">Enter info</a></li>
-			<li class="icn_alert_info"><a href="#">View info</a></li>
+			<li class="icn_alert_success"><a href="#">Completed</a></li>
+			<li class="icn_categories"><a href="#">Scheduled</a></li>
 		</ul>
 		<h3>Doctors</h3>
 		<ul class="toggle">
-			<li class="icn_search"><a href="#">Search</a></li>
-			<li class="icn_add_user"><a href="#">Create</a></li>
-			<li class="icn_edit"><a href="#">Edit</a></li>
+			<li class="icn_search"><a href="#">Search or Edit info</a></li>
+			<li class="icn_add_user"><a href="#">Create new</a></li>
 		</ul>
-		<h3>Medical Visitor</h3>
+		<h3>Account</h3>
 		<ul class="toggle">
 			<li class="icn_settings"><a href="#">Options</a></li>
 			<li class="icn_jump_back"><a href="Logout">Logout</a></li>

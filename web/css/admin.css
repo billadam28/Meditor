@@ -318,6 +318,9 @@ background: url(../images/icn_edit_article.png) no-repeat center left;
 #sidebar li.icn_logout a {
 background: url(../images/icn_logout.png) no-repeat center left;
 }
+#sidebar li.icn_alert_success a {
+background: url(../images/icn_alert_success.png) no-repeat center left;
+}
 #sidebar li.icn_alert_info a {
 background: url(../images/icn_alert_info.png) no-repeat center left;
 }
