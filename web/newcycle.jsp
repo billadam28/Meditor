@@ -30,6 +30,7 @@
         
         <%@ include file="includes/header_js.jsp" %>
         
+        
     </head>
     
     <body> 
@@ -42,7 +43,7 @@
 	
 	<section id="secondary_bar">
 		<div class="user">
-                       
+                        <p>Welcome <%= session.getAttribute("firstName") + " " + session.getAttribute("surName")%></p>
 			<a class="logout_user" href="Logout" title="Logout">Logout</a>
 		</div>
 		<div class="breadcrumbs_container">
@@ -58,7 +59,7 @@
 		<h3>General Tasks</h3>
 		<ul class="toggle">
                         <li class="icn_new_article"><a href="#">Assign Visitor to a Doctor</a></li>
-			<li class="icn_new_article"><a href="#">Create New Cycle of Scheduled Visits</a></li>
+			<li class="icn_new_article"><a href="Newcycle" onclick="highlightCurrentLink();">Create New Cycle of Scheduled Visits</a></li>
 			<li class="icn_logout"><a href="#">Delete a Doctor</a></li>
 		</ul>
                 <h3>Groups</h3>
@@ -86,6 +87,6 @@
 				
 		<div class="spacer"></div>
 	</section>
-        
+     <script type="text/javascript" src="js/currentlinkstyle.js"></script>
     </body>
 </html>

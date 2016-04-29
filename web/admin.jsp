@@ -26,6 +26,7 @@
 	<script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
 	<![endif]-->
         
+        
         <%@ include file="includes/header_js.jsp" %>
         
     </head>
@@ -41,7 +42,7 @@
 	<section id="secondary_bar">
 		<div class="user">
 			<p>Welcome <%= session.getAttribute("firstName") + " " + session.getAttribute("surName")%></p>
-			<!--<a class="logout_user" href="#" title="Logout">Logout</a> -->
+			<a class="logout_user" href="Logout" title="Logout">Logout</a>
 		</div>
 		<div class="breadcrumbs_container">
 			<!--<article class="breadcrumbs"><a href="admin.jsp">Meditor Admin</a> <div class="breadcrumb_                         divider"></div> <a class="current">Dashboard</a></article> -->
@@ -55,27 +56,22 @@
 		<hr/>
 		<h3>General Tasks</h3>
 		<ul class="toggle">
-                        <li class="icn_new_article"><a href="#">Assign Visitor to a Doctor</a></li>
-			<li class="icn_new_article"><a href="Newcycle">Create New Cycle of Scheduled Visits</a></li>
-			<li class="icn_logout"><a href="#">Delete a Doctor</a></li>
+                        <li class="icn_new_article"><a href="#" onclick="highlightCurrentLink();">Assign Visitor to a Doctor</a></li>
+			<li class="icn_new_article"><a href="Newcycle" onclick="highlightCurrentLink();">Create New Cycle of Scheduled Visits</a></li>
+			<li class="icn_logout"><a href="#" onclick="highlightCurrentLink();">Delete a Doctor</a></li>
 		</ul>
                 <h3>Groups</h3>
 		<ul class="toggle">
-			<li class="icn_new_article"><a href="#">Create new</a></li>
-                        <li class="icn_categories"><a href="#">Assign visitor to a group</a></li>
-                        <li class="icn_profile"><a href="#">Set visitor as a group leader</a></li>
+			<li class="icn_new_article"><a href="#" onclick="highlightCurrentLink();">Create new</a></li>
+                        <li class="icn_categories"><a href="#" onclick="highlightCurrentLink();">Assign visitor to a group</a></li>
+                        <li class="icn_profile"><a href="#" onclick="highlightCurrentLink();">Set visitor as a group leader</a></li>
 		</ul>
 		<h3>Reports</h3>
 		<ul class="toggle">
-			<li class="icn_folder"><a href="#">1</a></li>
-			<li class="icn_photo"><a href="#">2</a></li>
-			<li class="icn_audio"><a href="#">3</a></li>
-			<li class="icn_video"><a href="#">4</a></li>
-		</ul>
-		<h3>Account</h3>
-		<ul class="toggle">
-			<li class="icn_settings"><a href="#">Options</a></li>
-			<li class="icn_jump_back"><a href="Logout">Logout</a></li>
+			<li class="icn_folder"><a href="#" onclick="highlightCurrentLink();">1</a></li>
+			<li class="icn_photo"><a href="#" onclick="highlightCurrentLink();">2</a></li>
+			<li class="icn_audio"><a href="#" onclick="highlightCurrentLink();">3</a></li>
+			<li class="icn_video"><a href="#" onclick="highlightCurrentLink();">4</a></li>
 		</ul>
 		
 		<footer>
@@ -89,6 +85,6 @@
 				
 		<div class="spacer"></div>
 	</section>
-        
+        <script type="text/javascript" src="js/currentlinkstyle.js"></script>
     </body>
 </html>

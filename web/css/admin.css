@@ -37,13 +37,6 @@ a:hover {
     text-decoration: none;
 }
 
-a:focus {
-    color: #1cb495 !important;
-    text-decoration: none;
-    font-weight: bold;
-}
-
-
 /* Header */
 
 header#header {
