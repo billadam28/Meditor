@@ -6,15 +6,13 @@
 
 <%@page import="MeditorPersistence.User"%>
 <%@page import="MeditorServlets.LoginSrvlt"%>
+<%@page import="MeditorServlets.NewcycleSrvlt"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
     
-    <%if (request.getAttribute("user") == null){%>
-                <jsp:forward page="/index.jsp" >
-                    <jsp:param name="nullUser" value="1" />
-                </jsp:forward>
-    <%}%>
+ 
+    
 
     <head>
         <meta charset="utf-8" />
@@ -40,8 +38,7 @@
 	
 	<section id="secondary_bar">
 		<div class="user">
-                        <%User user = (User) request.getAttribute("user");%>
-			<p>Welcome <%= user.getFirstname() + " " + user.getSurname()%></p>
+                       
 			<a class="logout_user" href="Logout" title="Logout">Logout</a>
 		</div>
 		<div class="breadcrumbs_container">
@@ -57,7 +54,7 @@
 		<h3>General Tasks</h3>
 		<ul class="toggle">
                         <li class="icn_new_article"><a href="#">Assign Visitor to a Doctor</a></li>
-			<li class="icn_new_article"><a href="Newcycle">Create New Cycle of Scheduled Visits</a></li>
+			<li class="icn_new_article"><a href="#">Create New Cycle of Scheduled Visits</a></li>
 			<li class="icn_logout"><a href="#">Delete a Doctor</a></li>
 		</ul>
                 <h3>Groups</h3>

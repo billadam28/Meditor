@@ -41,7 +41,7 @@
 		<div class="user">
                         <%User user = (User) request.getAttribute("user");%>
 			<p>Welcome <%= user.getFirstname() + " " + user.getSurname()%></p>
-			<!-- <a class="logout_user" href="#" title="Logout">Logout</a> -->
+			<a class="logout_user" href="Logout" title="Logout">Logout</a>
 		</div>
 		<div class="breadcrumbs_container">
 			<!--<article class="breadcrumbs"><a href="admin.jsp">Meditor Medical Visitor</a> <div class="breadcrumb_                         divider"></div> <a class="current">Dashboard</a></article> -->
@@ -63,11 +63,6 @@
 		<ul class="toggle">
 			<li class="icn_search"><a href="#">Search or Edit info</a></li>
 			<li class="icn_add_user"><a href="#">Create new</a></li>
-		</ul>
-		<h3>Account</h3>
-		<ul class="toggle">
-			<li class="icn_settings"><a href="#">Options</a></li>
-			<li class="icn_jump_back"><a href="Logout">Logout</a></li>
 		</ul>
 		
 		<footer>

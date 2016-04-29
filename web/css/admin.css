@@ -37,6 +37,12 @@ a:hover {
     text-decoration: none;
 }
 
+a:focus {
+    color: #1cb495 !important;
+    text-decoration: none;
+    font-weight: bold;
+}
+
 
 /* Header */
 
@@ -129,7 +135,7 @@ text-decoration: none;
 color: #666666}
 
 .user a:hover {
-color: #77BACE;
+color: #1cb495;
 }
 
 .user a.logout_user {
@@ -138,7 +144,11 @@ display: block;
 width: 16px;
 height: 35px;
 text-indent: -5000px;
-background: url(../images/icn_logout.png) center no-repeat;
+background: url(../images/icn_jump_back.png) center no-repeat;
+}
+
+a.logout_user:hover {
+color: #1cb495;
 }
 
 /* Breadcrumbs */
