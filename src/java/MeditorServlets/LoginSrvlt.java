@@ -57,7 +57,7 @@ public class LoginSrvlt extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         
-        HttpSession session = request.getSession(true);
+        HttpSession session = request.getSession();
         Date createTime = new Date(session.getCreationTime());
         Date lastAccessTime = new Date(session.getLastAccessedTime());
         
@@ -67,14 +67,11 @@ public class LoginSrvlt extends HttpServlet {
         User user = loginService.getUserByEmailOrUsername();
         boolean result = loginService.authenticateUser(user);
         
-        request.setAttribute("user", user);
-        
         if(result == true){
-            if (session.isNew()) {
-                session.setAttribute("userId", user.getId());
-            }
-
-            
+            session.setAttribute("userId", user.getId());
+            session.setAttribute("username", user.getUsername());
+            session.setAttribute("firstName", user.getFirstname());
+            session.setAttribute("surName", user.getSurname());
 
             switch (user.getUserType()) {
                 case TYPE_ADMIN:
@@ -88,7 +85,7 @@ public class LoginSrvlt extends HttpServlet {
             }
 
         } else {
-            request.setAttribute("invalidUser", "invalid");
+            session.setAttribute("invalidUser", "true");
             this.getServletConfig().getServletContext().getRequestDispatcher("/index.jsp").forward(request, response);
         }   
     }

@@ -33,10 +33,11 @@
             <input type="submit" value="Login" />
         </form>
 
-        <p><h7> <%if (request.getAttribute("invalidUser") == "invalid"){%>
+        <p><h7> <%if (session.getAttribute("invalidUser") == "true"){
+                    session.invalidate();%>
                     Invalid username, email or password! Please try again...
                 <% }
-                String myval = request.getParameter("nullUser");
+                String myval = request.getParameter("noSession");
                 if ((myval!= null) && (myval.equals("1"))) { %>
                     You have to log in to access this page!
                 <% }%>

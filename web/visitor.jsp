@@ -10,10 +10,10 @@
 <!DOCTYPE html>
 <html>
 
-    <%if (request.getAttribute("user") == null){%>
-                <jsp:forward page="/index.jsp" >
-                    <jsp:param name="nullUser" value="1" />
-                </jsp:forward>
+    <%if (session.getAttribute("username") == null){%>
+        <jsp:forward page="/index.jsp" >
+            <jsp:param name="noSession" value="1" />
+        </jsp:forward>
     <%}%>
 
     <head>
@@ -39,8 +39,7 @@
 	
 	<section id="secondary_bar">
 		<div class="user">
-                        <%User user = (User) request.getAttribute("user");%>
-			<p>Welcome <%= user.getFirstname() + " " + user.getSurname()%></p>
+			<p>Welcome <%= session.getAttribute("firstName") + " " + session.getAttribute("surName")%></p>
 			<!-- <a class="logout_user" href="#" title="Logout">Logout</a> -->
 		</div>
 		<div class="breadcrumbs_container">
