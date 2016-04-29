@@ -43,7 +43,7 @@ public class NewcycleSrvlt extends HttpServlet {
         HttpSession session = request.getSession(false);
         
         if (session != null) {
-            session.getAttribute("userId");
+            //session.getAttribute("userId");
             //fere giatrous pou den exoun assigned period k na exoun aasigned visitor
             //fere ta periods
             this.getServletConfig().getServletContext().getRequestDispatcher("/newcycle.jsp").forward(request, response);

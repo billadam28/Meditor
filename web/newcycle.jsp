@@ -11,7 +11,11 @@
 <!DOCTYPE html>
 <html>
     
- 
+ <%if (session.getAttribute("username") == null) {%>
+        <jsp:forward page="/index.jsp" >
+            <jsp:param name="noSession" value="1" />
+        </jsp:forward>
+    <%}%>
     
 
     <head>
