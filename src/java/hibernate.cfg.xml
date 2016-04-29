@@ -6,9 +6,20 @@
     <property name="hibernate.connection.driver_class">com.mysql.jdbc.Driver</property>
     <property name="hibernate.connection.url">jdbc:mysql://localhost:3306/meditorDb?zeroDateTimeBehavior=convertToNull</property>
     <property name="hibernate.connection.username">root</property>
+    <mapping resource="MeditorPersistence/Institution.hbm.xml"/>
+    <mapping resource="MeditorPersistence/City.hbm.xml"/>
+    <mapping resource="MeditorPersistence/Cycle.hbm.xml"/>
+    <mapping resource="MeditorPersistence/ExtraVisit.hbm.xml"/>
+    <mapping resource="MeditorPersistence/UserType.hbm.xml"/>
+    <mapping resource="MeditorPersistence/Doctor.hbm.xml"/>
+    <mapping resource="MeditorPersistence/Admin.hbm.xml"/>
+    <mapping resource="MeditorPersistence/GeographicalArea.hbm.xml"/>
+    <mapping resource="MeditorPersistence/Group.hbm.xml"/>
     <mapping resource="MeditorPersistence/Visitor.hbm.xml"/>
     <mapping resource="MeditorPersistence/User.hbm.xml"/>
-    <mapping resource="MeditorPersistence/UserType.hbm.xml"/>
-    <mapping resource="MeditorPersistence/Admin.hbm.xml"/>
+    <mapping resource="MeditorPersistence/ScheduledDoctor.hbm.xml"/>
+    <mapping resource="MeditorPersistence/Specialty.hbm.xml"/>
+    <mapping resource="MeditorPersistence/GroupMember.hbm.xml"/>
+    <mapping resource="MeditorPersistence/Visit.hbm.xml"/>
   </session-factory>
 </hibernate-configuration>
