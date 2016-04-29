@@ -38,8 +38,7 @@ public class LoginService {
         return hexedpass;
     }  
     
-    public boolean authenticateUser(User user) {
-        //User user = getUserByEmailOrUsername();         
+    public boolean authenticateUser(User user) {        
         return (user!=null && (user.getEmail().equals(userInputId) || user.getUsername().equals(userInputId)) 
                 && user.getPasswd().equals(toSha(password)));
     }
