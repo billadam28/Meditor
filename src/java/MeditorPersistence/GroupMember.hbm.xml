@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated Apr 29, 2016 4:36:33 PM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="MeditorPersistence.GroupMember" table="Group_Member" catalog="meditorDb" optimistic-lock="version">
+        <composite-id name="id" class="MeditorPersistence.GroupMemberId">
+            <key-property name="groupId" type="int">
+                <column name="group_id" />
+            </key-property>
+            <key-property name="memberId" type="int">
+                <column name="member_id" />
+            </key-property>
+        </composite-id>
+    </class>
+</hibernate-mapping>
