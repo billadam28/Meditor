@@ -8,7 +8,7 @@
 	<section id="secondary_bar">
 		<div class="user">
 			<p>Welcome <%= session.getAttribute("firstName") + " " + session.getAttribute("surName")%></p>
-			<!-- <a class="logout_user" href="#" title="Logout">Logout</a> -->
+			<a class="logout_user" href="Logout" title="Logout">Logout</a>
 		</div>
 		<div class="breadcrumbs_container">
 			<!--<article class="breadcrumbs"><a href="admin.jsp">Meditor Medical Visitor</a> <div class="breadcrumb_                         divider"></div> <a class="current">Dashboard</a></article> -->
@@ -23,18 +23,13 @@
 		<hr/>
 		<h3>My Visits</h3>
 		<ul class="toggle">
-			<li class="icn_alert_success"><a href="#">Completed</a></li>
-			<li class="icn_categories"><a href="#">Scheduled</a></li>
+			<li class="icn_alert_success"><a href="#" onclick="highlightCurrentLink();">Completed</a></li>
+			<li class="icn_categories"><a href="#" onclick="highlightCurrentLink();">Scheduled</a></li>
 		</ul>
 		<h3>Doctors</h3>
 		<ul class="toggle">
-			<li class="icn_search"><a href="#">Search or Edit info</a></li>
-			<li class="icn_add_user"><a href="#">Create new</a></li>
-		</ul>
-		<h3>Account</h3>
-		<ul class="toggle">
-			<li class="icn_settings"><a href="#">Options</a></li>
-			<li class="icn_jump_back"><a href="Logout">Logout</a></li>
+			<li class="icn_search"><a href="#" onclick="highlightCurrentLink();">Search or Edit info</a></li>
+			<li class="icn_add_user" onclick="highlightCurrentLink();"><a href="#">Create new</a></li>
 		</ul>
 		
 		<footer>
