@@ -72,6 +72,7 @@ public class LoginSrvlt extends HttpServlet {
             session.setAttribute("username", user.getUsername());
             session.setAttribute("firstName", user.getFirstname());
             session.setAttribute("surName", user.getSurname());
+            session.setAttribute("user_type",user.getUserType());
 
             switch (user.getUserType()) {
                 case TYPE_ADMIN:
