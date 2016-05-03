@@ -107,7 +107,7 @@ CREATE TABLE Doctor (
   city_id          int,
   geo_area_id      int,
   institution_id   int,
-  position          varchar(30),
+  position         varchar(30),
   PRIMARY KEY (id),
   constraint fk_assigned_vst_id FOREIGN KEY (assigned_vst_id) REFERENCES Visitor (id),
    constraint fk_created_from FOREIGN KEY (created_from) REFERENCES Visitor (id),
@@ -201,11 +201,61 @@ INSERT INTO User
 (firstname, surname, email, username, passwd, user_type)
 VALUES ('George', 'Lalas','george@george.com','george',SHA1('1234'), 2);
 
+INSERT INTO User
+(firstname, surname, email, username, passwd, user_type)
+VALUES ('paul', 'paulopoulos','paul@paul.com','paul',SHA1('1234'), 2);
+
+INSERT INTO User
+(firstname, surname, email, username, passwd, user_type)
+VALUES ('john', 'john','john@john.com','john',SHA1('1234'), 2);
+
 INSERT INTO `Visitor`
 (user_id, visitor_level)
 VALUES (2, 'senior');
+
+INSERT INTO `Visitor`
+(user_id, visitor_level)
+VALUES (3, 'senior');
+
+INSERT INTO `Visitor`
+(user_id, visitor_level)
+VALUES (4, 'trainee');
 
 INSERT INTO `Admin`
 (user_id, access_level)
 VALUES (1, 1);
 
+INSERT INTO `Group`
+(parent_group_id, name, leader_id)
+VALUES (null , 'group1', 1);
+
+INSERT INTO Group_Member
+(group_id, member_id)
+VALUES (1,1);
+
+INSERT INTO Group_Member
+(group_id, member_id)
+VALUES (1,2);
+
+INSERT INTO Group_Member
+(group_id, member_id)
+VALUES (1,3);
+
+insert into geographical_area (geo_name)values ('Attica');
+insert into geographical_area (geo_name)values ('Lakonia');
+
+insert into city (city_name, geo_id) values ('Athens', 1);
+insert into city (city_name, geo_id) values ('Sparti', 2);
+
+insert into specialty (specialty_name) values ('Dentist');
+insert into specialty (specialty_name) values ('Cardiologist');
+insert into specialty (specialty_name) values ('Gastroenterologist');
+
+insert into institution (institution_name, city_id) values ('ygeia', 1);
+insert into institution (institution_name, city_id) values ('Sparti General Hospital', 2);
+
+insert into doctor (assigned_vst_id, created_from, name, specialty_id, address, phone, city_id, geo_area_id, institution_id, position)
+values (null,null, 'mark markus', 1, 'address1', '2101231231', 1, 1, 1, 'professor');
+
+insert into doctor (assigned_vst_id, created_from, name, specialty_id, address, phone, city_id, geo_area_id, institution_id, position)
+values (null,null, 'pitsos pitsou', 2, 'address1', '2101231231', 2, 2, 2, 'professor');

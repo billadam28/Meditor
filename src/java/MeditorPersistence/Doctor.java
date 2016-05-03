@@ -20,6 +20,11 @@ public class Doctor  implements java.io.Serializable {
      private Integer geoAreaId;
      private Integer institutionId;
      private String position;
+     private String assignedVstName;
+     private String specialtyName;
+     private String cityName;
+     private String geoAreaName;
+     private String institutionName;
 
     public Doctor() {
     }
@@ -114,10 +119,47 @@ public class Doctor  implements java.io.Serializable {
     public void setPosition(String position) {
         this.position = position;
     }
+    
+    public String getAssignedVstName() {
+        return this.assignedVstName;
+    }
+    
+    public void setAssignedVstName(String assignedVstName) {
+        this.assignedVstName = assignedVstName;
+    }
 
-
-
-
+    public String getSpecialtyName() {
+        return this.specialtyName;
+    }
+    
+    public void setSpecialtyName(String specialtyName) {
+        this.specialtyName = specialtyName;
+    }
+    
+    public String getCityName() {
+        return this.cityName;
+    }
+    
+    public void setCityName(String cityName) {
+        this.cityName = cityName;
+    }
+    
+    public String getGeoAreaName() {
+        return this.geoAreaName;
+    }
+    
+    public void setGeoAreaName(String geoAreaName) {
+        this.geoAreaName = geoAreaName;
+    }
+    
+    public String getInstitutionName() {
+        return this.institutionName;
+    }
+    
+    public void setInstitutionName(String institutionName) {
+        this.institutionName = institutionName;
+    }
+    
 }
 
 

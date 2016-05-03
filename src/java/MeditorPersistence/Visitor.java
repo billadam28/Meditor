@@ -13,6 +13,10 @@ public class Visitor  implements java.io.Serializable {
      private int userId;
      private String visitorLevel;
      private Integer superiorId;
+     private String firstname;
+     private String surname;
+     private String superiorName;
+     private String groupName;
 
     public Visitor() {
     }
@@ -56,9 +60,38 @@ public class Visitor  implements java.io.Serializable {
     public void setSuperiorId(Integer superiorId) {
         this.superiorId = superiorId;
     }
-
-
-
+    
+    public String getFirstname() {
+        return this.firstname;
+    }
+    
+    public void setFirstname(String firstname) {
+        this.firstname = firstname;
+    }
+    
+    public String getSurname() {
+        return this.surname;
+    }
+    
+    public void setSurname(String surname) {
+        this.surname = surname;
+    }
+    
+    public String getSuperiorName() {
+        return this.superiorName;
+    }
+    
+    public void setSuperiorName(String superiorName) {
+        this.superiorName = superiorName;
+    }
+    
+    public String getGroupName() {
+        return this.groupName;
+    }
+    
+    public void setGroupName(String groupName) {
+        this.groupName = groupName;
+    }
 
 }
 
