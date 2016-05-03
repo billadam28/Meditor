@@ -8,11 +8,14 @@ package MeditorServlets;
 import static MeditorJavaClasses.GlobalConstants.TYPE_ADMIN;
 import static MeditorJavaClasses.GlobalConstants.TYPE_VISITOR;
 import MeditorJavaClasses.LoginService;
+import MeditorJavaClasses.ProcessCycle;
+import MeditorPersistence.Doctor;
 import MeditorPersistence.NewHibernateUtil;
 import MeditorPersistence.User;
 import java.io.IOException;
 import static java.time.Clock.system;
 import java.util.Date;
+import java.util.Set;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -43,17 +46,20 @@ public class NewcycleSrvlt extends HttpServlet {
         HttpSession session = request.getSession(false);
         
         if ((session == null) || (session.getAttribute("userId") == null)) {
-            //session.getAttribute("userId");
-            //fere giatrous pou den exoun assigned period k na exoun aasigned visitor
-            //fere ta periods
             this.getServletConfig().getServletContext().getRequestDispatcher("/index.jsp?noSession=1").forward(request, response);
             System.out.println("null");
         } else {
-            //session.getAttribute("userId");
-            //fere giatrous pou den exoun assigned period k na exoun aasigned visitor
+            //fere giatrous pou den exoun assigned period k na exoun assigned visitor
             //fere ta periods
+            String doctorId = request.getParameter("doctorId");
+            ProcessCycle processCycle = new ProcessCycle((String)request.getParameter("doctorId")); 
+            Doctor doctor = processCycle.getAssignedDoctorWithNoPeriod();
+            session.setAttribute("doctorId", doctor.getId());
+            session.setAttribute("name", doctor.getName());
+            
             this.getServletConfig().getServletContext().getRequestDispatcher("/newcycle.jsp").forward(request, response);
             System.out.println("not null");
+            //System.out.println(session.getAttribute("username"));
         }
         
         

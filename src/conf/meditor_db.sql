@@ -209,3 +209,7 @@ INSERT INTO `Admin`
 (user_id, access_level)
 VALUES (1, 1);
 
+INSERT INTO Doctor 
+(assigned_vst_id, created_from, name, specialty_id, address, phone, city_id, geo_area_id, institution_id, position)
+VALUES (1, 1, 'teo', 1, 'agias kiriakis', '43534563', 1, 1, 1, 'pathologos');
+

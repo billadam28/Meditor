@@ -84,7 +84,7 @@
 	</aside><!-- end of sidebar -->
         
         <section id="main" class="column">
-				
+            <p>Welcome <%= session.getAttribute("doctorId") + " " + session.getAttribute("name")%></p>
 		<div class="spacer"></div>
 	</section>
      <script type="text/javascript" src="js/currentlinkstyle.js"></script>
