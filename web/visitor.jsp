@@ -14,6 +14,6 @@
     
     <body> 
         <%@ include file="includes/visitor_common.jsp" %>
-        
+    <script type="text/javascript" src="js/currentlinkstyle.js"></script>    
     </body>
 </html>
