@@ -13,14 +13,16 @@ public class Group  implements java.io.Serializable {
      private Integer parentGroupId;
      private String name;
      private Integer leaderId;
+     private String description;
 
     public Group() {
     }
 
-    public Group(Integer parentGroupId, String name, Integer leaderId) {
+    public Group(Integer parentGroupId, String name, Integer leaderId, String description) {
        this.parentGroupId = parentGroupId;
        this.name = name;
        this.leaderId = leaderId;
+       this.description = description;
     }
    
     public Integer getId() {
@@ -50,6 +52,14 @@ public class Group  implements java.io.Serializable {
     
     public void setLeaderId(Integer leaderId) {
         this.leaderId = leaderId;
+    }
+    
+    public String getDescription() {
+        return this.description;
+    }
+    
+    public void setDescription(String description) {
+        this.description = description;
     }
 
 

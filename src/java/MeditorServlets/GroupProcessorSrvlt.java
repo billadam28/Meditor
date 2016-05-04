@@ -34,11 +34,22 @@ public class GroupProcessorSrvlt extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         
         HttpSession session = request.getSession(false);
+        String nameOfGroup;
+        String descOfGroup;
         
         if ((session == null) || (session.getAttribute("userId") == null)) {
             this.getServletConfig().getServletContext().getRequestDispatcher("/index.jsp?noSession=1").forward(request, response);
         } else {
             GroupServices groupServices = new GroupServices();
+            
+            if (request.getParameterNames().hasMoreElements()) {
+                nameOfGroup = request.getParameter("nameOfGroup");
+                descOfGroup = request.getParameter("descOfGroup");
+                groupServices.createGroup(nameOfGroup,descOfGroup);
+                request.setAttribute("revealSuccessMsg", "true");
+                System.out.println(nameOfGroup +" "+ descOfGroup );
+                
+            }
             this.getServletConfig().getServletContext().getRequestDispatcher("/create_group.jsp").forward(request, response);
             
         }

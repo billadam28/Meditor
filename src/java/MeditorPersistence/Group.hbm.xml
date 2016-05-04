@@ -17,5 +17,8 @@
         <property name="leaderId" type="java.lang.Integer">
             <column name="leader_id" />
         </property>
+        <property name="description" type="string">
+            <column name="description" length="250" />
+        </property>
     </class>
 </hibernate-mapping>
