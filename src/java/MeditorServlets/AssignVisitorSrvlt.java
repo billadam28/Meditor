@@ -41,11 +41,10 @@ public class AssignVisitorSrvlt extends HttpServlet {
         } else {
             AssignVisitorProcessor assignVisitor = new AssignVisitorProcessor();
             
-            
             if (request.getParameterNames().hasMoreElements()) {
                 String visitorToAssign = request.getParameter("visitorToAssign");
                 doctorToAssign = request.getParameterValues("doctorToAssign");
-                //assignVisitor.assignVisitor(doctorToAssign, Integer.parseInt(visitorToAssign));
+                assignVisitor.assignVisitor(doctorToAssign, Integer.parseInt(visitorToAssign));
                 System.out.println("hello world");
                 request.setAttribute("revealSuccesMsg", "true");
     

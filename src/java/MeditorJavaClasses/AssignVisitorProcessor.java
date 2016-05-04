@@ -32,11 +32,20 @@ public class AssignVisitorProcessor {
         visitorList= new ArrayList<>();
         getVisitorListQuery = "select v, u.firstname, u.surname, g.name, (select u.surname from User as u, Visitor as v where v.superiorId = v.id and v.userId=u.id) as superiorName"
                 + " from Visitor v , User u, Group g, GroupMember gm where v.userId = u.id and v.id = gm.id.memberId and gm.id.groupId = g.id";
-        getDoctorListQuery = "select d, s.specialtyName, c.cityName, ga.geoName, i.institutionName,"
+        /*getDoctorListQuery = "select d, s.specialtyName, c.cityName, ga.geoName, i.institutionName,"
                 + " (select u.surname from User u, Visitor v, Doctor d where d.assignedVstId=v.id and v.userId=u.id ) as vstName"
                 + " from Doctor d, Specialty s, City c, GeographicalArea ga, Institution i"
-                + " where d.specialtyId=s.id and d.cityId=c.id and d.geoAreaId=ga.id and d.institutionId=i.id";
-        assignVisitorQuery = "insert into Doctor set AssignedVstId = :vst_id where ";
+                + " where d.specialtyId=s.id and d.cityId=c.id and d.geoAreaId=ga.id and d.institutionId=i.id"; */
+        assignVisitorQuery = "update Doctor d set d.assignedVstId = :vst_id where d.id = :doc_id";
+       getDoctorListQuery = "select d, s.specialtyName, c.cityName, ga.geoName, i.institutionName, u.surname"
+                    + " from Doctor d"
+                    + " left outer join Visitor v on d.assignedVstId = v.id"
+                    + " left outer join User u on v.userId = u.id"
+                    + " inner join City c on d.cityId=c.id"
+                    + " inner join Specialty s on d.specialtyId=s.id"
+                    + " inner join GeographicalArea ga on d.geoAreaId=ga.id"
+                    + " inner join Institution i on d.institutionId=i.id"; 
+       
     }
 
     public void populateDefaultLists() {
@@ -92,14 +101,12 @@ public class AssignVisitorProcessor {
 
         try {
             tx = session.beginTransaction();
-            //Query query = session.createQuery(assignVisitorQuery);
-            for (int i=0; i<docList.length; i++) {
-                Doctor doc = new Doctor();
-                doc.setId(Integer.parseInt(docList[i]));
-                doc.setAssignedVstId(visitorId);
-                //mergedOne = session.merge(one);
-                //session.saveOrUpdate(mergedOne);
-                session.save(doc);
+            Query query = session.createQuery(assignVisitorQuery);
+            int updatedEntities;
+            for (String docList1 : docList) {
+                query.setInteger("doc_id", Integer.parseInt(docList1));
+                query.setInteger("vst_id", visitorId);
+                updatedEntities = query.executeUpdate();
             }
             tx.commit();
         } catch (HibernateException e) {
