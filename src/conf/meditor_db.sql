@@ -171,6 +171,7 @@ CREATE TABLE `Group` (
   parent_group_id  int,
   name             varchar(50),
   leader_id        int,
+  description      varchar(250),
   PRIMARY KEY (id),
   constraint fk_parent_group_id FOREIGN KEY (parent_group_id) REFERENCES `Group` (id),
   constraint fk_leader_id FOREIGN KEY (leader_id) REFERENCES Visitor (id)

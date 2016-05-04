@@ -614,9 +614,9 @@ float: left;
 border-bottom: 1px dotted #cccccc;
 }
 
-input[type=submit] {
+input[type=submit],input[type=reset] {
 background: #D0D1D4 url(../images/btn_submit.png) repeat-x;
-border: 1px solid #A8A9A8;
+border: 1px solid #1cb495;
 -webkit-box-shadow: 0 1px 0 #fff;
 -moz-box-shadow: 0 1px 0 #fff;
 box-shadow: 0 1px 0 #fff;
@@ -631,13 +631,13 @@ text-shadow: 0 1px 0 #fff;
 cursor: pointer;
 }
 
-input[type=submit]:hover {
+input[type=submit]:hover,input[type=reset]:hover {
 color: #333333;
 }
 
-input[type=submit].alt_btn {
-background: #D0D1D4 url(../images/btn_submit_2.png) repeat-x;
-border: 1px solid#30B0C8;
+input[type=submit].alt_btn, input[type=reset].alt_btn {
+background: #1cb495;
+border: 1px solid#1cb495;
 -webkit-box-shadow: 0 1px 0 #fff;
 -moz-box-shadow: 0 1px 0 #fff;
 box-shadow: 0 1px 0 #fff;
@@ -647,16 +647,16 @@ height: 22px;
 -moz-border-radius: 5px;
 border-radius: 5px;
 padding: 0 10px;
-color: #003E49;
+color: #1F1F20;
 text-shadow: 0 1px 0 #6CDCF9;
 cursor: pointer;
 }
 
-input[type=submit].alt_btn:hover {
-color: #001217;
+input[type=submit].alt_btn:hover,input[type=reset].alt_btn:hover {
+background-color: #1fcaa7;
 }
 
-input[type=submit].btn_post_message {
+input[type=submit].btn_post_message, input[type=reset].btn_post_message {
 background: #D0D1D4 url(../images/post_message.png) no-repeat;
 display: block;
 width: 37px;
@@ -666,7 +666,7 @@ cursor: pointer;
 text-indent: -5000px;
 }
 
-input[type=submit].btn_post_message:hover {
+input[type=submit].btn_post_message:hover, input[type=reset].btn_post_message:hover {
 background-position: 0 -24px;
 }
 
@@ -757,7 +757,7 @@ margin: 0 10px;
 
 fieldset input[type=text]:focus {
 outline: none;
-border: 1px solid #77BACE;
+border: 1px solid #1cb495;
 -webkit-box-shadow: inset 0 2px 2px #ccc, 0 0 10px #ADDCE6;
 -moz-box-shadow: inset 0 2px 2px #ccc, 0 0 10px #ADDCE6;
 box-shadow: inset 0 2px 2px #ccc, 0 0 10px #ADDCE6;
@@ -791,7 +791,7 @@ margin: 0 10px;
 
 fieldset textarea:focus {
 outline: none;
-border: 1px solid #77BACE;
+border: 1px solid #1cb495;
 -webkit-box-shadow: inset 0 2px 2px #ccc, 0 0 10px #ADDCE6;
 -moz-box-shadow: inset 0 2px 2px #ccc, 0 0 10px #ADDCE6;
 box-shadow: inset 0 2px 2px #ccc, 0 0 10px #ADDCE6;
