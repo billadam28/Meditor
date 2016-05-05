@@ -22,7 +22,7 @@
             <%}%>
             
             <% if (request.getAttribute("revealErrorMsg") == "true") { %>
-                <h4 class="alert_error">Group cannot be created. This name has been assigned to another group.</h4>
+            <h4 class="alert_error">The name "<%=session.getAttribute("nameOfGroup")%>" has been assigned to another group. Please give another name.</h4>
             <%}%>
             
             <article class="module width_full">
@@ -50,8 +50,8 @@
            </article><!-- end of post new article -->
            <input type="hidden" id="msg" value="All fields are required!">
            <p id="msg2" style="color:red; margin-left: 30px; font-weight: bold"></p>
-        </section>       
-     <script type="text/javascript" src="js/validateform.js"></script>
-    <script type="text/javascript" src="js/currentlinkstyle.js"></script> 
+        </section>  
+        <script type="text/javascript" src="js/validateform.js"></script>
+        <script type="text/javascript" src="js/currentlinkstyle.js"></script> 
     </body>
 </html>

@@ -24,6 +24,15 @@ public class GroupServices {
     String descOfGroup;
 
 
+    public boolean availableGroup (String nameOfGroup) {
+        Session session = NewHibernateUtil.getSessionFactory().openSession();
+        Group group = new Group();
+        group.setName(nameOfGroup);
+        Query query = session.createQuery("select name from Group where name='"+nameOfGroup+"'");
+        return (query.uniqueResult() != null);
+    }
+    
+    
     public void createGroup(String nameOfGroup, String descOfGroup) {
             Session session = NewHibernateUtil.getSessionFactory().openSession();
             Transaction tx = null;
