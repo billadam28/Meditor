@@ -48,7 +48,7 @@ public class GroupProcessorSrvlt extends HttpServlet {
                 groupServices.createGroup(nameOfGroup,descOfGroup);
                 request.setAttribute("revealSuccessMsg", "true");
                 session.setAttribute("nameOfGroup", request.getParameter("nameOfGroup"));
-                System.out.println(nameOfGroup +" "+ descOfGroup );
+                //System.out.println(nameOfGroup +" "+ descOfGroup );
                 
             }
             this.getServletConfig().getServletContext().getRequestDispatcher("/create_group.jsp").forward(request, response);
