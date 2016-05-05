@@ -14,7 +14,6 @@ drop table Visit_Visitor_Lnk;
 drop table Extra_Visit_Visitor_Lnk;
 drop table Extra_Visit;
 drop table Visit;
-drop table Scheduled_Doctor;
 drop table Doctor;
 drop table Visitor;
 drop table Admin;
@@ -181,9 +180,10 @@ CREATE TABLE Extra_Visit_Visitor_Lnk (
 CREATE TABLE `Group` (
   id               int NOT NULL AUTO_INCREMENT,
   parent_group_id  int,
-  name             varchar(50),
+  `name`           varchar(50),
   leader_id        int,
   PRIMARY KEY (id),
+  unique(`name`),
   constraint fk_parent_group_id FOREIGN KEY (parent_group_id) REFERENCES `Group` (id),
   constraint fk_leader_id FOREIGN KEY (leader_id) REFERENCES Visitor (id)
   ON DELETE CASCADE ON UPDATE CASCADE
@@ -228,12 +228,12 @@ INSERT INTO `Visitor`
 VALUES (2, 'senior');
 
 INSERT INTO `Visitor`
-(user_id, visitor_level)
-VALUES (3, 'senior');
+(user_id, visitor_level, superior_id)
+VALUES (3, 'senior', 1);
 
 INSERT INTO `Visitor`
-(user_id, visitor_level)
-VALUES (4, 'trainee');
+(user_id, visitor_level, superior_id)
+VALUES (4, 'trainee', 2);
 
 INSERT INTO `Admin`
 (user_id, access_level)
@@ -268,8 +268,8 @@ insert into specialty (specialty_name) values ('Gastroenterologist');
 insert into institution (institution_name, city_id) values ('ygeia', 1);
 insert into institution (institution_name, city_id) values ('Sparti General Hospital', 2);
 
-insert into doctor (assigned_vst_id, created_from, name, specialty_id, address, phone, city_id, geo_area_id, institution_id, position)
-values (null,null, 'mark markus', 1, 'address1', '2101231231', 1, 1, 1, 'professor');
+insert into doctor (assigned_vst_id, created_from, name, specialty_id, address, phone, institution_id, position)
+values (null,null, 'mark markus', 1, 'address1', '2101231231', 1, 'professor');
 
-insert into doctor (assigned_vst_id, created_from, name, specialty_id, address, phone, city_id, geo_area_id, institution_id, position)
-values (null,null, 'pitsos pitsou', 2, 'address1', '2101231231', 2, 2, 2, 'professor');
+insert into doctor (assigned_vst_id, created_from, name, specialty_id, address, phone, institution_id, position)
+values (null,null, 'pitsos pitsou', 2, 'address1', '2101231231', 2, 'professor');
