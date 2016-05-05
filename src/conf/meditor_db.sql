@@ -10,6 +10,8 @@
 
 drop table Group_Member;
 drop table `Group`;
+drop table Visit_Visitor_Lnk;
+drop table Extra_Visit_Visitor_Lnk;
 drop table Extra_Visit;
 drop table Visit;
 drop table Scheduled_Doctor;
