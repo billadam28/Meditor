@@ -10,9 +10,10 @@
 
 drop table Group_Member;
 drop table `Group`;
+drop table Visit_Visitor_Lnk;
+drop table Extra_Visit_Visitor_Lnk;
 drop table Extra_Visit;
 drop table Visit;
-drop table Scheduled_Doctor;
 drop table Doctor;
 drop table Visitor;
 drop table Admin;
@@ -179,10 +180,11 @@ CREATE TABLE Extra_Visit_Visitor_Lnk (
 CREATE TABLE `Group` (
   id               int NOT NULL AUTO_INCREMENT,
   parent_group_id  int,
-  name             varchar(50),
+  `name`           varchar(50),
   leader_id        int,
   description      varchar(250),
   PRIMARY KEY (id),
+  unique(`name`),
   constraint fk_parent_group_id FOREIGN KEY (parent_group_id) REFERENCES `Group` (id),
   constraint fk_leader_id FOREIGN KEY (leader_id) REFERENCES Visitor (id)
   ON DELETE CASCADE ON UPDATE CASCADE
@@ -214,11 +216,61 @@ INSERT INTO User
 (firstname, surname, email, username, passwd, user_type)
 VALUES ('George', 'Lalas','george@george.com','george',SHA1('1234'), 2);
 
+INSERT INTO User
+(firstname, surname, email, username, passwd, user_type)
+VALUES ('paul', 'paulopoulos','paul@paul.com','paul',SHA1('1234'), 2);
+
+INSERT INTO User
+(firstname, surname, email, username, passwd, user_type)
+VALUES ('john', 'john','john@john.com','john',SHA1('1234'), 2);
+
 INSERT INTO `Visitor`
 (user_id, visitor_level)
 VALUES (2, 'senior');
+
+INSERT INTO `Visitor`
+(user_id, visitor_level, superior_id)
+VALUES (3, 'senior', 1);
+
+INSERT INTO `Visitor`
+(user_id, visitor_level, superior_id)
+VALUES (4, 'trainee', 2);
 
 INSERT INTO `Admin`
 (user_id, access_level)
 VALUES (1, 1);
 
+INSERT INTO `Group`
+(parent_group_id, name, leader_id)
+VALUES (null , 'group1', 1);
+
+INSERT INTO Group_Member
+(group_id, member_id)
+VALUES (1,1);
+
+INSERT INTO Group_Member
+(group_id, member_id)
+VALUES (1,2);
+
+INSERT INTO Group_Member
+(group_id, member_id)
+VALUES (1,3);
+
+insert into geographical_area (geo_name)values ('Attica');
+insert into geographical_area (geo_name)values ('Lakonia');
+
+insert into city (city_name, geo_id) values ('Athens', 1);
+insert into city (city_name, geo_id) values ('Sparti', 2);
+
+insert into specialty (specialty_name) values ('Dentist');
+insert into specialty (specialty_name) values ('Cardiologist');
+insert into specialty (specialty_name) values ('Gastroenterologist');
+
+insert into institution (institution_name, city_id) values ('ygeia', 1);
+insert into institution (institution_name, city_id) values ('Sparti General Hospital', 2);
+
+insert into doctor (assigned_vst_id, created_from, name, specialty_id, address, phone, institution_id, position)
+values (null,null, 'mark markus', 1, 'address1', '2101231231', 1, 'professor');
+
+insert into doctor (assigned_vst_id, created_from, name, specialty_id, address, phone, institution_id, position)
+values (null,null, 'pitsos pitsou', 2, 'address1', '2101231231', 2, 'professor');
