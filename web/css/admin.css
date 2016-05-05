@@ -636,8 +636,8 @@ color: #333333;
 }
 
 input[type=submit].alt_btn, input[type=reset].alt_btn {
-background: #1cb495;
-border: 1px solid#1cb495;
+background: #D0D1D4 url(../images/btn_submit_2.png) repeat-x;
+border: 1px solid#30B0C8;
 -webkit-box-shadow: 0 1px 0 #fff;
 -moz-box-shadow: 0 1px 0 #fff;
 box-shadow: 0 1px 0 #fff;
@@ -647,13 +647,13 @@ height: 22px;
 -moz-border-radius: 5px;
 border-radius: 5px;
 padding: 0 10px;
-color: #1F1F20;
+color: #003E49;
 text-shadow: 0 1px 0 #6CDCF9;
 cursor: pointer;
 }
 
 input[type=submit].alt_btn:hover,input[type=reset].alt_btn:hover {
-background-color: #1fcaa7;
+color: #001217;
 }
 
 input[type=submit].btn_post_message, input[type=reset].btn_post_message {
