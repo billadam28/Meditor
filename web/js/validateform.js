@@ -4,13 +4,19 @@ function validateForm() {
     if ((x == null || x == "") && (y==null || y=="")) {
         document.getElementById("name").style.borderColor="red";
         document.getElementById("desc").style.borderColor="red";
+        var m = document.getElementById("msg").value;
+        document.getElementById("msg2").innerHTML = m;
         //alert("All fields are required!");
         return false;
     } else if (x==null || x=="") {
         document.getElementById("name").style.borderColor="red";
+        var m = document.getElementById("msg").value;
+        document.getElementById("msg2").innerHTML = m;
         return false;
     } else if (y==null || y=="") {
         document.getElementById("desc").style.borderColor="red";
+        var m = document.getElementById("msg").value;
+        document.getElementById("msg2").innerHTML = m;
         return false;
     } else {
         return true;

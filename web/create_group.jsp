@@ -18,7 +18,7 @@
         <section id="main" class="column">
             
             <% if (request.getAttribute("revealSuccessMsg") == "true") { %>
-                <h4 class="alert_success">Group created successfully!</h4>
+                <h4 class="alert_success">Group "<%=session.getAttribute("nameOfGroup")%>" was created successfully!</h4>
             <%}%>
             
             <% if (request.getAttribute("revealErrorMsg") == "true") { %>
@@ -29,11 +29,11 @@
                 <header><h3>Create New Group</h3></header>
                     <div class="module_content">
 			<fieldset>
-                        	<label>Group Name</label>
+                            <label>Group Name<sup>*</sup></label>
                                 <input type="text" id="name" form="create_group_form" name="nameOfGroup" placeholder="Give the name of the group (up to 50 characters)" maxlength="50">
 			</fieldset>
 			<fieldset>
-				<label>Description</label>
+				<label>Description<sup>*</sup></label>
 				<textarea rows="5" id="desc" form="create_group_form" name="descOfGroup" placeholder="Give a short description for the group (up to 250 characters)" maxlength="250"></textarea>
 			</fieldset>
                     </div>
@@ -43,9 +43,13 @@
                             <input type="submit" class="alt_btn" value="Create" onclick="return validateForm()"/>
                             <input type="reset" class="alt_btn" value="Reset"/>
                         </form>
+                        
                     </div>
-		</footer>
-            </article><!-- end of post new article -->
+                    <p style="margin-left: 20px;"><sup>*</sup> Required Fields</p>
+		</footer> 
+           </article><!-- end of post new article -->
+           <input type="hidden" id="msg" value="All fields are required!">
+           <p id="msg2" style="color:red; margin-left: 30px; font-weight: bold"></p>
         </section>       
      <script type="text/javascript" src="js/validateform.js"></script>
     <script type="text/javascript" src="js/currentlinkstyle.js"></script> 
