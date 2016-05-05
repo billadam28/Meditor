@@ -22,6 +22,15 @@ import org.hibernate.Transaction;
 public class GroupServices {
     String nameOfGroup;
     String descOfGroup;
+    private List<Visitor> visitorList;
+    private final String getVisitorList;
+    
+    public GroupServices() {
+        visitorList = new ArrayList<>();
+        getVisitorList = "select v.*, u.firstname, u.sirname from visitor v, user u where v.id not in "
+                + "(select gm.member_id from group_member gm) and v.user_id = u.id";
+        
+    }
 
 
     public boolean availableGroup (String nameOfGroup) {
@@ -32,7 +41,6 @@ public class GroupServices {
         return (query.uniqueResult() != null);
     }
     
-    
     public void createGroup(String nameOfGroup, String descOfGroup) {
             Session session = NewHibernateUtil.getSessionFactory().openSession();
             Transaction tx = null;
@@ -40,6 +48,7 @@ public class GroupServices {
             try {
                 tx = session.beginTransaction();
                     Group group = new Group();
+                    //Group parentGroup = new Group();
                     group.setName(nameOfGroup);
                     group.setDescription(descOfGroup);
                     session.save(group);
@@ -52,5 +61,9 @@ public class GroupServices {
             } finally {
                 session.close();
             }
+    }
+    
+    public void showLists() {
+                 
     }
 }
