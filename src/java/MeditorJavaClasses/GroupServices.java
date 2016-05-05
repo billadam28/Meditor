@@ -24,25 +24,24 @@ public class GroupServices {
     String descOfGroup;
 
 
-public void createGroup(String nameOfGroup, String descOfGroup) {
-        Session session = NewHibernateUtil.getSessionFactory().openSession();
-        Transaction tx = null;
+    public void createGroup(String nameOfGroup, String descOfGroup) {
+            Session session = NewHibernateUtil.getSessionFactory().openSession();
+            Transaction tx = null;
 
-        try {
-            tx = session.beginTransaction();
-                Group group = new Group();
-                group.setName(nameOfGroup);
-                group.setDescription(descOfGroup);
-                session.save(group);
-            tx.commit();
-        } catch (HibernateException e) {
-            if (tx != null) {
-                tx.rollback();
+            try {
+                tx = session.beginTransaction();
+                    Group group = new Group();
+                    group.setName(nameOfGroup);
+                    group.setDescription(descOfGroup);
+                    session.save(group);
+                tx.commit();
+            } catch (HibernateException e) {
+                if (tx != null) {
+                    tx.rollback();
+                }
+                e.printStackTrace();
+            } finally {
+                session.close();
             }
-            e.printStackTrace();
-        } finally {
-            session.close();
-        }
-        
     }
 }

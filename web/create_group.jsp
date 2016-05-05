@@ -22,7 +22,7 @@
             <%}%>
             
             <% if (request.getAttribute("revealErrorMsg") == "true") { %>
-                <h4 class="alert_error">Group cannot be created This name has been assigned to another group.</h4>
+                <h4 class="alert_error">Group cannot be created. This name has been assigned to another group.</h4>
             <%}%>
             
             <article class="module width_full">
