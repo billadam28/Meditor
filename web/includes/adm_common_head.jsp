@@ -1,9 +1,9 @@
-    <%if (session.getAttribute("username") == null) {%>
+<%if (session.getAttribute("username") == null || session.getAttribute("user_type").equals(2)) {%>
         <jsp:forward page="/index.jsp" >
             <jsp:param name="noSession" value="1" />
         </jsp:forward>
     <%}%>
-
+    
     <head>
         <meta charset="utf-8" />
 	<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />

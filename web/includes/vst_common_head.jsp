@@ -1,4 +1,4 @@
-    <%if (session.getAttribute("username") == null){%>
+<%if (session.getAttribute("username") == null || session.getAttribute("user_type").equals(1)){%>
         <jsp:forward page="/index.jsp" >
             <jsp:param name="noSession" value="1" />
         </jsp:forward>

@@ -104,16 +104,12 @@ CREATE TABLE Doctor (
   specialty_id     int,
   address          varchar(50),
   phone            varchar(50),
-  city_id          int,
-  geo_area_id      int,
   institution_id   int,
-  position          varchar(30),
+  position         varchar(30),
   PRIMARY KEY (id),
   constraint fk_assigned_vst_id FOREIGN KEY (assigned_vst_id) REFERENCES Visitor (id),
    constraint fk_created_from FOREIGN KEY (created_from) REFERENCES Visitor (id),
   constraint fk_specialty_id FOREIGN KEY (specialty_id) REFERENCES Specialty (id),
-  constraint fk_doc_city_id FOREIGN KEY (city_id) REFERENCES City (id),
-  constraint fk_geo_area_id FOREIGN KEY (geo_area_id) REFERENCES Geographical_Area (id),
   constraint fk_institution_id FOREIGN KEY (institution_id) REFERENCES Institution (id)
   ON DELETE CASCADE ON UPDATE CASCADE
 );
@@ -125,7 +121,7 @@ CREATE TABLE `Cycle` (
   PRIMARY KEY (id)
 ) ;
 
-CREATE TABLE Scheduled_Doctor (
+/*CREATE TABLE Scheduled_Doctor (
   id               int NOT NULL AUTO_INCREMENT,
   doctor_id        int,
   cycle_id         int,
@@ -134,12 +130,11 @@ CREATE TABLE Scheduled_Doctor (
   constraint fk_doctor_id FOREIGN KEY (doctor_id) REFERENCES Doctor (id),
   constraint fk_cycle_id FOREIGN KEY (cycle_id) REFERENCES Cycle (id)
   ON DELETE CASCADE ON UPDATE CASCADE
-);
+); */
 
 CREATE TABLE Visit (
   id               int NOT NULL AUTO_INCREMENT,
   doctor_id        int,
-  visitor_id       int,
   visit_offset     int,
   status           varchar(10),
   date             date,
@@ -151,18 +146,34 @@ CREATE TABLE Visit (
   ON DELETE CASCADE ON UPDATE CASCADE
 );
 
+CREATE TABLE Visit_Visitor_Lnk (
+  visitor_id int not null,
+  visit_id   int not null,
+  PRIMARY  KEY (visitor_id, visit_id),
+  constraint fk_lnk_visit_id FOREIGN KEY (visit_id) REFERENCES Visit (id),
+  constraint fk_lnk_visitor_id FOREIGN KEY (visitor_id) REFERENCES Visitor (id)
+  ON DELETE CASCADE ON UPDATE CASCADE
+);
+
 CREATE TABLE Extra_Visit (
   id               int NOT NULL AUTO_INCREMENT,
   doctor_id        int,
-  visitor_id       int,
   visit_offset     int,
   status           varchar(10),
   date             date,
   cycle_id         int,
   PRIMARY KEY (id),
   constraint fk_xvst_doctor_id FOREIGN KEY (doctor_id) REFERENCES Doctor (id),
-  constraint fk_xvst_visitor_id FOREIGN KEY (visitor_id) REFERENCES Visitor (id),
   constraint fk_xvst_cycle_id FOREIGN KEY (cycle_id) REFERENCES Cycle (id)
+  ON DELETE CASCADE ON UPDATE CASCADE
+);
+
+CREATE TABLE Extra_Visit_Visitor_Lnk (
+  visitor_id int not null,
+  visit_id   int not null,
+  PRIMARY  KEY (visitor_id, visit_id),
+  constraint fk_xt_lnk_visit_id FOREIGN KEY (visit_id) REFERENCES Visit (id),
+  constraint fk_xt_lnk_visitor_id FOREIGN KEY (visitor_id) REFERENCES Visitor (id)
   ON DELETE CASCADE ON UPDATE CASCADE
 );
 
@@ -178,9 +189,11 @@ CREATE TABLE `Group` (
 );
 
 CREATE TABLE Group_Member (
+  id               int NOT NULL AUTO_INCREMENT, 
   group_id         int NOT NULL,
   member_id        int NOT NULL,
-  PRIMARY KEY (group_id, member_id),
+  PRIMARY KEY (id),
+  UNIQUE (member_id),
   constraint fk_mbr_group_id FOREIGN KEY (group_id) REFERENCES `Group` (id),
   constraint fk_member_id FOREIGN KEY (member_id) REFERENCES Visitor (id)
   ON DELETE CASCADE ON UPDATE CASCADE
