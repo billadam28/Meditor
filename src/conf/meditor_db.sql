@@ -141,7 +141,6 @@ CREATE TABLE Visit (
   cycle_id         int,
   PRIMARY KEY (id),
   constraint fk_vst_doctor_id FOREIGN KEY (doctor_id) REFERENCES Doctor (id),
-  constraint fk_vst_visitor_id FOREIGN KEY (visitor_id) REFERENCES Visitor (id),
   constraint fk_vst_cycle_id FOREIGN KEY (cycle_id) REFERENCES Cycle (id)
   ON DELETE CASCADE ON UPDATE CASCADE
 );
