@@ -34,10 +34,10 @@
 			</fieldset>
                         <fieldset style="width:30%; float: right; height: 49px;"> <!-- to make two field float next to one another, adjust values accordingly -->
                             <label>Select Parent Group</label>
-                            <select style="width:90%;">
-                                    <option>Articles</option>
-                                    <option>Tutorials</option>
-                                    <option>Freebies</option>
+                            <select name="parentGroup" form="create_group_form" style="width:90%;">
+                                    <%--<%for (Group obj : groupServices.groupsList()) { %> --%>
+                                    <option value="<%--<%= obj.getId()%>--%>"><%--<%= obj.getName()%>--%></option>
+                                    <%-- <%}%>--%>
                             </select>
 			</fieldset>
 			<fieldset style="width:100%;">

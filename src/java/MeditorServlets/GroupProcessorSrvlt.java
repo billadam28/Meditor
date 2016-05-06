@@ -36,6 +36,7 @@ public class GroupProcessorSrvlt extends HttpServlet {
         HttpSession session = request.getSession(false);
         String nameOfGroup;
         String descOfGroup;
+        String parentGroup;
         
         if ((session == null) || (session.getAttribute("userId") == null)) {
             this.getServletConfig().getServletContext().getRequestDispatcher("/index.jsp?noSession=1").forward(request, response);
@@ -45,6 +46,7 @@ public class GroupProcessorSrvlt extends HttpServlet {
             if (request.getParameterNames().hasMoreElements()) {
                 nameOfGroup = request.getParameter("nameOfGroup");
                 descOfGroup = request.getParameter("descOfGroup");
+                //parentGroup = request.getParameter("nameOfGroup");
                 boolean result = groupServices.availableGroup(nameOfGroup);
                 if (result == true) {
                     session.setAttribute("nameOfGroup", request.getParameter("nameOfGroup"));

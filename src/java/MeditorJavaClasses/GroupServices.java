@@ -22,11 +22,14 @@ import org.hibernate.Transaction;
 public class GroupServices {
     String nameOfGroup;
     String descOfGroup;
+    String parentGroup;
     private List<Visitor> visitorsList;
     private List<Group> groupsList;
     private final String getVisitorsQuery;
     private final String getGroupsQuery;
     private final String assignVisitorGroupQuery;
+    private final String setVisitorLeaderQuery;
+    
     
     public GroupServices() {
         visitorsList = new ArrayList<>();
@@ -34,7 +37,8 @@ public class GroupServices {
         getVisitorsQuery = "select v, u.firstname, u.surname from visitor v, user u where v.id not in "
                 + "(select gm.member_id from group_member gm) and v.user_id = u.id";
         getGroupsQuery = "";
-        assignVisitorGroupQuery = "";
+        assignVisitorGroupQuery = "insert into Group g set g.assignedVstId = :vst_id where g.id = :group_id\"";
+        setVisitorLeaderQuery = "update Group g set g.leaderVstId = :vst_id where g.id = :group_id";
     }
 
 
@@ -54,6 +58,7 @@ public class GroupServices {
                 tx = session.beginTransaction();
                     Group group = new Group();
                     //Group parentGroup = new Group();
+                    //parentGroup.getName(parentGroup);
                     group.setName(nameOfGroup);
                     group.setDescription(descOfGroup);
                     session.save(group);
@@ -82,6 +87,33 @@ public class GroupServices {
                 //mergedOne = session.merge(one);
                 //session.saveOrUpdate(mergedOne);
                 session.save(group);
+            }
+            tx.commit();
+        } catch (HibernateException e) {
+            if (tx != null) {
+                tx.rollback();
+            }
+            e.printStackTrace();
+        } finally {
+            session.close();
+        }
+        
+    }
+    
+    public void setVisitorAsLeader(String[] groupList, int visitorId ) {
+        Session session = NewHibernateUtil.getSessionFactory().openSession();
+        Transaction tx = null;
+
+        try {
+            tx = session.beginTransaction();
+            Query query = session.createQuery(assignVisitorGroupQuery);
+            for (int i=0; i<groupList.length; i++) {
+                Group group = new Group();
+                group.setId(Integer.parseInt(groupList[i]));
+                group.setLeaderId(visitorId);
+                //mergedOne = session.merge(one);
+                //session.saveOrUpdate(mergedOne);
+                session.saveOrUpdate(group);
             }
             tx.commit();
         } catch (HibernateException e) {
