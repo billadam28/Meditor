@@ -16,9 +16,10 @@
         <%@ include file="includes/admin_common.jsp" %>
         
         <section id="main" class="column">
-            <h4 class="alert_info">Welcome to the Administrator panel. You can select an action from the menu.</h4>
-        </section>
+            
+            
+        </section>  
         
-    <script type="text/javascript" src="js/currentlinkstyle.js"></script>    
+        <script type="text/javascript" src="js/currentlinkstyle.js"></script> 
     </body>
 </html>

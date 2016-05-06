@@ -28,13 +28,21 @@
             <article class="module width_full">
                 <header><h3>Create New Group</h3></header>
                     <div class="module_content">
-			<fieldset>
+			<fieldset style="width:67%; display: inline-block;">
                             <label>Group Name<sup>*</sup></label>
-                                <input type="text" id="name" form="create_group_form" name="nameOfGroup" placeholder="Give the name of the group (up to 50 characters)" maxlength="50">
+                                <input style="width:93%;" type="text" id="name" form="create_group_form" name="nameOfGroup" placeholder="Give the name of the group (up to 50 characters)" maxlength="50">
 			</fieldset>
-			<fieldset>
+                        <fieldset style="width:30%; float: right; height: 49px;"> <!-- to make two field float next to one another, adjust values accordingly -->
+                            <label>Select Parent Group</label>
+                            <select style="width:90%;">
+                                    <option>Articles</option>
+                                    <option>Tutorials</option>
+                                    <option>Freebies</option>
+                            </select>
+			</fieldset>
+			<fieldset style="width:100%;">
 				<label>Description<sup>*</sup></label>
-				<textarea rows="5" id="desc" form="create_group_form" name="descOfGroup" placeholder="Give a short description for the group (up to 250 characters)" maxlength="250"></textarea>
+				<textarea style="width:95.5%;" rows="5" id="desc" form="create_group_form" name="descOfGroup" placeholder="Give a short description for the group (up to 250 characters)" maxlength="250"></textarea>
 			</fieldset>
                     </div>
 		<footer>
