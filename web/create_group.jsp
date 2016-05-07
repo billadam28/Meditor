@@ -56,6 +56,7 @@
                         <form id="create_group_form" name="create_group_form" method="post" action="GroupProcessor" class="alt_btn" >
                             <input type="submit" class="alt_btn" value="Create" onclick="return validateForm()"/>
                             <input type="reset" class="alt_btn" value="Reset"/>
+                            <input type="reset" id="helpForCreation" onclick="help();" class="alt_btn" value="Help"/>
                         </form>
                         
                     </div>
@@ -65,6 +66,7 @@
            <input type="hidden" id="msg" value="All fields are required!">
            <p id="msg2" style="color:red; margin-left: 30px; font-weight: bold"></p>
         </section>  
+        <script type="text/javascript" src="js/help.js"></script>
         <script type="text/javascript" src="js/validateform.js"></script>
         <script type="text/javascript" src="js/currentlinkstyle.js"></script> 
     </body>

@@ -70,12 +70,14 @@
                     
                         <form style="margin-right:20px; float:right;" class="post_message" id="assign_form" method="post" action="AssignVisitorGroup">
                             <input type="submit" class="alt_btn" value="Assign Visitor"/>
+                            <input type="reset" id="helpForAssignVisitor" onclick="help2();" class="alt_btn" value="Help"/>
                         </form>
                    
             </footer>    
             </article><!-- end of groups -->
             
         </section>  
+        <script type="text/javascript" src="js/help.js"></script>
         <script type="text/javascript" src="js/currentlinkstyle.js"></script> 
     </body>
 </html>

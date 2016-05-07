@@ -62,12 +62,14 @@
                     
                         <form style="margin-right:20px; float:right;" class="post_message" id="set_form" method="post" action="SetVisitorLeader">
                             <input type="submit" class="alt_btn" value="Set Leader"/>
+                            <input type="reset" id="helpForSetLeader" onclick="help3();" class="alt_btn" value="Help"/>
                         </form>
                    
             </footer>    
             </article><!-- end of groups -->
             
-        </section>  
+        </section>
+        <script type="text/javascript" src="js/help.js"></script>
         <script type="text/javascript" src="js/currentlinkstyle.js"></script> 
     </body>
 </html>
