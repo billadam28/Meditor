@@ -34,25 +34,26 @@ public class AssignVisitorGroupSrvlt extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         
         HttpSession session = request.getSession(false);
-        //String [] assignedGroup = null;
+        String assignedGroup;
         
         if ((session == null) || (session.getAttribute("userId") == null)) {
             this.getServletConfig().getServletContext().getRequestDispatcher("/index.jsp?noSession=1").forward(request, response);
         } else {
             
-            /*GroupServices groupServices = new GroupServices();
+            GroupServices groupServices = new GroupServices();
             
             if (request.getParameterNames().hasMoreElements()) {
                 String assignedVisitor = request.getParameter("assignedVisitor");
-                assignedGroup = request.getParameterValues("assignedGroup");
-                System.out.println(assignedVisitor +" "+ assignedGroup);
-                groupServices.assignVisitorToGroup(assignedGroup, Integer.parseInt(assignedVisitor));
+                //assignedGroup = request.getParameterValues("assignedGroup");
+                assignedGroup = request.getParameter("parentGroup");
+                //System.out.println(assignedVisitor +" "+ assignedGroup);
+                //groupServices.assignVisitorToGroup(assignedGroup, Integer.parseInt(assignedVisitor));
                 //session.setAttribute("assignedGroup", assignedGroup);
                 //session.setAttribute("assignedVisitor", assignedVisitor);
                 request.setAttribute("revealSuccessMsg", "true");
             }
             groupServices.showVisitorGroupLists();
-            request.setAttribute("groupServices", groupServices);*/
+            request.setAttribute("groupServices", groupServices);
             this.getServletConfig().getServletContext().getRequestDispatcher("/assign_visitor_group.jsp").forward(request, response);    
         }
     }

@@ -36,7 +36,7 @@ public class GroupProcessorSrvlt extends HttpServlet {
         HttpSession session = request.getSession(false);
         String nameOfGroup;
         String descOfGroup;
-        String parentGroup;
+        String parentGroup = "0";
         
         if ((session == null) || (session.getAttribute("userId") == null)) {
             this.getServletConfig().getServletContext().getRequestDispatcher("/index.jsp?noSession=1").forward(request, response);
@@ -46,20 +46,22 @@ public class GroupProcessorSrvlt extends HttpServlet {
             if (request.getParameterNames().hasMoreElements()) {
                 nameOfGroup = request.getParameter("nameOfGroup");
                 descOfGroup = request.getParameter("descOfGroup");
-                //parentGroup = request.getParameter("nameOfGroup");
+                parentGroup = request.getParameter("parentGroup");
                 boolean result = groupServices.availableGroup(nameOfGroup);
                 if (result == true) {
                     session.setAttribute("nameOfGroup", request.getParameter("nameOfGroup"));
                     request.setAttribute("revealErrorMsg", "true");
                 } else {
                     //System.out.println(result);
-                    groupServices.createGroup(nameOfGroup,descOfGroup);
+                    groupServices.createGroup(nameOfGroup,descOfGroup,parentGroup);
                     session.setAttribute("nameOfGroup", request.getParameter("nameOfGroup"));
                     request.setAttribute("revealSuccessMsg", "true");
-                    //System.out.println(nameOfGroup +" "+ descOfGroup );
+                    //System.out.println(parentGroup);
                 }
                 
             }
+            groupServices.showVisitorGroupLists();
+            request.setAttribute("groupServices", groupServices);
             this.getServletConfig().getServletContext().getRequestDispatcher("/create_group.jsp").forward(request, response);
             
         }

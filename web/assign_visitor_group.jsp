@@ -41,8 +41,8 @@
                             </tr> 
                         </thead> 
                         <tbody>
-                            <%--<% GroupServices groupServices = (GroupServices) request.getAttribute("groupServices");
-                            for (Visitor obj : groupServices.visitorsList()) { %>--%>
+                            <% GroupServices groupServices = (GroupServices) request.getAttribute("groupServices");
+                            for (Visitor obj : groupServices.visitorsList()) { %>
                             <tr>                                
                                 <td><%--<%= obj.getFirstname()%>--%></td>
                                 <td><%--<%= obj.getSurname()%>--%></td>
@@ -50,7 +50,7 @@
     				<td><%--<%= obj.getSuperiorName() %>--%></td> 
                                 <td><input type="checkbox" name="assignedVisitor" id="visitor_chbx" value="<%--<%= obj.getId()%>--%>" form="assign_form"></td>
                             </tr> 
-                            <%--<%}%>--%>
+                            <%}%>
                         </tbody> 
                         </table>
                     </div><!-- end of #tab1 -->
@@ -60,9 +60,9 @@
                     <fieldset>
                         <label>Select a Group</label>
                         <select  name="assignedGroup" form="assign_form" style="width:92%;">
-                            <%--<%for (Group obj : groupServices.groupsList()) { %> --%>
-                            <option <%--value="<%= obj.getId()%>"--%>><%--<%= obj.getName()%>--%></option>
-                           <%-- <%}%>--%>
+                            <%for (Group obj : groupServices.groupsList()) { %>
+                            <option value="<%= obj.getId()%>"><%= obj.getName()%></option>
+                            <%}%>
                         </select>
                     </fieldset>
                 </div>

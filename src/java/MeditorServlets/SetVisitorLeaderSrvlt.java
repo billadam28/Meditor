@@ -39,19 +39,19 @@ public class SetVisitorLeaderSrvlt extends HttpServlet {
             this.getServletConfig().getServletContext().getRequestDispatcher("/index.jsp?noSession=1").forward(request, response);
         } else {
             
-            /*GroupServices groupServices = new GroupServices();
+            GroupServices groupServices = new GroupServices();
             
             if (request.getParameterNames().hasMoreElements()) {
                 String assignedVisitor = request.getParameter("assignedVisitor");
                 leaderVisitor = request.getParameterValues("leaderVisitor");
-                System.out.println(assignedVisitor +" "+ assignedGroup);
-                groupServices.assignVisitorToGroup(assignedGroup, Integer.parseInt(assignedVisitor));
+                //System.out.println(assignedVisitor +" "+ assignedGroup);
+                groupServices.setVisitorAsLeader(leaderVisitor, Integer.parseInt(assignedVisitor));
                 //session.setAttribute("assignedGroup", assignedGroup);
                 //session.setAttribute("assignedVisitor", assignedVisitor);
                 request.setAttribute("revealSuccessMsg", "true");
             }
-            groupServices.showVisitorGroupLists();
-            request.setAttribute("groupServices", groupServices);*/
+            //groupServices.showVisitorGroupLists();
+            //request.setAttribute("setVisitorAsLeader", groupServices);
             this.getServletConfig().getServletContext().getRequestDispatcher("/set_visitor_leader.jsp").forward(request, response);    
         }
     }

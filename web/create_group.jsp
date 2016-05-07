@@ -5,7 +5,11 @@
 --%>
 
 <%@page import="MeditorPersistence.User"%>
+<%@page import="MeditorPersistence.Visitor"%>
+<%@page import="MeditorPersistence.Group"%>
+<%@page import="MeditorJavaClasses.GroupServices"%>
 <%@page import="MeditorServlets.LoginSrvlt"%>
+<%@page import="MeditorServlets.GroupProcessorSrvlt"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -35,9 +39,11 @@
                         <fieldset style="width:30%; float: right; height: 49px;"> <!-- to make two field float next to one another, adjust values accordingly -->
                             <label>Select Parent Group</label>
                             <select name="parentGroup" form="create_group_form" style="width:90%;">
-                                    <%--<%for (Group obj : groupServices.groupsList()) { %> --%>
-                                    <option value="<%--<%= obj.getId()%>--%>"><%--<%= obj.getName()%>--%></option>
-                                    <%-- <%}%>--%>
+                                    <option value="0"></option>
+                                    <% GroupServices groupServices = (GroupServices) request.getAttribute("groupServices");
+                                    for (Group obj : groupServices.groupsList()) { %>
+                                        <option value="<%= obj.getId()%>"><%= obj.getName()%></option>
+                                    <%}%>
                             </select>
 			</fieldset>
 			<fieldset style="width:100%;">
