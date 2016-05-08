@@ -64,11 +64,11 @@
                                 <% AssignVisitorProcessor assignVisitor = (AssignVisitorProcessor) request.getAttribute("assignVisitor");
                                 for (Visitor obj : assignVisitor.getVisitorList()) { %>
 				<tr> 
-                                    <td><input type="checkbox" name="visitorToAssign" id="visitor_chbx" value="<%= obj.getId()%>" form="assign_form"></td> 
+                                    <td><input type="radio" name="visitorToAssign" id="visitor_rd" value="<%= obj.getId()%>" form="assign_form"></td> 
     				<td><%= obj.getFirstname() + " " + obj.getSurname()%></td> 
     				<td><%= obj.getVisitorLevel() %></td> 
-    				<td><%= obj.getSuperiorName() %></td> 
-    				<td><%= obj.getGroupName() %></td> 
+    				<td><%if (obj.getSuperior() != null) {%><%= obj.getSuperior().getSurname()%><%} else {%> not assigned <%}%></td> 
+    				<td><%if (obj.getGroup() != null) {%><%= obj.getGroup().getName()%><%} else {%> not assigned <%}%></td> 
 				</tr> 
                                 <%}%>
 			</tbody> 
@@ -157,12 +157,12 @@
 				<tr> 
                                     <td><input type="checkbox" name="doctorToAssign" id="doctor_chbx" value="<%= obj.getId()%>" form="assign_form"></td> 
     				<td><%= obj.getName()%></td> 
-    				<td><%= obj.getAssignedVstName() %></td> 
-    				<td><%= obj.getSpecialtyName() %></td> 
+    				<td><%if (obj.getAssignedVisitor() != null) {%><%= obj.getAssignedVisitor().getSurname()%><%} else {%> not assigned <%}%></td> 
+    				<td><%= obj.getSpecialty().getSpecialtyName()%></td> 
     				<td><%= obj.getPosition()%></td>
-                                <td><%= obj.getInstitutionName()%></td>
-                                <td><%= obj.getGeoAreaName()%></td>
-                                <td><%= obj.getCityName()%></td>
+                                <td><%= obj.getInstitution().getInstitutionName()%></td>
+                                <td><%= obj.getInstitution().getCity().getGeoArea().getGeoName()%></td>
+                                <td><%= obj.getInstitution().getCity().getCityName()%></td>
 				</tr> 
                                 <%}%>
 			</tbody> 

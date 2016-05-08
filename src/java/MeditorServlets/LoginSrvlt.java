@@ -5,6 +5,7 @@
  */
 package MeditorServlets;
 
+import MeditorJavaClasses.AssignVisitorProcessor;
 import static MeditorJavaClasses.GlobalConstants.TYPE_ADMIN;
 import static MeditorJavaClasses.GlobalConstants.TYPE_VISITOR;
 import MeditorJavaClasses.LoginService;
@@ -61,8 +62,6 @@ public class LoginSrvlt extends HttpServlet {
         Date createTime = new Date(session.getCreationTime());
         Date lastAccessTime = new Date(session.getLastAccessedTime());
         
-        String userId = request.getParameter("userId");   
-        String password = request.getParameter("password");
         LoginService loginService = new LoginService((String)request.getParameter("userId"), (String)request.getParameter("password"));
         User user = loginService.getUserByEmailOrUsername();
         boolean result = loginService.authenticateUser(user);
@@ -74,8 +73,10 @@ public class LoginSrvlt extends HttpServlet {
             session.setAttribute("surName", user.getSurname());
             session.setAttribute("user_type",user.getUserType());
 
-            switch (user.getUserType()) {
+            switch (user.getUserType().getId()) {
                 case TYPE_ADMIN:
+                    AssignVisitorProcessor vp = new AssignVisitorProcessor();
+                    vp.testmethod();
                     this.getServletConfig().getServletContext().getRequestDispatcher("/admin.jsp").forward(request, response);
                     break;
                 case TYPE_VISITOR:

@@ -7,7 +7,6 @@ package MeditorServlets;
 
 import MeditorJavaClasses.AssignVisitorProcessor;
 import java.io.IOException;
-import java.io.PrintWriter;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -34,7 +33,6 @@ public class AssignVisitorSrvlt extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         
         HttpSession session = request.getSession(false);
-        String[] doctorToAssign = null;
         
         if ((session == null) || (session.getAttribute("userId") == null)) {
             this.getServletConfig().getServletContext().getRequestDispatcher("/index.jsp?noSession=1").forward(request, response);
@@ -43,9 +41,8 @@ public class AssignVisitorSrvlt extends HttpServlet {
             
             if (request.getParameterNames().hasMoreElements()) {
                 String visitorToAssign = request.getParameter("visitorToAssign");
-                doctorToAssign = request.getParameterValues("doctorToAssign");
+                String[] doctorToAssign = request.getParameterValues("doctorToAssign");
                 assignVisitor.assignVisitor(doctorToAssign, Integer.parseInt(visitorToAssign));
-                System.out.println("hello world");
                 request.setAttribute("revealSuccesMsg", "true");
     
             }
