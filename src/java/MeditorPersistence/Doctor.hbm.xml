@@ -1,40 +1,30 @@
 <?xml version="1.0"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
-<!-- Generated Apr 29, 2016 4:36:33 PM by Hibernate Tools 4.3.1 -->
+
 <hibernate-mapping>
     <class name="MeditorPersistence.Doctor" table="Doctor" catalog="meditorDb" optimistic-lock="version">
         <id name="id" type="java.lang.Integer">
             <column name="id" />
             <generator class="identity" />
         </id>
-        <property name="assignedVstId" type="java.lang.Integer">
-            <column name="assigned_vst_id" />
-        </property>
-        <property name="createdFrom" type="java.lang.Integer">
-            <column name="created_from" />
-        </property>
+        <many-to-one name="assignedVisitor" column="assigned_vst_id" 
+            class="MeditorPersistence.Visitor" not-null="false"/>
+        <many-to-one name="createdFrom" column="created_from" 
+            class="MeditorPersistence.Visitor" not-null="true"/>
         <property name="name" type="string">
             <column name="name" length="50" />
         </property>
-        <property name="specialtyId" type="java.lang.Integer">
-            <column name="specialty_id" />
-        </property>
+        <many-to-one name="specialty" column="specialty_id" 
+           class="MeditorPersistence.Specialty" not-null="true"/>
         <property name="address" type="string">
             <column name="address" length="50" />
         </property>
         <property name="phone" type="string">
             <column name="phone" length="50" />
         </property>
-        <property name="cityId" type="java.lang.Integer">
-            <column name="city_id" />
-        </property>
-        <property name="geoAreaId" type="java.lang.Integer">
-            <column name="geo_area_id" />
-        </property>
-        <property name="institutionId" type="java.lang.Integer">
-            <column name="institution_id" />
-        </property>
+        <many-to-one name="institution" column="institution_id" 
+           class="MeditorPersistence.Institution" not-null="true"/>
         <property name="position" type="string">
             <column name="position" length="30" />
         </property>

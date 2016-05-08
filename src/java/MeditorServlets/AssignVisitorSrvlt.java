@@ -6,13 +6,7 @@
 package MeditorServlets;
 
 import MeditorJavaClasses.AssignVisitorProcessor;
-import static MeditorJavaClasses.GlobalConstants.TYPE_ADMIN;
-import static MeditorJavaClasses.GlobalConstants.TYPE_VISITOR;
-import MeditorJavaClasses.LoginService;
-import MeditorPersistence.NewHibernateUtil;
-import MeditorPersistence.User;
 import java.io.IOException;
-import java.util.Date;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -23,27 +17,7 @@ import javax.servlet.http.HttpSession;
  *
  * @author adamopoulo
  */
-public class LoginSrvlt extends HttpServlet {
-    private static NewHibernateUtil hibernateUtil;
-    
-    /**
-     *
-     * @throws ServletException
-     */
-    @Override
-    public void init() throws ServletException 
-    {
-        hibernateUtil = new NewHibernateUtil();
-    }
-    
-    /**
-     *
-     */
-    @Override
-    public void destroy()
-    {
-        NewHibernateUtil.getSessionFactory().close();
-    }
+public class AssignVisitorSrvlt extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -58,38 +32,26 @@ public class LoginSrvlt extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         
-        HttpSession session = request.getSession();
-        Date createTime = new Date(session.getCreationTime());
-        Date lastAccessTime = new Date(session.getLastAccessedTime());
+        HttpSession session = request.getSession(false);
         
-        LoginService loginService = new LoginService((String)request.getParameter("userId"), (String)request.getParameter("password"));
-        User user = loginService.getUserByEmailOrUsername();
-        boolean result = loginService.authenticateUser(user);
-        
-        if(result == true){
-            session.setAttribute("userId", user.getId());
-            session.setAttribute("username", user.getUsername());
-            session.setAttribute("firstName", user.getFirstname());
-            session.setAttribute("surName", user.getSurname());
-            session.setAttribute("user_type",user.getUserType());
-
-            switch (user.getUserType().getId()) {
-                case TYPE_ADMIN:
-                    AssignVisitorProcessor vp = new AssignVisitorProcessor();
-                    vp.testmethod();
-                    this.getServletConfig().getServletContext().getRequestDispatcher("/admin.jsp").forward(request, response);
-                    break;
-                case TYPE_VISITOR:
-                    this.getServletConfig().getServletContext().getRequestDispatcher("/visitor.jsp").forward(request, response);
-                    break;
-                default:
-                    break;
-            }
-
+        if ((session == null) || (session.getAttribute("userId") == null)) {
+            this.getServletConfig().getServletContext().getRequestDispatcher("/index.jsp?noSession=1").forward(request, response);
         } else {
-            session.setAttribute("invalidUser", "true");
-            this.getServletConfig().getServletContext().getRequestDispatcher("/index.jsp").forward(request, response);
-        }   
+            AssignVisitorProcessor assignVisitor = new AssignVisitorProcessor();
+            
+            if (request.getParameterNames().hasMoreElements()) {
+                String visitorToAssign = request.getParameter("visitorToAssign");
+                String[] doctorToAssign = request.getParameterValues("doctorToAssign");
+                assignVisitor.assignVisitor(doctorToAssign, Integer.parseInt(visitorToAssign));
+                request.setAttribute("revealSuccesMsg", "true");
+    
+            }
+            assignVisitor.populateDefaultLists();
+            request.setAttribute("assignVisitor", assignVisitor);
+            this.getServletConfig().getServletContext().getRequestDispatcher("/assign_visitor.jsp").forward(request, response);
+            
+        }
+        
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
