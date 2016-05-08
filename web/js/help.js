@@ -16,7 +16,7 @@ function help2() {
 
 function help3() {
     
-        alert("In order to set a Medical Visitor as Group Leader, select an available\nMedical Visitor by checking the radio button. You can select only one\nMedical Visitor at a time."); 
+        alert("In order to set a Medical Visitor as Group Leader, select an available\nMedical Visitor by clicking the radio button. You can select only one\nMedical Visitor at a time."); 
 } 
     
 
