@@ -41,8 +41,9 @@ public class GroupServices {
         visitorsNoLeaderList = new ArrayList<>();
         groupsNoLeaderList = new ArrayList<>();
                 
-        getVisitorsQuery = "select v, u.firstname, u.surname from visitor v, user u where v.id not in "
-                + "(select gm.member_id from group_member gm) and v.user_id = u.id";
+        getVisitorsQuery = "select v, u from Visitor v, User u where u.user_type=2";
+                /*"select v, u.firstname, u.surname from visitor v, user u where v.id not in "
+                + "(select gm.member_id from group_member gm) and v.user_id = u.id"; */
         getGroupsQuery = "from Group g order by g.name asc";
         getGroupsNoLeaderQuery = "";
         getVisitorsNoLeaderQuery = "";
@@ -88,34 +89,7 @@ public class GroupServices {
             } finally {
                 session.close();
             }
-    }
-    
-    /*public void createGroupWithoutParent(String nameOfGroup, String descOfGroup) {
-            Session session = NewHibernateUtil.getSessionFactory().openSession();
-            Transaction tx = null;
-
-            try {
-                tx = session.beginTransaction();
-                
-                    Group group = new Group();
-                    //Group parentGroup = new Group();
-                    //group.setParentGroupId(Integer.parseInt(parentGroupId));
-                    group.setName(nameOfGroup);
-                    group.setDescription(descOfGroup);
-                    //session.save(group);
-                    session.saveOrUpdate(group);
-                
-                tx.commit();
-            } catch (HibernateException e) {
-                if (tx != null) {
-                    tx.rollback();
-                }
-                e.printStackTrace();
-            } finally {
-                session.close();
-            }
-    }*/
-    
+    }    
     
     public void assignVisitorToGroup(String[] groupList, int visitorId ) {
         Session session = NewHibernateUtil.getSessionFactory().openSession();
@@ -185,13 +159,10 @@ public class GroupServices {
             }
             
          
-            /*Query query = session.createQuery(getVisitorsQuery);
-            List<Object> rs = (List<Object>)query.list();
-            for (Object obj : rs) {
-                Object[] o = (Object[]) obj;
-                Visitor visitor = (Visitor) o[0];
-                
+            /*List<Visitor> visitors = session.createQuery(getVisitorsQuery).list();
+            for (Visitor visitor : visitors) {
                 visitorsList.add(visitor);
+                //System.out.println(visitor.getId());
             }
             
             query = session.createQuery(getVisitorsNoLeaderQuery);

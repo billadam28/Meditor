@@ -38,7 +38,7 @@
                                 <th>Level</th> 
                                 <th>Superior</th> 
                                 <th>Member of Group</th>
-                                <th>Check for leader</th>
+                                <th></th>
                             </tr> 
                         </thead> 
                         <tbody>
@@ -50,7 +50,7 @@
     				<td><%--<%= obj.getVisitorLevel() %>--%></td> 
     				<td><%--<%= obj.getSuperiorName() %>--%></td> 
                                 <td><%--<%= obj.getAssignedGroupName() %>--%></td>
-                                <td><input type="checkbox" name="leaderVisitor" id="visitor_chbx" value="<%--<%= obj.getId()%>--%>" form="set_form"></td>
+                                <td><input type="radio" name="leaderVisitor" id="visitor_chbx" value="<%--<%= obj.getId()%>--%>" form="set_form"></td>
                             </tr> 
                             <%--<%}%>--%>
                         </tbody> 
