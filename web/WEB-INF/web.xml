@@ -5,6 +5,18 @@
         <servlet-class>MeditorServlets.LoginSrvlt</servlet-class>
     </servlet>
     <servlet>
+        <servlet-name>GroupProcessorSrvlt</servlet-name>
+        <servlet-class>MeditorServlets.GroupProcessorSrvlt</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>AssignVisitorGroupSrvlt</servlet-name>
+        <servlet-class>MeditorServlets.AssignVisitorGroupSrvlt</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>SetVisitorLeaderSrvlt</servlet-name>
+        <servlet-class>MeditorServlets.SetVisitorLeaderSrvlt</servlet-class>
+    </servlet>
+    <servlet>
         <servlet-name>AssignVisitorSrvlt</servlet-name>
         <servlet-class>MeditorServlets.AssignVisitorSrvlt</servlet-class>
     </servlet>
@@ -19,6 +31,18 @@
     <servlet-mapping>
         <servlet-name>LogoutSrvlt</servlet-name>
         <url-pattern>/Logout</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>GroupProcessorSrvlt</servlet-name>
+        <url-pattern>/GroupProcessor</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AssignVisitorGroupSrvlt</servlet-name>
+        <url-pattern>/AssignVisitorGroup</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>SetVisitorLeaderSrvlt</servlet-name>
+        <url-pattern>/SetVisitorLeader</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>AssignVisitorSrvlt</servlet-name>

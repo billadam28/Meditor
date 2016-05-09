@@ -787,7 +787,7 @@ html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockq
 	textarea {
 		padding: 0.75em 1em;
 	}
-	/* checkbox and radio decoration
+	checkbox and radio decoration
 	
 	input[type="checkbox"],
 	input[type="radio"] {
@@ -862,7 +862,7 @@ html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockq
 
 	input[type="radio"] + label:before {
 		border-radius: 100%;
-	} */
+	} 
 	
 	::-webkit-input-placeholder {
 		color: rgba(255, 255, 255, 0.5) !important;
