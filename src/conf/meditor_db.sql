@@ -173,6 +173,7 @@ CREATE TABLE `Group` (
   id               int NOT NULL AUTO_INCREMENT,
   parent_group_id  int,
   `name`           varchar(50) not null,
+  description    varchar(250),
   leader_id        int,
   PRIMARY KEY (id),
   unique(`name`),

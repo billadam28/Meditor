@@ -22,7 +22,7 @@ import org.hibernate.Transaction;
 public class GroupServices {
     String nameOfGroup;
     String descOfGroup;
-    String parentGroup;
+    //String parentGroup;
     private List<Visitor> visitorsList;
     private List<Group> groupsList;
     private List<Visitor> visitorsNoLeaderList;
@@ -72,11 +72,12 @@ public class GroupServices {
                     if (parentGroup.equals("0")==false) {
                         //group.setParentGroupId(Integer.parseInt(parentGroup));
                         group.setName(nameOfGroup);
-                        //group.setDescription(descOfGroup);
+                        group.setDescription(descOfGroup);
                         session.save(group);
                     } else {
                         group.setName(nameOfGroup);
-                        //group.setDescription(descOfGroup);
+                        group.setDescription(descOfGroup);
+                        System.out.println(descOfGroup);
                         session.save(group);
                     }
                 

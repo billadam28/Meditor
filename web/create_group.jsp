@@ -42,7 +42,7 @@
                                     <option value="0"></option>
                                     <% GroupServices groupServices = (GroupServices) request.getAttribute("groupServices");
                                     for (Group obj : groupServices.groupsList()) { %>
-                                        <option value="<%= obj.getId()%>"><%= obj.getName()%></option>
+                                        <option value="<%=obj.getId()%>"><%= obj.getName()%></option>
                                     <%}%>
                             </select>
 			</fieldset>

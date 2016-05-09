@@ -56,7 +56,7 @@ public class GroupProcessorSrvlt extends HttpServlet {
                     groupServices.createGroup(nameOfGroup,descOfGroup,parentGroup);
                     session.setAttribute("nameOfGroup", request.getParameter("nameOfGroup"));
                     request.setAttribute("revealSuccessMsg", "true");
-                    //System.out.println(parentGroup);
+                    //System.out.println(descOfGroup);
                 }
                 
             }
