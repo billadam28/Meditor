@@ -5,7 +5,6 @@
         <servlet-class>MeditorServlets.LoginSrvlt</servlet-class>
     </servlet>
     <servlet>
-<<<<<<< HEAD
         <servlet-name>GroupProcessorSrvlt</servlet-name>
         <servlet-class>MeditorServlets.GroupProcessorSrvlt</servlet-class>
     </servlet>
@@ -16,10 +15,10 @@
     <servlet>
         <servlet-name>SetVisitorLeaderSrvlt</servlet-name>
         <servlet-class>MeditorServlets.SetVisitorLeaderSrvlt</servlet-class>
-=======
+    </servlet>
+    <servlet>    
         <servlet-name>AssignVisitorSrvlt</servlet-name>
         <servlet-class>MeditorServlets.AssignVisitorSrvlt</servlet-class>
->>>>>>> refs/remotes/origin/master
     </servlet>
     <servlet-mapping>
         <servlet-name>LoginSrvlt</servlet-name>
@@ -34,7 +33,6 @@
         <url-pattern>/Logout</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-<<<<<<< HEAD
         <servlet-name>GroupProcessorSrvlt</servlet-name>
         <url-pattern>/GroupProcessor</url-pattern>
     </servlet-mapping>
@@ -45,10 +43,10 @@
     <servlet-mapping>
         <servlet-name>SetVisitorLeaderSrvlt</servlet-name>
         <url-pattern>/SetVisitorLeader</url-pattern>
-=======
+    </servlet-mapping>
+    <servlet-mapping>
         <servlet-name>AssignVisitorSrvlt</servlet-name>
         <url-pattern>/AssignVisitor</url-pattern>
->>>>>>> refs/remotes/origin/master
     </servlet-mapping>
     <session-config>
         <session-timeout>
