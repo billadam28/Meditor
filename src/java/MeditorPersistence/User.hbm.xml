@@ -1,30 +1,44 @@
-<?xml version="1.0"?>
-<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
-"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
-<!-- Generated Apr 29, 2016 4:36:33 PM by Hibernate Tools 4.3.1 -->
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
 <hibernate-mapping>
-    <class name="MeditorPersistence.User" table="User" catalog="meditorDb" optimistic-lock="version">
-        <id name="id" type="java.lang.Integer">
-            <column name="id" />
-            <generator class="identity" />
-        </id>
-        <property name="firstname" type="string">
-            <column name="firstname" length="50" not-null="true" />
-        </property>
-        <property name="surname" type="string">
-            <column name="surname" length="50" not-null="true" />
-        </property>
-        <property name="email" type="string">
-            <column name="email" length="50" not-null="true" unique="true" />
-        </property>
-        <property name="username" type="string">
-            <column name="username" length="50" not-null="true" />
-        </property>
-        <property name="passwd" type="string">
-            <column name="passwd" length="50" not-null="true" />
-        </property>
-        <property name="userType" type="int">
-            <column name="user_type" not-null="true" />
-        </property>
-    </class>
+  <class catalog="meditorDb" name="MeditorPersistence.User" optimistic-lock="version" table="User">
+    <id name="id" type="java.lang.Integer">
+      <column name="id"/>
+      <generator class="identity"/>
+    </id>
+    <property name="firstname" type="string">
+      <column length="50" name="firstname" not-null="true"/>
+    </property>
+    <property name="surname" type="string">
+      <column length="50" name="surname" not-null="true"/>
+    </property>
+    <property name="email" type="string">
+      <column length="50" name="email" not-null="true" unique="true"/>
+    </property>
+    <property name="username" type="string">
+      <column length="50" name="username" not-null="true"/>
+    </property>
+    <property name="passwd" type="string">
+      <column length="50" name="passwd" not-null="true"/>
+    </property>
+    <many-to-one class="MeditorPersistence.UserType" column="user_type" name="userType" not-null="true"/>
+    <joined-subclass name="MeditorPersistence.Visitor" table="Visitor">
+      <key column="user_id"/>
+      <property name="visitorLevel" type="string">
+        <column length="50" name="visitor_level" not-null="true"/>
+      </property>
+      <many-to-one class="MeditorPersistence.Visitor" column="superior_id" name="superior" not-null="false" cascade="all"/>
+      <many-to-one class="MeditorPersistence.Group" column="group_id" name="group" not-null="false" cascade="all"/>
+      <set cascade="save-update" name="visits" table="Visit_Visitor_Lnk">
+        <key column="visitor_id" not-null="true"/>
+        <many-to-many class="MeditorPersistence.Visit" column="visit_id"/>
+      </set>
+    </joined-subclass>
+    <joined-subclass name="MeditorPersistence.Admin" table="Admin">
+      <key column="user_id"/>
+      <property name="accessLevel" type="int">
+        <column name="access_level" not-null="true"/>
+      </property>
+    </joined-subclass>
+  </class>
 </hibernate-mapping>
