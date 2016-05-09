@@ -70,13 +70,13 @@ public class GroupServices {
                     Group group = new Group();
                     //Group parentGroup = new Group();
                     if (parentGroup.equals("0")==false) {
-                        group.setParentGroupId(Integer.parseInt(parentGroup));
+                        //group.setParentGroupId(Integer.parseInt(parentGroup));
                         group.setName(nameOfGroup);
-                        group.setDescription(descOfGroup);
+                        //group.setDescription(descOfGroup);
                         session.save(group);
                     } else {
                         group.setName(nameOfGroup);
-                        group.setDescription(descOfGroup);
+                        //group.setDescription(descOfGroup);
                         session.save(group);
                     }
                 
@@ -128,7 +128,7 @@ public class GroupServices {
             for (int i=0; i<groupList.length; i++) {
                 Group group = new Group();
                 group.setId(Integer.parseInt(groupList[i]));
-                group.setLeaderId(visitorId);
+                //group.setLeaderId(visitorId);
                 //mergedOne = session.merge(one);
                 //session.saveOrUpdate(mergedOne);
                 session.saveOrUpdate(group);
