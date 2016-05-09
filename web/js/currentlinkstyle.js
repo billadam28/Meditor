@@ -15,8 +15,3 @@ function highlightCurrentLink() {
     }
 } 
 highlightCurrentLink();
-
-<<<<<<< HEAD
-=======
-
->>>>>>> refs/remotes/origin/master
