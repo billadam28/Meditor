@@ -1,3 +1,8 @@
+<%@page import="MeditorPersistence.Group"%>
+<%@page import="MeditorPersistence.Specialty"%>
+<%@page import="MeditorPersistence.Institution"%>
+<%@page import="MeditorPersistence.City"%>
+<%@page import="MeditorPersistence.GeographicalArea"%>
 <%@page import="MeditorPersistence.Doctor"%>
 <%@page import="MeditorPersistence.Visitor"%>
 <%@page import="MeditorJavaClasses.AssignVisitorProcessor"%>
@@ -19,7 +24,8 @@
                 <h4 class="alert_success">Visitor Assigned Successfully</h4>
             <%}%>   
               
-            
+            <%AssignVisitorProcessor assignVisitorProc = (AssignVisitorProcessor) request.getAttribute("assignVisitor");%>
+                                      
             <article class="module width_quarter">
             <header><h3>Filters for Med. Visitor List</h3></header>
                 <div class="module_content">
@@ -27,9 +33,9 @@
                     <fieldset style="width:100%; float:left; margin-right: 3%;"> <!-- to make two field float next to one another, adjust values accordingly -->
                             <label>Select Group</label>
                             <select style="width:90%;">
-                                    <option>Articles</option>
-                                    <option>Tutorials</option>
-                                    <option>Freebies</option>
+                                    <%for (Group obj : assignVisitorProc.getGroupListObj().getGroupList()) { %>
+                                    <option><%=obj.getName()%></option>
+                                    <%}%>
                             </select>
                     </fieldset>
                     <fieldset style="width:100%; float:left;"> <!-- to make two field float next to one another, adjust values accordingly -->
@@ -61,8 +67,7 @@
 				</tr> 
 			</thead> 
 			<tbody> 
-                                <% AssignVisitorProcessor assignVisitor = (AssignVisitorProcessor) request.getAttribute("assignVisitor");
-                                for (Visitor obj : assignVisitor.getVisitorList()) { %>
+                                <%for (Visitor obj : assignVisitorProc.getVisitorListObj().getVisitorList()) { %>
 				<tr> 
                                     <td><input type="radio" name="visitorToAssign" id="visitor_rd" value="<%= obj.getId()%>" form="assign_form"></td> 
     				<td><%= obj.getFirstname() + " " + obj.getSurname()%></td> 
@@ -88,36 +93,36 @@
                     <fieldset style="width:100%; float:left; margin-right: 3%;"> <!-- to make two field float next to one another, adjust values accordingly -->
                             <label>Select Geo Area</label>
                             <select style="width:90%;">
-                                    <option>Articles</option>
-                                    <option>Tutorials</option>
-                                    <option>Freebies</option>
+                                    <%for (GeographicalArea obj : assignVisitorProc.getGeoAreaListObj().getGeoAreaList()) { %>
+                                    <option><%=obj.getGeoName()%></option>
+                                    <%}%>
                             </select>
                     </fieldset>
                     
                     <fieldset style="width:100%; float:left; margin-right: 3%;"> <!-- to make two field float next to one another, adjust values accordingly -->
                             <label>Select City</label>
                             <select style="width:90%;">
-                                    <option>Articles</option>
-                                    <option>Tutorials</option>
-                                    <option>Freebies</option>
+                                    <%for (City obj : assignVisitorProc.getCityListObj().getCityList()) { %>
+                                    <option><%=obj.getCityName()%></option>
+                                    <%}%>
                             </select>
                     </fieldset>
                     
                     <fieldset style="width:100%; float:left; margin-right: 3%;"> <!-- to make two field float next to one another, adjust values accordingly -->
                             <label>Select Institution</label>
                             <select style="width:90%;">
-                                    <option>Articles</option>
-                                    <option>Tutorials</option>
-                                    <option>Freebies</option>
+                                    <%for (Institution obj : assignVisitorProc.getInstitutionListObj().getInstitutionList()) { %>
+                                    <option><%=obj.getInstitutionName()%></option>
+                                    <%}%>
                             </select>
                     </fieldset>
                     
                     <fieldset style="width:100%; float:left; margin-right: 3%;"> <!-- to make two field float next to one another, adjust values accordingly -->
                             <label>Select Specialty</label>
                             <select style="width:90%;">
-                                    <option>Articles</option>
-                                    <option>Tutorials</option>
-                                    <option>Freebies</option>
+                                    <%for (Specialty obj : assignVisitorProc.getSpecialtyListObj().getSpecialtyList()) { %>
+                                    <option><%=obj.getSpecialtyName()%></option>
+                                    <%}%>
                             </select>
                     </fieldset>
                     
@@ -153,7 +158,7 @@
 				</tr> 
 			</thead> 
 			<tbody> 
-                                <%for (Doctor obj : assignVisitor.getDoctorList()) { %>
+                                <%for (Doctor obj : assignVisitorProc.getDoctorListObj().getDoctorList()) { %>
 				<tr> 
                                     <td><input type="checkbox" name="doctorToAssign" id="doctor_chbx" value="<%= obj.getId()%>" form="assign_form"></td> 
     				<td><%= obj.getName()%></td> 

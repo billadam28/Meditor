@@ -6,12 +6,9 @@
 package MeditorJavaClasses;
 
 import MeditorPersistence.Doctor;
-import MeditorPersistence.Group;
 import MeditorPersistence.NewHibernateUtil;
 import MeditorPersistence.Visitor;
-import java.util.ArrayList;
 import java.util.List;
-import org.hibernate.Hibernate;
 import org.hibernate.HibernateException;
 import org.hibernate.Query;
 import org.hibernate.Session;
@@ -23,57 +20,26 @@ import org.hibernate.Transaction;
  * @author adamopoulo
  */
 public class AssignVisitorProcessor {
-    private List<Doctor> doctorList;
-    private List<Visitor> visitorList;
-    private final String getVisitorListQuery;
-    private final String getDoctorListQuery;
+    private DoctorList doctorListObj;
+    private VisitorList visitorListObj;
+    private SpecialtyList specialtyListObj;
+    private CityList cityListObj;
+    private GeoAreaList geoAreaListObj;
+    private InstitutionList institutionListObj;
+    private GroupList groupListObj;
+   
+   
     
     public AssignVisitorProcessor() {
-        doctorList = new ArrayList<>();
-        visitorList= new ArrayList<>();
-        getVisitorListQuery = "select v from Visitor v";
-        getDoctorListQuery = "select d from Doctor d";  
+        doctorListObj = new DoctorList();
+        visitorListObj = new VisitorList();
+        specialtyListObj = new SpecialtyList();
+        cityListObj = new CityList();
+        geoAreaListObj = new GeoAreaList();
+        institutionListObj = new InstitutionList(); 
+        groupListObj = new GroupList();
     }
 
-    public void populateDefaultLists() {
-        Session session = NewHibernateUtil.getSessionFactory().openSession();
-        Transaction tx = null;
-
-        try {
-            tx = session.beginTransaction();
-            Query query = session.createQuery(getVisitorListQuery);
-            List<Visitor> res = (List<Visitor>) query.list();
-            for (Visitor vst : res) {
-                // we get lazy initialization exception, so we need to 
-                // initialize the child objects in order to access them in 
-                // the jsp page after we close the session.
-                Hibernate.initialize(vst.getGroup());
-                Hibernate.initialize(vst.getSuperior());
-                visitorList.add(vst);
-            }
-            
-            query = session.createQuery(getDoctorListQuery);
-            List<Doctor> res2 = (List<Doctor>) query.list();
-            for (Doctor dct : res2) {
-                Hibernate.initialize(dct.getAssignedVisitor());
-                Hibernate.initialize(dct.getSpecialty());
-                Hibernate.initialize(dct.getInstitution());
-                Hibernate.initialize(dct.getInstitution().getCity());
-                Hibernate.initialize(dct.getInstitution().getCity().getGeoArea());
-                doctorList.add(dct);
-            }
-            tx.commit();
-        } catch (HibernateException e) {
-            if (tx != null) {
-                tx.rollback();
-            }
-            e.printStackTrace();
-        } finally {
-            session.close();
-        }
-        
-    }
-    
     /**
      *
      * @param docList
@@ -105,12 +71,42 @@ public class AssignVisitorProcessor {
         
     }
     
-    public List<Visitor> getVisitorList () {
-        return this.visitorList;
+    public void loadLists () {
+        doctorListObj.populateDefaultList();
+        visitorListObj.populateDefaultList();
+        specialtyListObj.populateDefaultList();
+        cityListObj.populateDefaultList();
+        geoAreaListObj.populateDefaultList();
+        institutionListObj.populateDefaultList();
+        groupListObj.populateDefaultList();
     }
     
-    public List<Doctor> getDoctorList () {
-        return this.doctorList;
+    public VisitorList getVisitorListObj () {
+        return this.visitorListObj;
+    }
+    
+    public DoctorList getDoctorListObj () {
+        return this.doctorListObj;
+    }
+    
+    public GeoAreaList getGeoAreaListObj () {
+        return this.geoAreaListObj;
+    }
+    
+    public CityList getCityListObj () {
+        return this.cityListObj;
+    }
+    
+    public SpecialtyList getSpecialtyListObj () {
+        return this.specialtyListObj;
+    }
+    
+    public InstitutionList getInstitutionListObj () {
+        return this.institutionListObj;
+    }
+    
+    public GroupList getGroupListObj () {
+        return this.groupListObj;
     }
     
     public void testmethod() {
