@@ -11,7 +11,7 @@ function help() {
     
 function help2() {
     
-        alert("In order to assign a Medical Visitor to a Group, select an available\nMedical Visitor by checking the checkbox and select a group.");
+        alert("In order to assign a Medical Visitor to a Group, select one or more available\nMedical Visitors by checking the checkboxes and select a group.");
 } 
 
 function help3() {

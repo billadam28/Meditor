@@ -10,6 +10,7 @@ import MeditorPersistence.NewHibernateUtil;
 import MeditorPersistence.Visitor;
 import java.util.ArrayList;
 import java.util.List;
+import org.hibernate.Hibernate;
 import org.hibernate.HibernateException;
 import org.hibernate.Query;
 import org.hibernate.Session;
@@ -22,7 +23,6 @@ import org.hibernate.Transaction;
 public class GroupServices {
     String nameOfGroup;
     String descOfGroup;
-    //String parentGroup;
     private List<Visitor> visitorsList;
     private List<Group> groupsList;
     private List<Visitor> visitorsNoLeaderList;
@@ -31,8 +31,6 @@ public class GroupServices {
     private final String getGroupsQuery;
     private final String getGroupsNoLeaderQuery;
     private final String getVisitorsNoLeaderQuery;
-    private final String assignVisitorGroupQuery;
-    private final String setVisitorLeaderQuery;
     
     
     public GroupServices() {
@@ -41,14 +39,12 @@ public class GroupServices {
         visitorsNoLeaderList = new ArrayList<>();
         groupsNoLeaderList = new ArrayList<>();
                 
-        getVisitorsQuery = "select v, u from Visitor v, User u where u.user_type=2";
+        getVisitorsQuery = "select v from Visitor v where group = null";
                 /*"select v, u.firstname, u.surname from visitor v, user u where v.id not in "
                 + "(select gm.member_id from group_member gm) and v.user_id = u.id"; */
         getGroupsQuery = "from Group g order by g.name asc";
         getGroupsNoLeaderQuery = "";
         getVisitorsNoLeaderQuery = "";
-        assignVisitorGroupQuery = "insert into Group g set g.assignedVstId = :vst_id where g.id = :group_id\"";
-        setVisitorLeaderQuery = "update Group g set g.leaderVstId = :vst_id where g.id = :group_id";
     }
 
 
@@ -62,9 +58,6 @@ public class GroupServices {
     
     public String assignedGroup (int parentGroup) {
         Session session = NewHibernateUtil.getSessionFactory().openSession();
-        Group group = new Group();
-        Group pgroup = (Group) session.get(Group.class, parentGroup);
-        group.setParentGroup(pgroup);
         Query query = session.createQuery("select name from Group where id='"+parentGroup+"'");
         //System.out.println(parentGroup);
         String name = query.uniqueResult().toString();
@@ -106,20 +99,19 @@ public class GroupServices {
             
     }    
     
-    public void assignVisitorToGroup(String[] groupList, int visitorId ) {
+    public void assignVisitorToGroup(String[] assignedVisitors, int groupId ) {
         Session session = NewHibernateUtil.getSessionFactory().openSession();
         Transaction tx = null;
 
         try {
             tx = session.beginTransaction();
-            Query query = session.createQuery(assignVisitorGroupQuery);
-            for (int i=0; i<groupList.length; i++) {
-                Group group = new Group();
-                group.setId(Integer.parseInt(groupList[i]));
-                //group.setAssignedVstId(visitorId);
-                //mergedOne = session.merge(one);
-                //session.saveOrUpdate(mergedOne);
-                session.save(group);
+            Integer visitorId;
+            Group group = (Group) session.get(Group.class, groupId);
+            for (String visitor : assignedVisitors) {
+                visitorId = Integer.parseInt(visitor);
+                Visitor visitors = (Visitor)session.get(Visitor.class, visitorId);
+                visitors.setGroup(group);
+                session.update(visitors); 
             }
             tx.commit();
         } catch (HibernateException e) {
@@ -139,7 +131,7 @@ public class GroupServices {
 
         try {
             tx = session.beginTransaction();
-            Query query = session.createQuery(assignVisitorGroupQuery);
+            //Query query = session.createQuery(assignVisitorGroupQuery);
             for (int i=0; i<groupList.length; i++) {
                 Group group = new Group();
                 group.setId(Integer.parseInt(groupList[i]));
@@ -174,12 +166,13 @@ public class GroupServices {
             }
             
          
-            /*List<Visitor> visitors = session.createQuery(getVisitorsQuery).list();
+            List<Visitor> visitors = session.createQuery(getVisitorsQuery).list();
             for (Visitor visitor : visitors) {
+                Hibernate.initialize(visitor.getSuperior());
                 visitorsList.add(visitor);
                 //System.out.println(visitor.getId());
             }
-            
+            /*
             query = session.createQuery(getVisitorsNoLeaderQuery);
             rs = (List<Object>)query.list();
             for (Object obj : rs) {

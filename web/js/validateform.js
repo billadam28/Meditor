@@ -24,3 +24,12 @@ function validateForm() {
     
     
 }
+
+function validateAssignForm () {
+    if(document.getElementById('visitor_chbx').checked) { 
+        return true; 
+    } else { 
+        alert('You must select at least one Medical Visitor!'); 
+        return false; 
+    }
+}

@@ -34,7 +34,6 @@ public class AssignVisitorGroupSrvlt extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         
         HttpSession session = request.getSession(false);
-        String assignedGroup;
         
         if ((session == null) || (session.getAttribute("userId") == null)) {
             this.getServletConfig().getServletContext().getRequestDispatcher("/index.jsp?noSession=1").forward(request, response);
@@ -43,11 +42,9 @@ public class AssignVisitorGroupSrvlt extends HttpServlet {
             GroupServices groupServices = new GroupServices();
             
             if (request.getParameterNames().hasMoreElements()) {
-                String assignedVisitor = request.getParameter("assignedVisitor");
-                //assignedGroup = request.getParameterValues("assignedGroup");
-                assignedGroup = request.getParameter("parentGroup");
-                //System.out.println(assignedVisitor +" "+ assignedGroup);
-                //groupServices.assignVisitorToGroup(assignedGroup, Integer.parseInt(assignedVisitor));
+                String [] assignedVisitor = request.getParameterValues("assignedVisitor");
+                String assignedGroup = request.getParameter("assignedGroup");
+                groupServices.assignVisitorToGroup(assignedVisitor, Integer.parseInt(assignedGroup));
                 //session.setAttribute("assignedGroup", assignedGroup);
                 //session.setAttribute("assignedVisitor", assignedVisitor);
                 request.setAttribute("revealSuccessMsg", "true");
