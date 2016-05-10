@@ -237,8 +237,8 @@ INSERT INTO `Admin`
 VALUES (1, 1);
 
 INSERT INTO `Group`
-(parent_group_id, name, leader_id)
-VALUES (null , 'group1', 2);
+(parent_group_id, name, description, leader_id)
+VALUES (null , 'group1','123', 2);
 
 insert into geographical_area (geo_name)values ('Attica');
 insert into geographical_area (geo_name)values ('Lakonia');

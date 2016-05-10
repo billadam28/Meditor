@@ -22,7 +22,7 @@
         <section id="main" class="column">
             
             <% if (request.getAttribute("revealSuccessMsg") == "true") { %>
-                <h4 class="alert_success">Group "<%=session.getAttribute("nameOfGroup")%>" was created successfully!</h4>
+                <h4 class="alert_success">Group "<%=session.getAttribute("nameOfGroup")%>" <%if (session.getAttribute("parentGroup") != null) {%>with Parent Group "<%=session.getAttribute("parentGroup")%>"<%}%> was created successfully!</h4>
             <%}%>
             
             <% if (request.getAttribute("revealErrorMsg") == "true") { %>

@@ -60,24 +60,37 @@ public class GroupServices {
         return (query.uniqueResult() != null);
     }
     
-    public void createGroup(String nameOfGroup, String descOfGroup, String parentGroup) {
+    public String assignedGroup (int parentGroup) {
+        Session session = NewHibernateUtil.getSessionFactory().openSession();
+        Group group = new Group();
+        Group pgroup = (Group) session.get(Group.class, parentGroup);
+        group.setParentGroup(pgroup);
+        Query query = session.createQuery("select name from Group where id='"+parentGroup+"'");
+        //System.out.println(parentGroup);
+        String name = query.uniqueResult().toString();
+        //System.out.println("name"+ name);
+        return name;
+        
+    }
+    
+    public void createGroup(String nameOfGroup, String descOfGroup, int parentGroup) {
             Session session = NewHibernateUtil.getSessionFactory().openSession();
             Transaction tx = null;
 
             try {
                 tx = session.beginTransaction();
-                
                     Group group = new Group();
-                    //Group parentGroup = new Group();
-                    if (parentGroup.equals("0")==false) {
-                        //group.setParentGroupId(Integer.parseInt(parentGroup));
+                    Group pgroup = (Group) session.get(Group.class, parentGroup);
+                    
+                    if (parentGroup!=0) {
                         group.setName(nameOfGroup);
                         group.setDescription(descOfGroup);
+                        group.setParentGroup(pgroup);
                         session.save(group);
                     } else {
                         group.setName(nameOfGroup);
                         group.setDescription(descOfGroup);
-                        System.out.println(descOfGroup);
+                        //System.out.println(descOfGroup);
                         session.save(group);
                     }
                 
@@ -90,6 +103,7 @@ public class GroupServices {
             } finally {
                 session.close();
             }
+            
     }    
     
     public void assignVisitorToGroup(String[] groupList, int visitorId ) {

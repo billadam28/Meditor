@@ -6,6 +6,7 @@
 package MeditorServlets;
 
 import MeditorJavaClasses.GroupServices;
+import MeditorPersistence.Group;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
@@ -47,14 +48,19 @@ public class GroupProcessorSrvlt extends HttpServlet {
                 nameOfGroup = request.getParameter("nameOfGroup");
                 descOfGroup = request.getParameter("descOfGroup");
                 parentGroup = request.getParameter("parentGroup");
+                //System.out.println(parentGroup);
                 boolean result = groupServices.availableGroup(nameOfGroup);
                 if (result == true) {
-                    session.setAttribute("nameOfGroup", request.getParameter("nameOfGroup"));
+                    session.setAttribute("nameOfGroup", nameOfGroup);
                     request.setAttribute("revealErrorMsg", "true");
                 } else {
                     //System.out.println(result);
-                    groupServices.createGroup(nameOfGroup,descOfGroup,parentGroup);
-                    session.setAttribute("nameOfGroup", request.getParameter("nameOfGroup"));
+                    groupServices.createGroup(nameOfGroup,descOfGroup,Integer.parseInt(parentGroup));
+                    session.setAttribute("nameOfGroup", nameOfGroup);
+                    if (!parentGroup.equals("0")) {
+                        String assignedGroupName = groupServices.assignedGroup(Integer.parseInt(parentGroup));    
+                        session.setAttribute("parentGroup", assignedGroupName);
+                    }
                     request.setAttribute("revealSuccessMsg", "true");
                     //System.out.println(descOfGroup);
                 }
