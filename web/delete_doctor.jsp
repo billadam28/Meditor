@@ -1,3 +1,8 @@
+<%@page import="MeditorJavaClasses.DeleteDoctorProcessor"%>
+<%@page import="MeditorPersistence.Specialty"%>
+<%@page import="MeditorPersistence.Institution"%>
+<%@page import="MeditorPersistence.City"%>
+<%@page import="MeditorPersistence.GeographicalArea"%>
 <%@page import="MeditorPersistence.Doctor"%>
 <%@page import="MeditorPersistence.User"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -13,7 +18,9 @@
             
             <% if (request.getAttribute("revealSuccesMsg") == "true") { %>
                 <h4 class="alert_success">Doctor(s) Deleted Successfully</h4>
-            <%}%>   
+            <%}%> 
+            
+            <%DeleteDoctorProcessor deleteDoctorProc = (DeleteDoctorProcessor) request.getAttribute("deleteDoctor");%>
             
             <article class="module width_quarter">
             <header><h3>Filters for Doctor List</h3></header>
@@ -21,37 +28,37 @@
                            
                     <fieldset style="width:100%; float:left; margin-right: 3%;"> <!-- to make two field float next to one another, adjust values accordingly -->
                             <label>Select Geo Area</label>
-                            <select style="width:90%;">
-                                    <option>Articles</option>
-                                    <option>Tutorials</option>
-                                    <option>Freebies</option>
+                            <select style="width:90%;" form="doctor_filter">
+                                    <%for (GeographicalArea obj : deleteDoctorProc.getGeoAreaListObj().getGeoAreaList()) { %>
+                                    <option value="<%= obj.getId()%>"><%=obj.getGeoName()%></option>
+                                    <%}%>
                             </select>
                     </fieldset>
                     
                     <fieldset style="width:100%; float:left; margin-right: 3%;"> <!-- to make two field float next to one another, adjust values accordingly -->
                             <label>Select City</label>
-                            <select style="width:90%;">
-                                    <option>Articles</option>
-                                    <option>Tutorials</option>
-                                    <option>Freebies</option>
+                            <select style="width:90%;" form="doctor_filter">
+                                    <%for (City obj : deleteDoctorProc.getCityListObj().getCityList()) { %>
+                                    <option value="<%= obj.getId()%>"><%=obj.getCityName()%></option>
+                                    <%}%>
                             </select>
                     </fieldset>
                     
                     <fieldset style="width:100%; float:left; margin-right: 3%;"> <!-- to make two field float next to one another, adjust values accordingly -->
                             <label>Select Institution</label>
-                            <select style="width:90%;">
-                                    <option>Articles</option>
-                                    <option>Tutorials</option>
-                                    <option>Freebies</option>
+                            <select style="width:90%;" form="doctor_filter">
+                                    <%for (Institution obj : deleteDoctorProc.getInstitutionListObj().getInstitutionList()) { %>
+                                    <option value="<%= obj.getId()%>"><%=obj.getInstitutionName()%></option>
+                                    <%}%>
                             </select>
                     </fieldset>
                     
                     <fieldset style="width:100%; float:left; margin-right: 3%;"> <!-- to make two field float next to one another, adjust values accordingly -->
                             <label>Select Specialty</label>
-                            <select style="width:90%;">
-                                    <option>Articles</option>
-                                    <option>Tutorials</option>
-                                    <option>Freebies</option>
+                            <select style="width:90%;" form="doctor_filter">
+                                    <%for (Specialty obj : deleteDoctorProc.getSpecialtyListObj().getSpecialtyList()) { %>
+                                    <option value="<%= obj.getId()%>"><%=obj.getSpecialtyName()%></option>
+                                    <%}%>
                             </select>
                     </fieldset>
                     
@@ -61,14 +68,14 @@
                     </fieldset><div class="clear"></div>
                 </div>
             <footer>
-                    <form class="post_message">
+                    <form class="post_message" id="doctor_filter">
                             <input type="submit" class="alt_btn" value="Refresh"/>
                     </form>
             </footer>
             </article> <!-- end of visitor filters article -->
               
             <article class="module width_3_quarter">
-                <header><h3 class="tabs_involved">Select a Doctor to delete</h3>
+                <header><h3 class="tabs_involved">Select one or more Doctor(s) to Delete</h3>
 		</header>
                 
 		<div class="tab_container">
@@ -87,9 +94,9 @@
 				</tr> 
 			</thead> 
 			<tbody> 
-                                <%for (Doctor obj : assignVisitor.getDoctorList()) { %>
+                                <%for (Doctor obj : deleteDoctorProc.getDoctorListObj().getDoctorList()) { %>
 				<tr> 
-                                    <td><input type="checkbox" name="doctorToAssign" id="doctor_chbx" value="<%= obj.getId()%>" form="assign_form"></td> 
+                                    <td><input type="checkbox" name="doctorToDelete" id="doctor_chbx" value="<%= obj.getId()%>" form="delete_form"></td> 
     				<td><%= obj.getName()%></td> 
     				<td><%if (obj.getAssignedVisitor() != null) {%><%= obj.getAssignedVisitor().getSurname()%><%} else {%> not assigned <%}%></td> 
     				<td><%= obj.getSpecialty().getSpecialtyName()%></td> 
@@ -105,8 +112,8 @@
 			
 		</div><!-- end of .tab_container -->
                 
-                <form class="post_message" id="assign_form" method="post" action="AssignVisitor">
-                    <input type="submit" class="alt_btn" value="Assign"/>
+                <form class="post_message" id="delete_form" method="post" action="DeleteDoctor">
+                    <input type="submit" class="alt_btn" value="Delete" style="color:red"/>
                 </form>
 		
             </article><!-- end of doctors article -->

@@ -5,6 +5,7 @@
  */
 package MeditorServlets;
 
+import MeditorJavaClasses.DeleteDoctorProcessor;
 import java.io.IOException;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -36,18 +37,18 @@ public class DeleteDoctorSrvlt extends HttpServlet {
         if ((session == null) || (session.getAttribute("userId") == null)) {
             this.getServletConfig().getServletContext().getRequestDispatcher("/index.jsp?noSession=1").forward(request, response);
         } else {
-            //DeleteDoctorProcessor deleteDoctor = new DeleteDoctor();
+            DeleteDoctorProcessor deleteDoctor = new DeleteDoctorProcessor();
             
             if (request.getParameterNames().hasMoreElements()) {
-                String visitorToAssign = request.getParameter("visitorToAssign");
-                String[] doctorToAssign = request.getParameterValues("doctorToAssign");
+                //String visitorToAssign = request.getParameter("visitorToAssign");
+                String[] doctorToDelete = request.getParameterValues("doctorToDelete");
                 //assignVisitor.assignVisitor(doctorToAssign, Integer.parseInt(visitorToAssign));
                 request.setAttribute("revealSuccesMsg", "true");
     
             }
-            //deleteDoctor.getDoctorList().populateDefaultList();
-            //request.setAttribute("", deleteDoctor);
-            this.getServletConfig().getServletContext().getRequestDispatcher("/assign_visitor.jsp").forward(request, response);
+            deleteDoctor.loadLists();
+            request.setAttribute("deleteDoctor", deleteDoctor);
+            this.getServletConfig().getServletContext().getRequestDispatcher("/delete_doctor.jsp").forward(request, response);
             
         }
     }

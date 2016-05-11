@@ -32,9 +32,9 @@
                            
                     <fieldset style="width:100%; float:left; margin-right: 3%;"> <!-- to make two field float next to one another, adjust values accordingly -->
                             <label>Select Group</label>
-                            <select style="width:90%;">
+                            <select style="width:90%;" form="visitor_filter">
                                     <%for (Group obj : assignVisitorProc.getGroupListObj().getGroupList()) { %>
-                                    <option><%=obj.getName()%></option>
+                                    <option value="<%= obj.getId()%>"><%=obj.getName()%></option>
                                     <%}%>
                             </select>
                     </fieldset>
@@ -44,7 +44,7 @@
                     </fieldset><div class="clear"></div>
                 </div>
             <footer>
-                    <form class="post_message">
+                    <form class="post_message" id="visitor_filter">
                             <input type="submit" class="alt_btn" value="Refresh"/>
                     </form>
             </footer>
@@ -92,36 +92,36 @@
                            
                     <fieldset style="width:100%; float:left; margin-right: 3%;"> <!-- to make two field float next to one another, adjust values accordingly -->
                             <label>Select Geo Area</label>
-                            <select style="width:90%;">
+                            <select style="width:90%;" form="doctor_filter">
                                     <%for (GeographicalArea obj : assignVisitorProc.getGeoAreaListObj().getGeoAreaList()) { %>
-                                    <option><%=obj.getGeoName()%></option>
+                                    <option value="<%= obj.getId()%>"><%=obj.getGeoName()%></option>
                                     <%}%>
                             </select>
                     </fieldset>
                     
                     <fieldset style="width:100%; float:left; margin-right: 3%;"> <!-- to make two field float next to one another, adjust values accordingly -->
                             <label>Select City</label>
-                            <select style="width:90%;">
+                            <select style="width:90%;" form="doctor_filter">
                                     <%for (City obj : assignVisitorProc.getCityListObj().getCityList()) { %>
-                                    <option><%=obj.getCityName()%></option>
+                                    <option value="<%= obj.getId()%>"><%=obj.getCityName()%></option>
                                     <%}%>
                             </select>
                     </fieldset>
                     
                     <fieldset style="width:100%; float:left; margin-right: 3%;"> <!-- to make two field float next to one another, adjust values accordingly -->
                             <label>Select Institution</label>
-                            <select style="width:90%;">
+                            <select style="width:90%;" form="doctor_filter">
                                     <%for (Institution obj : assignVisitorProc.getInstitutionListObj().getInstitutionList()) { %>
-                                    <option><%=obj.getInstitutionName()%></option>
+                                    <option value="<%= obj.getId()%>"><%=obj.getInstitutionName()%></option>
                                     <%}%>
                             </select>
                     </fieldset>
                     
                     <fieldset style="width:100%; float:left; margin-right: 3%;"> <!-- to make two field float next to one another, adjust values accordingly -->
                             <label>Select Specialty</label>
-                            <select style="width:90%;">
+                            <select style="width:90%;" form="doctor_filter">
                                     <%for (Specialty obj : assignVisitorProc.getSpecialtyListObj().getSpecialtyList()) { %>
-                                    <option><%=obj.getSpecialtyName()%></option>
+                                    <option value="<%= obj.getId()%>"><%=obj.getSpecialtyName()%></option>
                                     <%}%>
                             </select>
                     </fieldset>
@@ -132,7 +132,7 @@
                     </fieldset><div class="clear"></div>
                 </div>
             <footer>
-                    <form class="post_message">
+                    <form class="post_message" id="doctor_filter">
                             <input type="submit" class="alt_btn" value="Refresh"/>
                     </form>
             </footer>
