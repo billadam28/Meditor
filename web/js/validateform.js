@@ -35,10 +35,35 @@ function validateAssignForm () {
 }
 
 function validateSetForm () {
-    if(document.getElementById('visitor_radio').checked) { 
-        return true; 
-    } else { 
-        alert('You must select at least one Medical Visitor!'); 
-        return false; 
+    var isChecked = 0;
+    var radios = document.getElementsByName('leaderVisitor');
+    for (i = 0; i < radios.length; i++) {
+        if (radios[i].checked) {
+            isChecked = isChecked +1;
+        }
+    }
+    
+    if (isChecked > 0) {
+        return true;
+    } else {
+        alert('You must select a Medical Visitor!');
+        return false;
+    }
+}
+
+function validateDoctorForm () {
+    var isChecked = 0;
+    var radios = document.getElementsByName('doctorInfo');
+    for (i = 0; i < radios.length; i++) {
+        if (radios[i].checked) {
+            isChecked = isChecked +1;
+        }
+    }
+    
+    if (isChecked > 0) {
+        return true;
+    } else {
+        alert('You must select a Doctor!');
+        return false;
     }
 }
