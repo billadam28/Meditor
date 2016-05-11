@@ -18,5 +18,10 @@ function help3() {
     
         alert("In order to set a Medical Visitor as Group Leader, select an available\nMedical Visitor by clicking the radio button. You can select only one\nMedical Visitor at a time."); 
 } 
+
+function help4() {
+    
+        alert("In order to enter information about a visit you paid to a doctor, first\nselect the doctor and click Next. Enter the information you want\nand click Save."); 
+} 
     
 

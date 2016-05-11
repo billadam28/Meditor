@@ -28,7 +28,7 @@
 		</ul>
 		<h3>Doctors</h3>
 		<ul class="toggle">
-			<li class="icn_search"><a href="#" onclick="highlightCurrentLink();">Search or Edit info</a></li>
+			<li class="icn_search"><a href="VisitInfo" onclick="highlightCurrentLink();">Search or Edit info</a></li>
 			<li class="icn_add_user" onclick="highlightCurrentLink();"><a href="#">Create new</a></li>
 		</ul>
 		

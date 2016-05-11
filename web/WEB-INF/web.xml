@@ -20,6 +20,10 @@
         <servlet-name>AssignVisitorSrvlt</servlet-name>
         <servlet-class>MeditorServlets.AssignVisitorSrvlt</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>VisitInfoSrvlt</servlet-name>
+        <servlet-class>MeditorServlets.VisitInfoSrvlt</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>LoginSrvlt</servlet-name>
         <url-pattern>/Login</url-pattern>
@@ -47,6 +51,10 @@
     <servlet-mapping>
         <servlet-name>AssignVisitorSrvlt</servlet-name>
         <url-pattern>/AssignVisitor</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>VisitInfoSrvlt</servlet-name>
+        <url-pattern>/VisitInfo</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
