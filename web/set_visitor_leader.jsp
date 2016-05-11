@@ -9,7 +9,7 @@
 <%@page import="MeditorPersistence.Group"%>
 <%@page import="MeditorJavaClasses.GroupServices"%>
 <%@page import="MeditorServlets.LoginSrvlt"%>
-<%@page import="MeditorServlets.AssignVisitorGroupSrvlt"%>
+<%@page import="MeditorServlets.SetVisitorLeaderSrvlt"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -21,9 +21,9 @@
         
         <section id="main" class="column">
             
-           <%-- <% if (request.getAttribute("revealSuccesMsg") == "true") { %>
-                <h4 class="alert_success">Visitor Assigned to Group Successfully</h4>
-            <%}%>--%>
+            <% if (request.getAttribute("revealSuccessMsg") == "true") { %>
+                <h4 class="alert_success">Visitor was set as group leader successfully!</h4>
+            <%}%>
         
             <article class="module width_full">
 		<header><h3>Select a Medical Visitor</h3></header>
@@ -39,20 +39,30 @@
                                 <th>Superior</th> 
                                 <th>Member of Group</th>
                                 <th></th>
+                                <th></th>
                             </tr> 
                         </thead> 
                         <tbody>
-                            <%--<% GroupServices groupServices = (GroupServices) request.getAttribute("groupServices");
-                            for (Visitor obj : groupServices.visitorsList()) { %>--%>
-                            <tr>                                
-                                <td><%--<%= obj.getFirstname()%>--%></td>
-                                <td><%--<%= obj.getSurname()%>--%></td>
-    				<td><%--<%= obj.getVisitorLevel() %>--%></td> 
-    				<td><%--<%= obj.getSuperiorName() %>--%></td> 
-                                <td><%--<%= obj.getAssignedGroupName() %>--%></td>
-                                <td><input type="radio" name="leaderVisitor" id="visitor_chbx" value="<%--<%= obj.getId()%>--%>" form="set_form"></td>
-                            </tr> 
-                            <%--<%}%>--%>
+                            <% GroupServices groupServices = (GroupServices) request.getAttribute("groupServices");%>
+                            <%if (groupServices.visitorsNoLeaderList().isEmpty() == false) { 
+                                for (Visitor obj : groupServices.visitorsNoLeaderList()) { %>
+                                    <tr>                            
+                                        <td><%= obj.getFirstname()%></td>
+                                        <td><%= obj.getSurname() %></td>
+                                        <td><%= obj.getVisitorLevel() %></td> 
+                                        <td><%if (obj.getSuperior() != null) {%><%= obj.getSuperior().getSurname()+ " " + obj.getSuperior().getFirstname()%><%} else {%> --- <%}%></td>
+                                        <td><%if (obj.getGroup() != null) {%><%= obj.getGroup().getName()%><%} else {%> --- <%}%></td>
+                                        <td><input type="radio" name="leaderVisitor" id="visitor_radio" value="<%= obj.getId()%>" form="set_form"></td>
+                                        <td><input type="hidden" name="leaderGroup" id="groupid" value="<%= obj.getGroup().getId()%>" form="set_form"></td>
+                                <%}%>
+                            <%} else {%>
+                                        <td><p style="color:red; font-weight: bold">There ara no available Medical Visitors for assignment!</p></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                            <%}%>
+                            </tr>
                         </tbody> 
                         </table>
                     </div><!-- end of #tab1 -->
@@ -61,7 +71,11 @@
             <footer>
                     
                         <form style="margin-right:20px; float:right;" class="post_message" id="set_form" method="post" action="SetVisitorLeader">
-                            <input type="submit" class="alt_btn" value="Set Leader"/>
+                            <%if (groupServices.visitorsNoLeaderList().isEmpty() == true) {%>
+                                <input type="submit" style="background-color:grey; color: gray; border: 1px solid grey"  value="Assign Visitor" disabled/>
+                            <%} else {%>
+                                <input type="submit" class="alt_btn" value="Set Leader" onclick="return validateSetForm()"/>
+                            <%}%>
                             <input type="reset" id="helpForSetLeader" onclick="help3();" class="alt_btn" value="Help"/>
                         </form>
                    
@@ -69,6 +83,7 @@
             </article><!-- end of groups -->
             
         </section>
+        <script type="text/javascript" src="js/validateform.js"></script>
         <script type="text/javascript" src="js/help.js"></script>
         <script type="text/javascript" src="js/currentlinkstyle.js"></script> 
     </body>

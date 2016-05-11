@@ -40,11 +40,9 @@ public class GroupServices {
         groupsNoLeaderList = new ArrayList<>();
                 
         getVisitorsQuery = "select v from Visitor v where group = null";
-                /*"select v, u.firstname, u.surname from visitor v, user u where v.id not in "
-                + "(select gm.member_id from group_member gm) and v.user_id = u.id"; */
         getGroupsQuery = "from Group g order by g.name asc";
         getGroupsNoLeaderQuery = "";
-        getVisitorsNoLeaderQuery = "";
+        getVisitorsNoLeaderQuery = "select v from Visitor v where group != null";
     }
 
 
@@ -125,21 +123,16 @@ public class GroupServices {
         
     }
     
-    public void setVisitorAsLeader(String[] groupList, int visitorId ) {
+    public void setVisitorAsLeader(int groupId,int visitorId) {
         Session session = NewHibernateUtil.getSessionFactory().openSession();
         Transaction tx = null;
 
         try {
             tx = session.beginTransaction();
-            //Query query = session.createQuery(assignVisitorGroupQuery);
-            for (int i=0; i<groupList.length; i++) {
-                Group group = new Group();
-                group.setId(Integer.parseInt(groupList[i]));
-                //group.setLeaderId(visitorId);
-                //mergedOne = session.merge(one);
-                //session.saveOrUpdate(mergedOne);
-                session.saveOrUpdate(group);
-            }
+            Visitor visitor = (Visitor) session.get(Visitor.class, visitorId);
+            Group group = (Group)session.get(Group.class, groupId);
+            group.setGroupLeader(visitor);
+            session.update(group);
             tx.commit();
         } catch (HibernateException e) {
             if (tx != null) {
@@ -172,16 +165,18 @@ public class GroupServices {
                 visitorsList.add(visitor);
                 //System.out.println(visitor.getId());
             }
-            /*
-            query = session.createQuery(getVisitorsNoLeaderQuery);
-            rs = (List<Object>)query.list();
-            for (Object obj : rs) {
-                Object[] o = (Object[]) obj;
-                Visitor visitor = (Visitor) o[0];
-                
-                visitorsNoLeaderList.add(visitor);
-            }
             
+            List<Visitor> visitorNoLeader = session.createQuery(getVisitorsNoLeaderQuery).list();
+            for (Visitor vstr : visitorNoLeader) {
+                Hibernate.initialize(vstr.getSuperior());
+                //Hibernate.initialize(vstr.getGroup().getGroupLeader());
+                if(vstr.getGroup().getGroupLeader()==null &&vstr.getGroup()!=null){
+                    visitorsNoLeaderList.add(vstr);
+                }
+                
+                
+            }
+            /*
             query = session.createQuery(getGroupsQuery);
             rs = (List<Object>)query.list();
             for (Object obj : rs) {

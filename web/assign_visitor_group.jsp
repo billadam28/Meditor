@@ -22,7 +22,7 @@
         <section id="main" class="column">
             
             <% if (request.getAttribute("revealSuccessMsg") == "true") { %>
-                <h4 class="alert_success">Visitor(s) Assigned to Group Successfully</h4>
+                <h4 class="alert_success">Visitor(s) Assigned to Group Successfully!</h4>
             <%}%>
         
             <article class="module width_3_quarter" style="float:none; margin:auto; margin-top: 20px;">

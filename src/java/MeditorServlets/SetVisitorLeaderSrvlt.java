@@ -33,7 +33,6 @@ public class SetVisitorLeaderSrvlt extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         HttpSession session = request.getSession(false);
-        String [] leaderVisitor = null;
         
         if ((session == null) || (session.getAttribute("userId") == null)) {
             this.getServletConfig().getServletContext().getRequestDispatcher("/index.jsp?noSession=1").forward(request, response);
@@ -42,16 +41,14 @@ public class SetVisitorLeaderSrvlt extends HttpServlet {
             GroupServices groupServices = new GroupServices();
             
             if (request.getParameterNames().hasMoreElements()) {
-                String assignedVisitor = request.getParameter("assignedVisitor");
-                leaderVisitor = request.getParameterValues("leaderVisitor");
-                //System.out.println(assignedVisitor +" "+ assignedGroup);
-                groupServices.setVisitorAsLeader(leaderVisitor, Integer.parseInt(assignedVisitor));
-                //session.setAttribute("assignedGroup", assignedGroup);
-                //session.setAttribute("assignedVisitor", assignedVisitor);
+                String leaderVisitor = request.getParameter("leaderVisitor");
+                String leaderGroup = request.getParameter("leaderGroup");
+                //System.out.println(leaderVisitor +" "+ leaderGroup);
+                groupServices.setVisitorAsLeader(Integer.parseInt(leaderGroup),Integer.parseInt(leaderVisitor));
                 request.setAttribute("revealSuccessMsg", "true");
             }
-            //groupServices.showVisitorGroupLists();
-            //request.setAttribute("setVisitorAsLeader", groupServices);
+            groupServices.showVisitorGroupLists();
+            request.setAttribute("groupServices", groupServices);
             this.getServletConfig().getServletContext().getRequestDispatcher("/set_visitor_leader.jsp").forward(request, response);    
         }
     }

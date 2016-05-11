@@ -33,3 +33,12 @@ function validateAssignForm () {
         return false; 
     }
 }
+
+function validateSetForm () {
+    if(document.getElementById('visitor_radio').checked) { 
+        return true; 
+    } else { 
+        alert('You must select at least one Medical Visitor!'); 
+        return false; 
+    }
+}
