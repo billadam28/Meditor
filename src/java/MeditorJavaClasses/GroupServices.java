@@ -29,7 +29,6 @@ public class GroupServices {
     private List<Group> groupsNoLeaderList;
     private final String getVisitorsQuery;
     private final String getGroupsQuery;
-    private final String getGroupsNoLeaderQuery;
     private final String getVisitorsNoLeaderQuery;
     
     
@@ -37,11 +36,9 @@ public class GroupServices {
         visitorsList = new ArrayList<>();
         groupsList= new ArrayList<>();
         visitorsNoLeaderList = new ArrayList<>();
-        groupsNoLeaderList = new ArrayList<>();
                 
         getVisitorsQuery = "select v from Visitor v where group = null";
         getGroupsQuery = "from Group g order by g.name asc";
-        getGroupsNoLeaderQuery = "";
         getVisitorsNoLeaderQuery = "select v from Visitor v where group != null";
     }
 
@@ -176,24 +173,6 @@ public class GroupServices {
                 
                 
             }
-            /*
-            query = session.createQuery(getGroupsQuery);
-            rs = (List<Object>)query.list();
-            for (Object obj : rs) {
-                Object[] o = (Object[]) obj;
-                Group group = (Group) o[0];
-                group.setName((String) o[1]);
-                groupsList.add(group);
-            }
-            
-            query = session.createQuery(getGroupsNoLeaderQuery);
-            rs = (List<Object>)query.list();
-            for (Object obj : rs) {
-                Object[] o = (Object[]) obj;
-                Group group = (Group) o[0];
-                group.setName((String) o[1]);
-                groupsNoLeaderList.add(group);
-            } */
             tx.commit();
         } catch (HibernateException e) {
             if (tx != null) {
@@ -216,9 +195,5 @@ public class GroupServices {
     
     public List<Visitor> visitorsNoLeaderList () {
         return this.visitorsNoLeaderList;
-    }
-    
-    public List<Group> groupsNoLeaderList () {
-        return this.groupsNoLeaderList;
     }
 }
