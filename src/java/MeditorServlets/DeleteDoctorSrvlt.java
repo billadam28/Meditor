@@ -40,9 +40,8 @@ public class DeleteDoctorSrvlt extends HttpServlet {
             DeleteDoctorProcessor deleteDoctor = new DeleteDoctorProcessor();
             
             if (request.getParameterNames().hasMoreElements()) {
-                //String visitorToAssign = request.getParameter("visitorToAssign");
                 String[] doctorToDelete = request.getParameterValues("doctorToDelete");
-                //assignVisitor.assignVisitor(doctorToAssign, Integer.parseInt(visitorToAssign));
+                 deleteDoctor.deleteDoctor(doctorToDelete);
                 request.setAttribute("revealSuccesMsg", "true");
     
             }

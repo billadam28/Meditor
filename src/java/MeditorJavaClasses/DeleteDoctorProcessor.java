@@ -40,19 +40,17 @@ public class DeleteDoctorProcessor {
         institutionListObj.populateDefaultList();
     }
     
-    public void assignVisitor(String[] docList, int visitorId ) {
+    public void deleteDoctor(String[] docList) {
         Session session = NewHibernateUtil.getSessionFactory().openSession();
         Transaction tx = null;
 
         try {
             tx = session.beginTransaction();
             Integer docId;
-            //Visitor vst = (Visitor) session.get(Visitor.class, visitorId);
             for (String retrieveddocId : docList) {
                 docId = Integer.parseInt(retrieveddocId);
-                Doctor dct = (Doctor)session.get(Doctor.class, docId);
-                //dct.setAssignedVisitor(vst);
-                session.update(dct); 
+                Doctor dct = (Doctor) session.get(Doctor.class, docId);
+                session.delete(dct); 
             }
             tx.commit();
         } catch (HibernateException e) {
