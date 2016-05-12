@@ -53,7 +53,7 @@ function validateSetForm () {
 
 function validateDoctorForm () {
     var isChecked = 0;
-    var radios = document.getElementsByName('doctorInfo');
+    var radios = document.getElementsByName('selectDoc');
     for (i = 0; i < radios.length; i++) {
         if (radios[i].checked) {
             isChecked = isChecked +1;
@@ -64,6 +64,23 @@ function validateDoctorForm () {
         return true;
     } else {
         alert('You must select a Doctor!');
+        return false;
+    }
+}
+
+function validateVisitForm() {
+    var isChecked = 0;
+    var radios = document.getElementsByName('selectVisit');
+    for (i = 0; i < radios.length; i++) {
+        if (radios[i].checked) {
+            isChecked = isChecked +1;
+        }
+    }
+    
+    if (isChecked > 0) {
+        return true;
+    } else {
+        alert('You must select a visit!');
         return false;
     }
 }

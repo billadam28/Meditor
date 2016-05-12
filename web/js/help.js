@@ -21,7 +21,7 @@ function help3() {
 
 function help4() {
     
-        alert("In order to enter information about a visit you paid to a doctor, first\nselect the doctor and click Next. Enter the information you want\nand click Save."); 
+        alert("In order to enter information about a visit you paid to a doctor, first\nselect the doctor and click Next. Select the visit you want to edit\nand click Edit. Change the fields you want and click Update."); 
 } 
     
 

@@ -131,7 +131,8 @@ CREATE TABLE Visit (
   status           varchar(10),
   date             date not null,
   cycle_id         int not null,
-  extra_visit      bit, 
+  extra_visit      bit,
+  comments         varchar(250),
   PRIMARY KEY (id),
   constraint fk_vst_doctor_id FOREIGN KEY (doctor_id) REFERENCES Doctor (id),
   constraint fk_vst_cycle_id FOREIGN KEY (cycle_id) REFERENCES Cycle (id)

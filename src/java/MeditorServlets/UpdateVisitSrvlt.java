@@ -8,6 +8,11 @@ package MeditorServlets;
 import MeditorJavaClasses.VisitServices;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.text.*;
+import java.util.*; 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -18,7 +23,7 @@ import javax.servlet.http.HttpSession;
  *
  * @author thodo
  */
-public class VisitInfoSrvlt extends HttpServlet {
+public class UpdateVisitSrvlt extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -30,9 +35,9 @@ public class VisitInfoSrvlt extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
+            throws ServletException, IOException, ParseException {
         response.setContentType("text/html;charset=UTF-8");
-        
+       
         HttpSession session = request.getSession(false);
         
         if ((session == null) || (session.getAttribute("userId") == null)) {
@@ -40,11 +45,29 @@ public class VisitInfoSrvlt extends HttpServlet {
         } else {
             
             VisitServices visitServices = new VisitServices();
+            SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+            try {
+                
+                Date date = format.parse(request.getParameter("date"));
             
-            String uId = session.getAttribute("userId").toString();
-            visitServices.showDoctorsList(Integer.parseInt(uId));
+            
+            
+            String status = request.getParameter("status");
+            String comments = request.getParameter("comments");
+            boolean extra;
+            if (request.getParameterValues("extra1")!=null) {
+                extra = true;
+            } else {
+                extra = false;
+            }
+            System.out.println(date+status+extra+comments);
+            //visitServices.updateVisit(date,status,extra,comments);
+            request.setAttribute("revealSuccessMsg", "true");
+            request.setAttribute("revealForm3", "true");
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
             request.setAttribute("visitServices", visitServices);
-            request.setAttribute("revealForm0", "true");
             this.getServletConfig().getServletContext().getRequestDispatcher("/enter_visit_info.jsp").forward(request, response);
             
         }

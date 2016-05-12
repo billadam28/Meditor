@@ -24,6 +24,18 @@
         <servlet-name>VisitInfoSrvlt</servlet-name>
         <servlet-class>MeditorServlets.VisitInfoSrvlt</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>ShowVisitSrvlt</servlet-name>
+        <servlet-class>MeditorServlets.ShowVisitSrvlt</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>EditVisitSrvlt</servlet-name>
+        <servlet-class>MeditorServlets.EditVisitSrvlt</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>UpdateVisitSrvlt</servlet-name>
+        <servlet-class>MeditorServlets.UpdateVisitSrvlt</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>LoginSrvlt</servlet-name>
         <url-pattern>/Login</url-pattern>
@@ -55,6 +67,18 @@
     <servlet-mapping>
         <servlet-name>VisitInfoSrvlt</servlet-name>
         <url-pattern>/VisitInfo</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ShowVisitSrvlt</servlet-name>
+        <url-pattern>/ShowVisit</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>EditVisitSrvlt</servlet-name>
+        <url-pattern>/EditVisit</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>UpdateVisitSrvlt</servlet-name>
+        <url-pattern>/UpdateVisit</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

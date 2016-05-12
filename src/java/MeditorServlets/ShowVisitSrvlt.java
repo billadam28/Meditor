@@ -18,7 +18,7 @@ import javax.servlet.http.HttpSession;
  *
  * @author thodo
  */
-public class VisitInfoSrvlt extends HttpServlet {
+public class ShowVisitSrvlt extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -32,7 +32,6 @@ public class VisitInfoSrvlt extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        
         HttpSession session = request.getSession(false);
         
         if ((session == null) || (session.getAttribute("userId") == null)) {
@@ -40,11 +39,15 @@ public class VisitInfoSrvlt extends HttpServlet {
         } else {
             
             VisitServices visitServices = new VisitServices();
-            
+            String selectDoc = request.getParameter("selectDoc");
             String uId = session.getAttribute("userId").toString();
-            visitServices.showDoctorsList(Integer.parseInt(uId));
+            int vId = visitServices.getVisitorId(Integer.parseInt(uId));
+            //System.out.println(vId);
+            visitServices.showVisitsList(Integer.parseInt(selectDoc));
             request.setAttribute("visitServices", visitServices);
-            request.setAttribute("revealForm0", "true");
+            request.setAttribute("vId", vId);
+            request.setAttribute("revealForm1", "true");
+            
             this.getServletConfig().getServletContext().getRequestDispatcher("/enter_visit_info.jsp").forward(request, response);
             
         }
