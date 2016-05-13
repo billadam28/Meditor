@@ -5,19 +5,20 @@
  */
 package MeditorServlets;
 
-import MeditorJavaClasses.DeleteDoctorProcessor;
+import MeditorJavaClasses.DoctorList;
+import MeditorPersistence.Doctor;
 import java.io.IOException;
+import java.io.PrintWriter;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 /**
  *
  * @author adamopoulo
  */
-public class DeleteDoctorSrvlt extends HttpServlet {
+public class AsyncUpdateDoctorList extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -30,26 +31,44 @@ public class DeleteDoctorSrvlt extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
-
-        HttpSession session = request.getSession(false);
+        StringBuilder sb = new StringBuilder();
+        DoctorList docList = new DoctorList();
+        docList.populateListWithParameters( Integer.parseInt(request.getParameter("institution")), 
+                Integer.parseInt(request.getParameter("specialty")));
         
-        if ((session == null) || (session.getAttribute("userId") == null)) {
-            this.getServletConfig().getServletContext().getRequestDispatcher("/index.jsp?noSession=1").forward(request, response);
-        } else {
-            DeleteDoctorProcessor deleteDoctor = new DeleteDoctorProcessor();
-            
-            if (request.getParameterNames().hasMoreElements()) {
-                String[] doctorToDelete = request.getParameterValues("doctorToDelete");
-                deleteDoctor.deleteDoctor(doctorToDelete);
-                request.setAttribute("revealSuccesMsg", "true");
-    
+        if (!docList.getDoctorList().isEmpty()) { // list is not empty, create xml response
+            for (Doctor dct : docList.getDoctorList()) {
+                sb.append("<doctor>");
+                sb.append("<name>").append(dct.getName()).append("</name>");
+                if (dct.getAssignedVisitor() != null) {
+                    sb.append("<assignedVisitor>").append(dct.getAssignedVisitor().getSurname()).append("</assignedVisitor>");
+                }
+                else {
+                    sb.append("<assignedVisitor>").append("not assigned").append("</assignedVisitor>");
+                }  
+                sb.append("<specialty>").append(dct.getSpecialty().getSpecialtyName()).append("</specialty>");
+                sb.append("<position>").append(dct.getPosition()).append("</position>");
+                sb.append("<institution>").append(dct.getInstitution().getInstitutionName()).append("</institution>");
+                sb.append("<geoArea>").append(dct.getInstitution().getCity().getGeoArea().getGeoName()).append("</geoArea>");
+                sb.append("<city>").append(dct.getInstitution().getCity().getCityName()).append("</city>");
+                sb.append("</doctor>");
             }
-            deleteDoctor.loadLists();
-            request.setAttribute("deleteDoctor", deleteDoctor);
-            this.getServletConfig().getServletContext().getRequestDispatcher("/delete_doctor.jsp").forward(request, response);
+            response.setContentType("text/xml");
+            response.setHeader("Cache-Control", "no-cache");
+            response.getWriter().write("<doctors>" + sb.toString() + "</doctors>");
             
         }
+        else { // list is empty
+            response.setStatus(HttpServletResponse.SC_NO_CONTENT);   
+        }
+        
+        
+        
+        System.out.println(request.getParameter("geoArea"));
+        System.out.println(request.getParameter("city"));
+        System.out.println(request.getParameter("institution"));
+        System.out.println(request.getParameter("specialty"));
+
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

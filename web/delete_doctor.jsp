@@ -28,7 +28,7 @@
                            
                     <fieldset style="width:100%; float:left; margin-right: 3%;"> <!-- to make two field float next to one another, adjust values accordingly -->
                             <label>Select Geo Area</label>
-                            <select style="width:90%;" form="doctor_filter">
+                            <select style="width:90%;" form="doctor_filter" id="geo_area_dd">
                                     <%for (GeographicalArea obj : deleteDoctorProc.getGeoAreaListObj().getGeoAreaList()) { %>
                                     <option value="<%= obj.getId()%>"><%=obj.getGeoName()%></option>
                                     <%}%>
@@ -37,7 +37,7 @@
                     
                     <fieldset style="width:100%; float:left; margin-right: 3%;"> <!-- to make two field float next to one another, adjust values accordingly -->
                             <label>Select City</label>
-                            <select style="width:90%;" form="doctor_filter">
+                            <select style="width:90%;" form="doctor_filter" id="city_dd">
                                     <%for (City obj : deleteDoctorProc.getCityListObj().getCityList()) { %>
                                     <option value="<%= obj.getId()%>"><%=obj.getCityName()%></option>
                                     <%}%>
@@ -46,7 +46,7 @@
                     
                     <fieldset style="width:100%; float:left; margin-right: 3%;"> <!-- to make two field float next to one another, adjust values accordingly -->
                             <label>Select Institution</label>
-                            <select style="width:90%;" form="doctor_filter">
+                            <select style="width:90%;" form="doctor_filter" id="institution_dd">
                                     <%for (Institution obj : deleteDoctorProc.getInstitutionListObj().getInstitutionList()) { %>
                                     <option value="<%= obj.getId()%>"><%=obj.getInstitutionName()%></option>
                                     <%}%>
@@ -55,7 +55,7 @@
                     
                     <fieldset style="width:100%; float:left; margin-right: 3%;"> <!-- to make two field float next to one another, adjust values accordingly -->
                             <label>Select Specialty</label>
-                            <select style="width:90%;" form="doctor_filter">
+                            <select style="width:90%;" form="doctor_filter" id="specialty_dd">
                                     <%for (Specialty obj : deleteDoctorProc.getSpecialtyListObj().getSpecialtyList()) { %>
                                     <option value="<%= obj.getId()%>"><%=obj.getSpecialtyName()%></option>
                                     <%}%>
@@ -64,13 +64,12 @@
                     
                     <fieldset style="width:100%; float:left;"> <!-- to make two field float next to one another, adjust values accordingly -->
                             <label>Search</label>
-                            <input type="text" style="width:85%;">
+                            <input type="text" size="40" id="complete-field" onkeyup="doCompletion();" style="width:85%;">
                     </fieldset><div class="clear"></div>
                 </div>
             <footer>
-                    <form class="post_message" id="doctor_filter">
-                            <input type="submit" class="alt_btn" value="Refresh"/>
-                    </form>
+                <button type="button" class="alt_btn" onclick="updateDoctorList()"
+                        style="color:orange;font-weight:bold">Refresh</button>
             </footer>
             </article> <!-- end of visitor filters article -->
               
