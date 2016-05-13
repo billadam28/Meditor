@@ -29,7 +29,7 @@
             <% VisitServices visitServices = (VisitServices) request.getAttribute("visitServices");%>
             <% CycleServices cycleServices = (CycleServices) request.getAttribute("cycleServices");%>
             
-            <article class="module width_quarter">
+            <article class="module width_quarter" style="width: 22%; margin-left: 10px;">
             <header><h3>Filter for Visitor's Visits</h3></header>
                 <div class="module_content">
                            
@@ -55,7 +55,7 @@
                 </footer>
             </article> <!-- end of visitor filters article -->
             
-            <article class="module width_3_quarter">
+            <article class="module width_3_quarter" style="width: 74.5%; margin-left: 10px;">
                 <header><h3>Visitor's Visits filtered by:<%= request.getAttribute("period")%></h3></header>
 
                 <div class="tab_container">
@@ -63,8 +63,8 @@
                         <table class="tablesorter" cellspacing="0"> 
                         <thead> 
                             <tr>  
-                                <th>Visitor Id</th> 
-                                <th>Doctor Id</th> 
+                                <th>Doc's Name</th> 
+                                <th>Doc's Address</th>
                                 <th>Status</th> 
                                 <th>Date</th>
                                 <th>Cycle</th>
@@ -76,8 +76,8 @@
                             <%if (cycleServices.getVisitorVisits().isEmpty() == false) { 
                                 for (Visit obj : cycleServices.getVisitorVisits()) { %>
                                     <tr>                            
-                                        <td><%= obj.getDoctor().getAssignedVisitor().getId()%></td> 
-                                        <td><%= obj.getDoctor().getId()%></td> 
+                                        <td><%= obj.getDoctor().getName()%></td> 
+                                        <td><%= obj.getDoctor().getAddress()%></td> 
                                         <td><%= obj.getStatus()%></td> 
                                         <td><%= obj.getDate()%></td>
                                         <td><%= obj.getCycle().getCycle()%></td>

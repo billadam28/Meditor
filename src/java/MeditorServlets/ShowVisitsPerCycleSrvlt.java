@@ -45,27 +45,28 @@ public class ShowVisitsPerCycleSrvlt extends HttpServlet {
             CycleServices cycleServices = new CycleServices();
             String uId = session.getAttribute("userId").toString();
             int vId = visitServices.getVisitorId(Integer.parseInt(uId));
-            
+            cycleServices.showCyclesList();
             if (request.getParameterNames().hasMoreElements()) {
                 
                 period = request.getParameter("period");
                 cycleServices.getVisitorVisits(vId, Integer.parseInt(period));
                 //System.out.println(vId+" "+Integer.parseInt(period));
+                
+            } else {
+                cycleServices.getVisitorVisits(vId, Integer.parseInt(period));
+                //System.out.println(vId+" "+Integer.parseInt(period));
             }
-            cycleServices.showCyclesList();
-            request.setAttribute("vId", vId);
             if (period.equals("0")) {
                 request.setAttribute("period", "All periods");
-            } else if (period.equals("1")) {
-                request.setAttribute("period", "1 Jan. - 31 Mar.");
-            } else if (period.equals("2")) {
-                request.setAttribute("period", "1 Apr. - 30 June");
-            }else if (period.equals("3")) {
-                request.setAttribute("period", "1 July - 30 Sept.");
-            } else {
-                request.setAttribute("period", "1 Oct. - 31 Dec");
+                } else if (period.equals("1")) {
+                    request.setAttribute("period", "1 Jan. - 31 Mar.");
+                } else if (period.equals("2")) {
+                    request.setAttribute("period", "1 Apr. - 30 June");
+                }else if (period.equals("3")) {
+                    request.setAttribute("period", "1 July - 30 Sept.");
+                } else {
+                    request.setAttribute("period", "1 Oct. - 31 Dec");
             }
-            
             request.setAttribute("visitServices", visitServices);
             request.setAttribute("cycleServices", cycleServices);
             this.getServletConfig().getServletContext().getRequestDispatcher("/show_visits_per_cycle.jsp").forward(request, response);
