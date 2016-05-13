@@ -113,7 +113,7 @@
                                 <%if (visitServices.visitsList().isEmpty() == false) { 
                                 for (Visit obj : visitServices.visitsList()) { %>
                                     <tr>                            
-                                        <td><%= request.getAttribute("vId")%></td> 
+                                        <td><%= obj.getDoctor().getAssignedVisitor().getId()%></td> 
                                         <td><%= obj.getDoctor().getId()%></td> 
                                         <td><%= obj.getStatus()%></td> 
                                         <td><%= obj.getDate()%></td>

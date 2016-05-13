@@ -23,5 +23,9 @@ function help4() {
     
         alert("In order to enter information about a visit you paid to a doctor, first\nselect the doctor and click Next. Select the visit you want to edit\nand click Edit. Change the fields you want and click Update."); 
 } 
+
+function help5() {
     
+        alert("In order to view information about completed or unsuccessful visits\nper cycle, select the cycle period and click Search button. If you do\nnot select a cycle period, all cycle's visitis will be displayed."); 
+} 
 

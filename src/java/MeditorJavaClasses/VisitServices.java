@@ -74,6 +74,7 @@ public class VisitServices {
                 Hibernate.initialize(visit.getVisitors());
                 Hibernate.initialize(visit.getDate());
                 Hibernate.initialize(visit.getCycle().getCycle());
+                Hibernate.initialize(visit.getDoctor().getAssignedVisitor().getId());
                 if((visit.getId()) == visitId){
                     getVisit = visit;
                 }
@@ -144,6 +145,7 @@ public class VisitServices {
             List<Visit> visits  = session.createQuery(getVisitsQuery).list();
             for (Visit visit : visits) {
                 Hibernate.initialize(visit.getDoctor().getId());
+                Hibernate.initialize(visit.getDoctor().getAssignedVisitor().getId());
                 Hibernate.initialize(visit.getVisitors());
                 Hibernate.initialize(visit.getDate());
                 Hibernate.initialize(visit.getCycle().getCycle());
