@@ -10,6 +10,7 @@ import java.util.List;
 import java.util.ArrayList;
 import MeditorPersistence.NewHibernateUtil;
 import MeditorPersistence.Visit;
+import java.util.Date;
 import org.hibernate.Hibernate;
 import org.hibernate.HibernateException;
 import org.hibernate.Query;
@@ -36,26 +37,18 @@ public class VisitServices {
         getVisitsQuery = "select v from Visit v where status = 'pending'";
     }
     
-    /*public void updateVisit(String date, String status, boolean extra, String comments) {
+    public void updateVisit(Date date, String status, boolean extra, String comments, int visitId) {
             Session session = NewHibernateUtil.getSessionFactory().openSession();
             Transaction tx = null;
 
             try {
                 tx = session.beginTransaction();
-                    Group group = new Group();
-                    Group pgroup = (Group) session.get(Group.class, parentGroup);
-                    
-                    if (parentGroup!=0) {
-                        group.setName(nameOfGroup);
-                        group.setDescription(descOfGroup);
-                        group.setParentGroup(pgroup);
-                        session.save(group);
-                    } else {
-                        group.setName(nameOfGroup);
-                        group.setDescription(descOfGroup);
-                        //System.out.println(descOfGroup);
-                        session.save(group);
-                    }
+                    Visit visit = (Visit) session.get(Visit.class, visitId);
+                    visit.setDate(date);
+                    visit.setStatus(status);
+                    visit.setExtraVisit(extra);
+                    visit.setComments(comments);
+                    session.saveOrUpdate(visit);
                 
                 tx.commit();
             } catch (HibernateException e) {
@@ -67,7 +60,7 @@ public class VisitServices {
                 session.close();
             }
             
-    } */
+    } 
     
     public void editVisitForm (int visitId) {
         Session session = NewHibernateUtil.getSessionFactory().openSession();

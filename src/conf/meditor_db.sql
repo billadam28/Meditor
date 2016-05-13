@@ -128,7 +128,7 @@ CREATE TABLE Visit (
   id               int NOT NULL AUTO_INCREMENT,
   doctor_id        int not null,
   visit_offset     int not null,
-  status           varchar(10),
+  status           varchar(12),
   date             date not null,
   cycle_id         int not null,
   extra_visit      bit,

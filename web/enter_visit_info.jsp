@@ -90,7 +90,7 @@
             <%}%>
             <% if (request.getAttribute("revealForm1") == "true" && request.getAttribute("revealForm2") != "true" && request.getAttribute("revealForm0") != "true") { %>
             
-            <article class="module width_3_quarter" style="float:none; margin:auto; margin-top: 20px;">
+            <article class="module width_full" style="float:none; margin:auto; margin-top: 20px;">
                     <header><h3>Select a Visit</h3></header>
 
                     <div class="tab_container">
@@ -121,7 +121,7 @@
                                         <td><%if(obj.getExtraVisit()==true) {%> 
                                             <input type="checkbox" name="extraVisit" id="extra_visit_yes" value="<%= obj.getExtraVisit()%>" form="selectVisit_form" checked="checked" disabled><%} else {%>
                                             <input type="checkbox" name="extraVisit" id="extra_visit_no" value="<%= obj.getExtraVisit()%>" form="selectVisit_form" disabled><%}%></td>
-                                        <td><%= obj.getComments()%></td>
+                                        <td style="word-break:break-all; word-wrap:break-word; max-width:100px; "><%= obj.getComments()%></td>
                                         <td><input type="radio" name="selectVisit" id="visit_radio" value="<%= obj.getId()%>" form="selectVisit_form"></td>
                                 <%}%>
                                 <%} else {%>
@@ -163,6 +163,7 @@
                 
                 <article class="module width_3_quarter" style="float:none; margin:auto; margin-top: 20px;">
                     <header><h3>Edit Visit with ID: #<%= obj.getId()%></h3></header>
+                    <input type="hidden" name="visit" value="<%= obj.getId()%>" form="update_visit_form">
                         <div class="module_content">
                             <fieldset style="width:20%; display: inline-block;">
                                 <label style="width:80%; text-align: center;">Visitor Id</label>
@@ -181,6 +182,7 @@
                                 <select name="status" id="status" form="update_visit_form" style="width:84%;">
                                         <option value="pending">Pending</option>
                                         <option value="completed">Completed</option>
+                                        <option value="unsuccessful">Unsuccessful</option>
                                 </select>
                             </fieldset>
                             
@@ -206,7 +208,7 @@
                     <footer>
                         <div class="submit_link">
                             <form id="update_visit_form" name="update_visit_form" method="post" action="UpdateVisit" class="alt_btn" >
-                                <input type="submit" class="alt_btn" value="Update"/>
+                                <input type="submit" class="alt_btn" value="Update" onclick="return isValidDate()"/>
                                 <input type="reset" class="alt_btn" value="Reset"/>
                                 <input type="button" id="helpForCreation" onclick="help4();" class="alt_btn" value="Help"/>
                             </form>
@@ -216,9 +218,9 @@
                </article><!-- end of post new article -->
             <%}%>
             
-            <% if (request.getAttribute("revealForm3") == "true") { %>
+            <% if (request.getAttribute("revealForm3") == "true") { %> 
                 <% if (request.getAttribute("revealSuccessMsg") == "true") { %>
-                    <h4 class="alert_success">Visit updated!</h4>
+                    <h4 class="alert_success">Visit #<%= request.getAttribute("visitId")%> updated successfully!</h4>
                 <%}%>
             <%}%>
         </section>

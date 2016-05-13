@@ -84,3 +84,15 @@ function validateVisitForm() {
         return false;
     }
 }
+
+function isValidDate() {
+  var dateString = document.getElementById('date').value;  
+  var regEx = /^\d{4}-\d{2}-\d{2}$/;
+  if(dateString.match(regEx)) {
+    return true;
+  } else {
+    alert('You must enter a valid date. The pattern should be YYYY-MM-DD');  
+    return false;    
+  }
+  
+}

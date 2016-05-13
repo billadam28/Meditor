@@ -11,6 +11,7 @@ import java.io.PrintWriter;
 import java.text.*;
 import java.util.*; 
 import java.text.ParseException;
+import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import javax.servlet.ServletException;
@@ -35,7 +36,7 @@ public class UpdateVisitSrvlt extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException, ParseException {
+            throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
        
         HttpSession session = request.getSession(false);
@@ -44,32 +45,36 @@ public class UpdateVisitSrvlt extends HttpServlet {
             this.getServletConfig().getServletContext().getRequestDispatcher("/index.jsp?noSession=1").forward(request, response);
         } else {
             
-            VisitServices visitServices = new VisitServices();
-            SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
-            try {
-                
+            
+            try 
+            {    
+                VisitServices visitServices = new VisitServices();
+                String v = request.getParameter("visit");
+                int visit = Integer.parseInt(v);
+                //System.out.println(visit);
+                SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
                 Date date = format.parse(request.getParameter("date"));
-            
-            
-            
-            String status = request.getParameter("status");
-            String comments = request.getParameter("comments");
-            boolean extra;
-            if (request.getParameterValues("extra1")!=null) {
-                extra = true;
-            } else {
-                extra = false;
+                //System.out.println(date);
+                String status = request.getParameter("status");
+                String comments = request.getParameter("comments");
+                boolean extra;
+                if (request.getParameterValues("extra1")!=null) {
+                    extra = true;
+                } else {
+                    extra = false;
+                }
+                //System.out.println(format.format(date)+status+extra+comments);
+                visitServices.updateVisit(date,status,extra,comments,visit);
+                request.setAttribute("visitId", visit);
+                request.setAttribute("revealSuccessMsg", "true");
+                request.setAttribute("revealForm3", "true");
+
+                request.setAttribute("visitServices", visitServices);
+                this.getServletConfig().getServletContext().getRequestDispatcher("/enter_visit_info.jsp").forward(request, response);
             }
-            System.out.println(date+status+extra+comments);
-            //visitServices.updateVisit(date,status,extra,comments);
-            request.setAttribute("revealSuccessMsg", "true");
-            request.setAttribute("revealForm3", "true");
-            } catch (ParseException e) {
-                e.printStackTrace();
+            catch (Exception ex ){
+            System.out.println(ex);
             }
-            request.setAttribute("visitServices", visitServices);
-            this.getServletConfig().getServletContext().getRequestDispatcher("/enter_visit_info.jsp").forward(request, response);
-            
         }
     }
 
