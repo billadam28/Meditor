@@ -123,10 +123,11 @@ CREATE TABLE Visit (
   id               int NOT NULL AUTO_INCREMENT,
   doctor_id        int not null,
   visit_offset     int not null,
-  status           varchar(10),
+  status           varchar(12),
   date             date,
   cycle_id         int not null,
-  extra_visit      bit, 
+  extra_visit      bit,
+  comments         varchar(250),
   PRIMARY KEY (id),
   constraint fk_vst_doctor_id FOREIGN KEY (doctor_id) REFERENCES Doctor (id) 
   ON DELETE CASCADE ON UPDATE CASCADE,
@@ -169,6 +170,7 @@ CREATE TABLE `Group` (
   id               int NOT NULL AUTO_INCREMENT,
   parent_group_id  int,
   `name`           varchar(50) not null,
+  description      varchar(250),
   leader_id        int,
   PRIMARY KEY (id),
   unique(`name`),
@@ -215,6 +217,22 @@ INSERT INTO User
 (firstname, surname, email, username, passwd, user_type)
 VALUES ('john', 'john','john@john.com','john',SHA1('1234'), 2);
 
+INSERT INTO User
+(firstname, surname, email, username, passwd, user_type)
+VALUES ('teo', 'teo','teo@teo.com','teo',SHA1('123'), 2);
+
+INSERT INTO User
+(firstname, surname, email, username, passwd, user_type)
+VALUES ('thodoris', 'thodoris','thodoris@thodoris.com','thodoris',SHA1('123'), 2);
+
+INSERT INTO `Visitor`
+(user_id, visitor_level, group_id)
+VALUES (8, 'senior', 41);
+
+INSERT INTO `Visitor`
+(user_id, visitor_level, group_id)
+VALUES (5, 'senior', 42);
+
 INSERT INTO `Visitor`
 (user_id, visitor_level)
 VALUES (2, 'senior');
@@ -232,8 +250,8 @@ INSERT INTO `Admin`
 VALUES (1, 1);
 
 INSERT INTO `Group`
-(parent_group_id, name, leader_id)
-VALUES (null , 'group1', 2);
+(parent_group_id, name, description, leader_id)
+VALUES (null , 'group1','123', 2);
 
 INSERT INTO `Group`
 (parent_group_id, name, leader_id)

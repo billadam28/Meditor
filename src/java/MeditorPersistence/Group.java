@@ -8,6 +8,7 @@ public class Group  implements java.io.Serializable {
 
      private Integer id;
      private String name;
+     private String description;
      private Group parentGroup;
      private Visitor groupLeader;
      //private Set<Visitor> members;
@@ -15,9 +16,10 @@ public class Group  implements java.io.Serializable {
     public Group() {
     }
 
-    public Group(Group parentGroup, String name, Visitor groupLeader) {
+    public Group(Group parentGroup, String name, String description, Visitor groupLeader) {
        this.parentGroup = parentGroup;
        this.name = name;
+       this.description = description;
        this.groupLeader = groupLeader;
     }
    
@@ -40,6 +42,13 @@ public class Group  implements java.io.Serializable {
     }
     public void setName(String name) {
         this.name = name;
+    }
+    
+    public String getDescription() {
+        return this.description;
+    }
+    public void setDescription(String description) {
+        this.description = description;
     }
     
     public Visitor getGroupLeader() {

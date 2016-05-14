@@ -30,9 +30,9 @@
 		</ul>
                 <h3>Groups</h3>
 		<ul class="toggle">
-			<li class="icn_new_article"><a href="#" onclick="highlightCurrentLink();">Create new</a></li>
-                        <li class="icn_categories"><a href="#" onclick="highlightCurrentLink();">Assign visitor to a group</a></li>
-                        <li class="icn_profile"><a href="#" onclick="highlightCurrentLink();">Set visitor as a group leader</a></li>
+			<li class="icn_new_article"><a href="GroupProcessor" onclick="highlightCurrentLink();">Create new</a></li>
+                        <li class="icn_categories"><a href="AssignVisitorGroup" onclick="highlightCurrentLink();">Assign visitor to a group</a></li>
+                        <li class="icn_profile"><a href="SetVisitorLeader" onclick="highlightCurrentLink();">Set visitor as a group leader</a></li>
 		</ul>
 		<h3>Reports</h3>
 		<ul class="toggle">

@@ -5,8 +5,36 @@
         <servlet-class>MeditorServlets.LoginSrvlt</servlet-class>
     </servlet>
     <servlet>
+        <servlet-name>GroupProcessorSrvlt</servlet-name>
+        <servlet-class>MeditorServlets.GroupProcessorSrvlt</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>AssignVisitorGroupSrvlt</servlet-name>
+        <servlet-class>MeditorServlets.AssignVisitorGroupSrvlt</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>SetVisitorLeaderSrvlt</servlet-name>
+        <servlet-class>MeditorServlets.SetVisitorLeaderSrvlt</servlet-class>
+    </servlet>
+    <servlet>
         <servlet-name>AssignVisitorSrvlt</servlet-name>
         <servlet-class>MeditorServlets.AssignVisitorSrvlt</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>VisitInfoSrvlt</servlet-name>
+        <servlet-class>MeditorServlets.VisitInfoSrvlt</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ShowVisitSrvlt</servlet-name>
+        <servlet-class>MeditorServlets.ShowVisitSrvlt</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>EditVisitSrvlt</servlet-name>
+        <servlet-class>MeditorServlets.EditVisitSrvlt</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>UpdateVisitSrvlt</servlet-name>
+        <servlet-class>MeditorServlets.UpdateVisitSrvlt</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>DeleteDoctorSrvlt</servlet-name>
@@ -25,8 +53,36 @@
         <url-pattern>/Logout</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
+        <servlet-name>GroupProcessorSrvlt</servlet-name>
+        <url-pattern>/GroupProcessor</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AssignVisitorGroupSrvlt</servlet-name>
+        <url-pattern>/AssignVisitorGroup</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>SetVisitorLeaderSrvlt</servlet-name>
+        <url-pattern>/SetVisitorLeader</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
         <servlet-name>AssignVisitorSrvlt</servlet-name>
         <url-pattern>/AssignVisitor</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>VisitInfoSrvlt</servlet-name>
+        <url-pattern>/VisitInfo</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ShowVisitSrvlt</servlet-name>
+        <url-pattern>/ShowVisit</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>EditVisitSrvlt</servlet-name>
+        <url-pattern>/EditVisit</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>UpdateVisitSrvlt</servlet-name>
+        <url-pattern>/UpdateVisit</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>DeleteDoctorSrvlt</servlet-name>

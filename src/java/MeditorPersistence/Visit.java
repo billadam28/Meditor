@@ -10,6 +10,7 @@ public class Visit  implements java.io.Serializable {
      private Integer id;
      private Integer visitOffset;
      private String status;
+     private String comments;
      private Boolean extraVisit;
      private Date date;
      private Cycle cycle;
@@ -51,6 +52,15 @@ public class Visit  implements java.io.Serializable {
     public void setStatus(String status) {
         this.status = status;
     }
+    
+    public String getComments() {
+        return this.comments;
+    }
+    
+    public void setComments(String comments) {
+        this.comments = comments;
+    }
+    
     public Date getDate() {
         return this.date;
     }
