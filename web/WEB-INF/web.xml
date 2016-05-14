@@ -44,6 +44,18 @@
         <servlet-name>DeleteDoctorSrvlt</servlet-name>
         <servlet-class>MeditorServlets.DeleteDoctorSrvlt</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>FiltersSrvlt</servlet-name>
+        <servlet-class>MeditorServlets.AsyncUpdateDoctorList</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>AsyncUpdateDoctorList</servlet-name>
+        <servlet-class>MeditorServlets.AsyncUpdateDoctorList</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>AsyncUpdateVisitorList</servlet-name>
+        <servlet-class>MeditorServlets.AsyncUpdateVisitorList</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>LoginSrvlt</servlet-name>
         <url-pattern>/Login</url-pattern>
@@ -95,6 +107,14 @@
     <servlet-mapping>
         <servlet-name>DeleteDoctorSrvlt</servlet-name>
         <url-pattern>/DeleteDoctor</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AsyncUpdateDoctorList</servlet-name>
+        <url-pattern>/AsyncUpdateDoctorList</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AsyncUpdateVisitorList</servlet-name>
+        <url-pattern>/AsyncUpdateVisitorList</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

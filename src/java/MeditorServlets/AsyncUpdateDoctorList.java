@@ -5,19 +5,19 @@
  */
 package MeditorServlets;
 
-import MeditorJavaClasses.AssignVisitorProcessor;
+import MeditorJavaClasses.DoctorList;
+import MeditorPersistence.Doctor;
 import java.io.IOException;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 /**
  *
  * @author adamopoulo
  */
-public class AssignVisitorSrvlt extends HttpServlet {
+public class AsyncUpdateDoctorList extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -30,28 +30,38 @@ public class AssignVisitorSrvlt extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
+        StringBuilder sb = new StringBuilder();
+        DoctorList docList = new DoctorList();
+        docList.populateListWithParameters( Integer.parseInt(request.getParameter("institution")), 
+                Integer.parseInt(request.getParameter("specialty")));
         
-        HttpSession session = request.getSession(false);
-        
-        if ((session == null) || (session.getAttribute("userId") == null)) {
-            this.getServletConfig().getServletContext().getRequestDispatcher("/index.jsp?noSession=1").forward(request, response);
-        } else {
-            AssignVisitorProcessor assignVisitorProc = new AssignVisitorProcessor();
-            
-            if (request.getParameterNames().hasMoreElements()) {
-                String visitorToAssign = request.getParameter("visitorToAssign");
-                String[] doctorToAssign = request.getParameterValues("doctorList");
-                assignVisitorProc.assignVisitor(doctorToAssign, Integer.parseInt(visitorToAssign));
-                request.setAttribute("revealSuccesMsg", "true");
-    
+        if (!docList.getDoctorList().isEmpty()) { // list is not empty, create xml response
+            for (Doctor dct : docList.getDoctorList()) {
+                sb.append("<doctor>");
+                sb.append("<id>").append(dct.getId()).append("</id>");
+                sb.append("<name>").append(dct.getName()).append("</name>");
+                if (dct.getAssignedVisitor() != null) {
+                    sb.append("<assignedVisitor>").append(dct.getAssignedVisitor().getSurname()).append("</assignedVisitor>");
+                }
+                else {
+                    sb.append("<assignedVisitor>").append("---").append("</assignedVisitor>");
+                }  
+                sb.append("<specialty>").append(dct.getSpecialty().getSpecialtyName()).append("</specialty>");
+                sb.append("<position>").append(dct.getPosition()).append("</position>");
+                sb.append("<institution>").append(dct.getInstitution().getInstitutionName()).append("</institution>");
+                sb.append("<geoArea>").append(dct.getInstitution().getCity().getGeoArea().getGeoName()).append("</geoArea>");
+                sb.append("<city>").append(dct.getInstitution().getCity().getCityName()).append("</city>");
+                sb.append("</doctor>");
             }
-            assignVisitorProc.loadLists();
-            request.setAttribute("assignVisitor", assignVisitorProc);
-            this.getServletConfig().getServletContext().getRequestDispatcher("/assign_visitor.jsp").forward(request, response);
+            response.setContentType("text/xml");
+            response.setHeader("Cache-Control", "no-cache");
+            response.getWriter().write("<doctors>" + sb.toString() + "</doctors>");
             
         }
-        
+        else { // list is empty
+            response.setStatus(HttpServletResponse.SC_NO_CONTENT);   
+        }
+
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

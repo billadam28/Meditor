@@ -32,7 +32,7 @@
                            
                     <fieldset style="width:100%; float:left; margin-right: 3%;"> <!-- to make two field float next to one another, adjust values accordingly -->
                             <label>Select Group</label>
-                            <select style="width:90%;" form="visitor_filter">
+                            <select style="width:90%;" form="visitor_filter" id="group_dd">
                                     <%for (Group obj : assignVisitorProc.getGroupListObj().getGroupList()) { %>
                                     <option value="<%= obj.getId()%>"><%=obj.getName()%></option>
                                     <%}%>
@@ -44,9 +44,8 @@
                     </fieldset><div class="clear"></div>
                 </div>
             <footer>
-                    <form class="post_message" id="visitor_filter">
-                            <input type="submit" class="alt_btn" value="Refresh"/>
-                    </form>
+                    <button type="button" class="alt_btn" onclick="updateVisitorList()"
+                        style="color:orange;font-weight:bold">Refresh</button>
             </footer>
             </article> <!-- end of visitor filters article -->
 
@@ -66,14 +65,14 @@
     				<th>Group Name</th> 
 				</tr> 
 			</thead> 
-			<tbody> 
+			<tbody id="vst_table"> 
                                 <%for (Visitor obj : assignVisitorProc.getVisitorListObj().getVisitorList()) { %>
 				<tr> 
-                                    <td><input type="radio" name="visitorToAssign" id="visitor_rd" value="<%= obj.getId()%>" form="assign_form"></td> 
+                                    <td><input type="radio" name="visitorToAssign" id="visitor_rd" value="<%= obj.getId()%>" form="form1"></td> 
     				<td><%= obj.getFirstname() + " " + obj.getSurname()%></td> 
     				<td><%= obj.getVisitorLevel() %></td> 
-    				<td><%if (obj.getSuperior() != null) {%><%= obj.getSuperior().getSurname()%><%} else {%> not assigned <%}%></td> 
-    				<td><%if (obj.getGroup() != null) {%><%= obj.getGroup().getName()%><%} else {%> not assigned <%}%></td> 
+    				<td><%if (obj.getSuperior() != null) {%><%= obj.getSuperior().getSurname()%><%} else {%> --- <%}%></td> 
+    				<td><%if (obj.getGroup() != null) {%><%= obj.getGroup().getName()%><%} else {%> --- <%}%></td> 
 				</tr> 
                                 <%}%>
 			</tbody> 
@@ -92,7 +91,7 @@
                            
                     <fieldset style="width:100%; float:left; margin-right: 3%;"> <!-- to make two field float next to one another, adjust values accordingly -->
                             <label>Select Geo Area</label>
-                            <select style="width:90%;" form="doctor_filter">
+                            <select style="width:90%;" form="doctor_filter" id="geo_area_dd">
                                     <%for (GeographicalArea obj : assignVisitorProc.getGeoAreaListObj().getGeoAreaList()) { %>
                                     <option value="<%= obj.getId()%>"><%=obj.getGeoName()%></option>
                                     <%}%>
@@ -101,7 +100,7 @@
                     
                     <fieldset style="width:100%; float:left; margin-right: 3%;"> <!-- to make two field float next to one another, adjust values accordingly -->
                             <label>Select City</label>
-                            <select style="width:90%;" form="doctor_filter">
+                            <select style="width:90%;" form="doctor_filter" id="city_dd">
                                     <%for (City obj : assignVisitorProc.getCityListObj().getCityList()) { %>
                                     <option value="<%= obj.getId()%>"><%=obj.getCityName()%></option>
                                     <%}%>
@@ -110,7 +109,7 @@
                     
                     <fieldset style="width:100%; float:left; margin-right: 3%;"> <!-- to make two field float next to one another, adjust values accordingly -->
                             <label>Select Institution</label>
-                            <select style="width:90%;" form="doctor_filter">
+                            <select style="width:90%;" form="doctor_filter" id="institution_dd">
                                     <%for (Institution obj : assignVisitorProc.getInstitutionListObj().getInstitutionList()) { %>
                                     <option value="<%= obj.getId()%>"><%=obj.getInstitutionName()%></option>
                                     <%}%>
@@ -119,7 +118,7 @@
                     
                     <fieldset style="width:100%; float:left; margin-right: 3%;"> <!-- to make two field float next to one another, adjust values accordingly -->
                             <label>Select Specialty</label>
-                            <select style="width:90%;" form="doctor_filter">
+                            <select style="width:90%;" form="doctor_filter" id="specialty_dd">
                                     <%for (Specialty obj : assignVisitorProc.getSpecialtyListObj().getSpecialtyList()) { %>
                                     <option value="<%= obj.getId()%>"><%=obj.getSpecialtyName()%></option>
                                     <%}%>
@@ -132,9 +131,8 @@
                     </fieldset><div class="clear"></div>
                 </div>
             <footer>
-                    <form class="post_message" id="doctor_filter">
-                            <input type="submit" class="alt_btn" value="Refresh"/>
-                    </form>
+                    <button type="button" class="alt_btn" onclick="updateDoctorList()"
+                        style="color:orange;font-weight:bold">Refresh</button>
             </footer>
             </article> <!-- end of visitor filters article -->
               
@@ -157,12 +155,12 @@
     				<th>City</th>
 				</tr> 
 			</thead> 
-			<tbody> 
+			<tbody id="doc_table"> 
                                 <%for (Doctor obj : assignVisitorProc.getDoctorListObj().getDoctorList()) { %>
 				<tr> 
-                                    <td><input type="checkbox" name="doctorToAssign" id="doctor_chbx" value="<%= obj.getId()%>" form="assign_form"></td> 
+                                    <td><input type="checkbox" name="doctorList" id="doctor_chbx" value="<%= obj.getId()%>" form="form1"></td> 
     				<td><%= obj.getName()%></td> 
-    				<td><%if (obj.getAssignedVisitor() != null) {%><%= obj.getAssignedVisitor().getSurname()%><%} else {%> not assigned <%}%></td> 
+    				<td><%if (obj.getAssignedVisitor() != null) {%><%= obj.getAssignedVisitor().getSurname()%><%} else {%> --- <%}%></td> 
     				<td><%= obj.getSpecialty().getSpecialtyName()%></td> 
     				<td><%= obj.getPosition()%></td>
                                 <td><%= obj.getInstitution().getInstitutionName()%></td>
@@ -176,7 +174,7 @@
 			
 		</div><!-- end of .tab_container -->
                 
-                <form class="post_message" id="assign_form" method="post" action="AssignVisitor">
+                <form class="post_message" id="form1" method="post" action="AssignVisitor">
                     <input type="submit" class="alt_btn" value="Assign"/>
                 </form>
 		
