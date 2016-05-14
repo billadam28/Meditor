@@ -64,7 +64,7 @@
                     
                     <fieldset style="width:100%; float:left;"> <!-- to make two field float next to one another, adjust values accordingly -->
                             <label>Search</label>
-                            <input type="text" size="40" id="complete-field" onkeyup="doCompletion();" style="width:85%;">
+                            <input type="text" size="40" style="width:85%;">
                     </fieldset><div class="clear"></div>
                 </div>
             <footer>
@@ -92,12 +92,12 @@
     				<th>City</th>
 				</tr> 
 			</thead> 
-			<tbody> 
+			<tbody id="doc_table"> 
                                 <%for (Doctor obj : deleteDoctorProc.getDoctorListObj().getDoctorList()) { %>
 				<tr> 
-                                    <td><input type="checkbox" name="doctorToDelete" id="doctor_chbx" value="<%= obj.getId()%>" form="delete_form"></td> 
+                                    <td><input type="checkbox" name="doctorList" id="doctor_chbx" value="<%= obj.getId()%>" form="form1"></td> 
     				<td><%= obj.getName()%></td> 
-    				<td><%if (obj.getAssignedVisitor() != null) {%><%= obj.getAssignedVisitor().getSurname()%><%} else {%> not assigned <%}%></td> 
+    				<td><%if (obj.getAssignedVisitor() != null) {%><%= obj.getAssignedVisitor().getSurname()%><%} else {%> --- <%}%></td> 
     				<td><%= obj.getSpecialty().getSpecialtyName()%></td> 
     				<td><%= obj.getPosition()%></td>
                                 <td><%= obj.getInstitution().getInstitutionName()%></td>
@@ -111,7 +111,7 @@
 			
 		</div><!-- end of .tab_container -->
                 
-                <form class="post_message" id="delete_form" method="post" action="DeleteDoctor">
+                <form class="post_message" id="form1" method="post" action="DeleteDoctor">
                     <input type="submit" class="alt_btn" value="Delete" style="color:red"/>
                 </form>
 		

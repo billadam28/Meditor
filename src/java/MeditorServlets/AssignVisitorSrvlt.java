@@ -41,7 +41,7 @@ public class AssignVisitorSrvlt extends HttpServlet {
             
             if (request.getParameterNames().hasMoreElements()) {
                 String visitorToAssign = request.getParameter("visitorToAssign");
-                String[] doctorToAssign = request.getParameterValues("doctorToAssign");
+                String[] doctorToAssign = request.getParameterValues("doctorList");
                 assignVisitorProc.assignVisitor(doctorToAssign, Integer.parseInt(visitorToAssign));
                 request.setAttribute("revealSuccesMsg", "true");
     

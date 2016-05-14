@@ -5,9 +5,10 @@
  */
 package MeditorServlets;
 
-import MeditorJavaClasses.DoctorList;
-import MeditorPersistence.Doctor;
+import MeditorJavaClasses.VisitorList;
+import MeditorPersistence.Visitor;
 import java.io.IOException;
+import java.io.PrintWriter;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -17,7 +18,7 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author adamopoulo
  */
-public class AsyncUpdateDoctorList extends HttpServlet {
+public class AsyncUpdateVisitorList extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -31,37 +32,32 @@ public class AsyncUpdateDoctorList extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         StringBuilder sb = new StringBuilder();
-        DoctorList docList = new DoctorList();
-        docList.populateListWithParameters( Integer.parseInt(request.getParameter("institution")), 
-                Integer.parseInt(request.getParameter("specialty")));
+        VisitorList vstList = new VisitorList();
+        vstList.populateListWithParameters( Integer.parseInt(request.getParameter("group")));
         
-        if (!docList.getDoctorList().isEmpty()) { // list is not empty, create xml response
-            for (Doctor dct : docList.getDoctorList()) {
-                sb.append("<doctor>");
-                sb.append("<id>").append(dct.getId()).append("</id>");
-                sb.append("<name>").append(dct.getName()).append("</name>");
-                if (dct.getAssignedVisitor() != null) {
-                    sb.append("<assignedVisitor>").append(dct.getAssignedVisitor().getSurname()).append("</assignedVisitor>");
+        if (!vstList.getVisitorList().isEmpty()) { // list is not empty, create xml response
+            for (Visitor vst : vstList.getVisitorList()) {
+                sb.append("<visitor>");
+                sb.append("<id>").append(vst.getId()).append("</id>");
+                sb.append("<name>").append(vst.getFirstname()).append(" ").append(vst.getSurname()).append("</name>");
+                sb.append("<level>").append(vst.getVisitorLevel()).append("</level>");
+                if (vst.getSuperior() != null) {
+                    sb.append("<superior>").append(vst.getSuperior().getSurname()).append("</superior>");
                 }
                 else {
-                    sb.append("<assignedVisitor>").append("---").append("</assignedVisitor>");
+                    sb.append("<superior>").append("---").append("</superior>");
                 }  
-                sb.append("<specialty>").append(dct.getSpecialty().getSpecialtyName()).append("</specialty>");
-                sb.append("<position>").append(dct.getPosition()).append("</position>");
-                sb.append("<institution>").append(dct.getInstitution().getInstitutionName()).append("</institution>");
-                sb.append("<geoArea>").append(dct.getInstitution().getCity().getGeoArea().getGeoName()).append("</geoArea>");
-                sb.append("<city>").append(dct.getInstitution().getCity().getCityName()).append("</city>");
-                sb.append("</doctor>");
+                sb.append("<group>").append(vst.getGroup().getName()).append("</group>");
+                sb.append("</visitor>");
             }
             response.setContentType("text/xml");
             response.setHeader("Cache-Control", "no-cache");
-            response.getWriter().write("<doctors>" + sb.toString() + "</doctors>");
+            response.getWriter().write("<visitors>" + sb.toString() + "</visitors>");
             
         }
         else { // list is empty
             response.setStatus(HttpServletResponse.SC_NO_CONTENT);   
         }
-
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
