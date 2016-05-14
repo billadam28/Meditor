@@ -19,7 +19,7 @@
       <column length="250" name="comments"/>
     </property>
     <property name="date" type="date">
-      <column length="10" name="date"/>
+      <column name="date"/>
     </property>
     <property name="extraVisit" type="java.lang.Boolean">
       <column name="extra_visit"/>

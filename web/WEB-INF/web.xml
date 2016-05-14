@@ -36,6 +36,10 @@
         <servlet-name>UpdateVisitSrvlt</servlet-name>
         <servlet-class>MeditorServlets.UpdateVisitSrvlt</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>DeleteDoctorSrvlt</servlet-name>
+        <servlet-class>MeditorServlets.DeleteDoctorSrvlt</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>LoginSrvlt</servlet-name>
         <url-pattern>/Login</url-pattern>
@@ -79,6 +83,10 @@
     <servlet-mapping>
         <servlet-name>UpdateVisitSrvlt</servlet-name>
         <url-pattern>/UpdateVisit</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>DeleteDoctorSrvlt</servlet-name>
+        <url-pattern>/DeleteDoctor</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
