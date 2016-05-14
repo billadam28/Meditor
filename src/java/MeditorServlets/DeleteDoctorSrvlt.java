@@ -5,7 +5,7 @@
  */
 package MeditorServlets;
 
-import MeditorJavaClasses.AssignVisitorProcessor;
+import MeditorJavaClasses.DeleteDoctorProcessor;
 import java.io.IOException;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -17,7 +17,7 @@ import javax.servlet.http.HttpSession;
  *
  * @author adamopoulo
  */
-public class AssignVisitorSrvlt extends HttpServlet {
+public class DeleteDoctorSrvlt extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -31,27 +31,25 @@ public class AssignVisitorSrvlt extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        
+
         HttpSession session = request.getSession(false);
         
         if ((session == null) || (session.getAttribute("userId") == null)) {
             this.getServletConfig().getServletContext().getRequestDispatcher("/index.jsp?noSession=1").forward(request, response);
         } else {
-            AssignVisitorProcessor assignVisitorProc = new AssignVisitorProcessor();
+            DeleteDoctorProcessor deleteDoctor = new DeleteDoctorProcessor();
             
             if (request.getParameterNames().hasMoreElements()) {
-                String visitorToAssign = request.getParameter("visitorToAssign");
-                String[] doctorToAssign = request.getParameterValues("doctorToAssign");
-                assignVisitorProc.assignVisitor(doctorToAssign, Integer.parseInt(visitorToAssign));
+                String[] doctorToDelete = request.getParameterValues("doctorToDelete");
+                 deleteDoctor.deleteDoctor(doctorToDelete);
                 request.setAttribute("revealSuccesMsg", "true");
     
             }
-            assignVisitorProc.loadLists();
-            request.setAttribute("assignVisitor", assignVisitorProc);
-            this.getServletConfig().getServletContext().getRequestDispatcher("/assign_visitor.jsp").forward(request, response);
+            deleteDoctor.loadLists();
+            request.setAttribute("deleteDoctor", deleteDoctor);
+            this.getServletConfig().getServletContext().getRequestDispatcher("/delete_doctor.jsp").forward(request, response);
             
         }
-        
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

@@ -40,6 +40,10 @@
         <servlet-name>ShowVisitsPerCycleSrvlt</servlet-name>
         <servlet-class>MeditorServlets.ShowVisitsPerCycleSrvlt</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>DeleteDoctorSrvlt</servlet-name>
+        <servlet-class>MeditorServlets.DeleteDoctorSrvlt</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>LoginSrvlt</servlet-name>
         <url-pattern>/Login</url-pattern>
@@ -87,6 +91,10 @@
     <servlet-mapping>
         <servlet-name>ShowVisitsPerCycleSrvlt</servlet-name>
         <url-pattern>/ShowVisitsPerCycle</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>DeleteDoctorSrvlt</servlet-name>
+        <url-pattern>/DeleteDoctor</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
