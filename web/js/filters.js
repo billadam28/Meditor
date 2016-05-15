@@ -28,7 +28,7 @@ function updateInstitution(source) {
 function callbackCity() {
     var city_list = document.getElementById("city_dd");
     if (req.readyState == 4 && req.status == 200) {
-        new_list = "<option></option>";
+        new_list = "<option>none</option>";
         var xmlDoc = req.responseXML;
         var doc_elem = xmlDoc.getElementsByTagName("city");
         for (i = 0; i <doc_elem.length; i++) { 
@@ -45,7 +45,7 @@ function callbackCity() {
 function callbackInstitution() {
     var inst_list = document.getElementById("institution_dd");
     if (req.readyState == 4 && req.status == 200) {
-        new_list = "<option></option>";
+        new_list = "<option>none</option>";
         var xmlDoc = req.responseXML;
         var doc_elem = xmlDoc.getElementsByTagName("institution");
         for (i = 0; i <doc_elem.length; i++) { 
