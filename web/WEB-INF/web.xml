@@ -64,6 +64,10 @@
         <servlet-name>SelectCycleSrvlt</servlet-name>
         <servlet-class>MeditorServlets.SelectCycleSrvlt</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>DynamicListLoadSrvlt</servlet-name>
+        <servlet-class>MeditorServlets.DynamicListLoadSrvlt</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>LoginSrvlt</servlet-name>
         <url-pattern>/Login</url-pattern>
@@ -131,6 +135,10 @@
     <servlet-mapping>
         <servlet-name>SelectCycleSrvlt</servlet-name>
         <url-pattern>/SelectCycle</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>DynamicListLoadSrvlt</servlet-name>
+        <url-pattern>/DynamicListLoad</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

@@ -22,10 +22,12 @@ import org.hibernate.Transaction;
 public class CityList implements LoadListService {
     private List<City> cityList;
     private final String cityListQuery;
+    private final String cityListWithIdQuery;
     
     public CityList() {
         cityList = new ArrayList<>();
         cityListQuery = "select c from City c";
+        cityListWithIdQuery = "Select c from City c where c.geoArea.id = :geoArea_id";
     }
     
     @Override
@@ -50,6 +52,29 @@ public class CityList implements LoadListService {
             session.close();
         }
         
+    }
+    
+    public void populateListWithId(Integer geoAreaId) {
+        Session session = NewHibernateUtil.getSessionFactory().openSession();
+        Transaction tx = null;
+
+        try {
+            tx = session.beginTransaction();
+            Query query = session.createQuery(cityListWithIdQuery)
+                    .setParameter("geoArea_id", geoAreaId);
+            List<City> res = (List<City>) query.list();
+            for (City ct : res) {
+                cityList.add(ct);
+            }
+            tx.commit();
+        } catch (HibernateException e) {
+            if (tx != null) {
+                tx.rollback();
+            }
+            e.printStackTrace();
+        } finally {
+            session.close();
+        }
     }
     
     public List<City> getCityList () {

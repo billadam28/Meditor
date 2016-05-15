@@ -28,7 +28,8 @@
                            
                     <fieldset style="width:100%; float:left; margin-right: 3%;"> <!-- to make two field float next to one another, adjust values accordingly -->
                             <label>Select Geo Area</label>
-                            <select style="width:90%;" form="doctor_filter" id="geo_area_dd">
+                            <select style="width:90%;" form="doctor_filter" id="geo_area_dd" onchange="updateCity(this)">
+                                    <option value=""></option>
                                     <%for (GeographicalArea obj : deleteDoctorProc.getGeoAreaListObj().getGeoAreaList()) { %>
                                     <option value="<%= obj.getId()%>"><%=obj.getGeoName()%></option>
                                     <%}%>
@@ -37,19 +38,15 @@
                     
                     <fieldset style="width:100%; float:left; margin-right: 3%;"> <!-- to make two field float next to one another, adjust values accordingly -->
                             <label>Select City</label>
-                            <select style="width:90%;" form="doctor_filter" id="city_dd">
-                                    <%for (City obj : deleteDoctorProc.getCityListObj().getCityList()) { %>
-                                    <option value="<%= obj.getId()%>"><%=obj.getCityName()%></option>
-                                    <%}%>
+                            <select style="width:90%;" form="doctor_filter" id="city_dd" onchange="updateInstitution(this)">
+                                    <option value=""></option>     
                             </select>
                     </fieldset>
                     
                     <fieldset style="width:100%; float:left; margin-right: 3%;"> <!-- to make two field float next to one another, adjust values accordingly -->
                             <label>Select Institution</label>
                             <select style="width:90%;" form="doctor_filter" id="institution_dd">
-                                    <%for (Institution obj : deleteDoctorProc.getInstitutionListObj().getInstitutionList()) { %>
-                                    <option value="<%= obj.getId()%>"><%=obj.getInstitutionName()%></option>
-                                    <%}%>
+                                    <option value=""></option>
                             </select>
                     </fieldset>
                     
