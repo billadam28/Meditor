@@ -56,6 +56,14 @@
         <servlet-name>AsyncUpdateVisitorList</servlet-name>
         <servlet-class>MeditorServlets.AsyncUpdateVisitorList</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>CreateVisitsSrvlt</servlet-name>
+        <servlet-class>MeditorServlets.CreateVisitsSrvlt</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>SelectCycleSrvlt</servlet-name>
+        <servlet-class>MeditorServlets.SelectCycleSrvlt</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>LoginSrvlt</servlet-name>
         <url-pattern>/Login</url-pattern>
@@ -115,6 +123,14 @@
     <servlet-mapping>
         <servlet-name>AsyncUpdateVisitorList</servlet-name>
         <url-pattern>/AsyncUpdateVisitorList</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>CreateVisitsSrvlt</servlet-name>
+        <url-pattern>/CreateVisits</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>SelectCycleSrvlt</servlet-name>
+        <url-pattern>/SelectCycle</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

@@ -92,6 +92,14 @@ function callbackVisitor() {
 
 }
 
+function toggle(source) {
+  checkboxes = document.getElementsByName('doctorList');
+  var n = checkboxes.length;
+  for (var i=0; i<n; i++) {
+      checkboxes[i].checked = source.checked;
+  }
+}
+
 
 
 
