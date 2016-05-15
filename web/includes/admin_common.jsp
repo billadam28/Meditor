@@ -24,7 +24,7 @@
 		<ul class="toggle">
 
                         <li class="icn_new_article"><a href="AssignVisitor" onclick="highlightCurrentLink();">Assign Visitor to a Doctor</a></li>
-			<li class="icn_new_article"><a href="Newcycle" onclick="highlightCurrentLink();">Create New Cycle of Scheduled Visits</a></li>
+			<li class="icn_new_article"><a href="SelectCycle" onclick="highlightCurrentLink();">Create New Cycle of Scheduled Visits</a></li>
 			<li class="icn_logout"><a href="DeleteDoctor" onclick="highlightCurrentLink();">Delete a Doctor</a></li>
 
 		</ul>
