@@ -22,10 +22,12 @@ import org.hibernate.Transaction;
 public class InstitutionList implements LoadListService {
     private List<Institution> institutionList;
     private final String institutionListQuery;
+    private final String institutionListPerCityQuery;
     
     public InstitutionList() {
         institutionList = new ArrayList<>();
         institutionListQuery = "select i from Institution i";
+        institutionListPerCityQuery = "select i from Institution i where i.city.id = :city_id"; 
     }
     
     @Override
@@ -50,6 +52,29 @@ public class InstitutionList implements LoadListService {
             session.close();
         }
         
+    }
+    
+    public void populateListPerCity(Integer cityId) {
+        Session session = NewHibernateUtil.getSessionFactory().openSession();
+        Transaction tx = null;
+
+        try {
+            tx = session.beginTransaction();
+            Query query = session.createQuery(institutionListPerCityQuery)
+                    .setParameter("city_id", cityId);
+            List<Institution> res = (List<Institution>) query.list();
+            for (Institution inst : res) {
+                institutionList.add(inst);
+            }
+            tx.commit();
+        } catch (HibernateException e) {
+            if (tx != null) {
+                tx.rollback();
+            }
+            e.printStackTrace();
+        } finally {
+            session.close();
+        }
     }
     
     public List<Institution> getInstitutionList () {

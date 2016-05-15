@@ -7,6 +7,58 @@
 var req;
 var isIE;
 
+function updateCity(source) {
+    var url = "DynamicListLoad?geoAreaId=" + source.options[source.selectedIndex].value;
+ 
+    req = initRequest();
+    req.open("GET", url, true);
+    req.onreadystatechange = callbackCity; 
+    req.send();
+}
+
+function updateInstitution(source) {
+    var url = "DynamicListLoad?cityId=" + source.options[source.selectedIndex].value;
+ 
+    req = initRequest();
+    req.open("GET", url, true);
+    req.onreadystatechange = callbackInstitution; 
+    req.send();
+}
+
+function callbackCity() {
+    var city_list = document.getElementById("city_dd");
+    if (req.readyState == 4 && req.status == 200) {
+        new_list = "<option>none</option>";
+        var xmlDoc = req.responseXML;
+        var doc_elem = xmlDoc.getElementsByTagName("city");
+        for (i = 0; i <doc_elem.length; i++) { 
+            new_list += "<option value=\""+doc_elem[i].getElementsByTagName("id")[0].childNodes[0].nodeValue+"\">"+
+                        doc_elem[i].getElementsByTagName("name")[0].childNodes[0].nodeValue + "</option>";  
+        }   
+        city_list.innerHTML = new_list;     
+    }
+    if (req.readyState == 4 && req.status == 204) {
+        
+    } 
+}
+
+function callbackInstitution() {
+    var inst_list = document.getElementById("institution_dd");
+    if (req.readyState == 4 && req.status == 200) {
+        new_list = "<option>none</option>";
+        var xmlDoc = req.responseXML;
+        var doc_elem = xmlDoc.getElementsByTagName("institution");
+        for (i = 0; i <doc_elem.length; i++) { 
+            new_list += "<option value=\""+doc_elem[i].getElementsByTagName("id")[0].childNodes[0].nodeValue+"\">"+
+                        doc_elem[i].getElementsByTagName("name")[0].childNodes[0].nodeValue + "</option>";  
+        }   
+        inst_list.innerHTML = new_list;     
+    }
+    if (req.readyState == 4 && req.status == 204) {
+        
+    } 
+}
+
 function updateDoctorList() {
     e = document.getElementById("institution_dd");
     var institution = e.options[e.selectedIndex].value;
