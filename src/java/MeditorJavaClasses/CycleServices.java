@@ -72,21 +72,26 @@ public class CycleServices {
                 Hibernate.initialize(visit.getVisitors());
                 Hibernate.initialize(visit.getDate());
                 Hibernate.initialize(visit.getCycle().getCycle());
-                Hibernate.initialize(visit.getDoctor().getAssignedVisitor().getId());
-                
-                if(visit.getDoctor().getAssignedVisitor().getId()== vId){
-                    if (cycleId!= 0) {
-                        if((visit.getStatus().equals("completed") || visit.getStatus().equals("unsuccessful")) && (visit.getCycle().getId()== cycleId)){
-                            getVisitorVisits.add(visit);
-                            //System.out.println(visit.getId());
+                //Hibernate.initialize(visit.getDoctor().getAssignedVisitor().getId());
+                if (visit.getDoctor()== null || visit.getDoctor().getAssignedVisitor() == null || visit.getDoctor().getAssignedVisitor().getId()==null) {
+                    getVisitorVisits.isEmpty();
+                } else {    
+                    if(visit.getDoctor().getAssignedVisitor().getId()== vId){
+                        if (cycleId!= 0) {
+                            if((visit.getStatus().equals("completed") || visit.getStatus().equals("unsuccessful")) && (visit.getCycle().getId()== cycleId)){
+                                getVisitorVisits.add(visit);
+                                //System.out.println(visit.getId());
+                            }
+                        } else {
+                            if((visit.getStatus().equals("completed") || visit.getStatus().equals("unsuccessful"))){
+                                getVisitorVisits.add(visit);
+                                //System.out.println(visit.getId());
+                            }
                         }
                     } else {
-                        if((visit.getStatus().equals("completed") || visit.getStatus().equals("unsuccessful"))){
-                            getVisitorVisits.add(visit);
-                            //System.out.println(visit.getId());
-                        }
+                        getVisitorVisits.isEmpty();
                     }
-                }//System.out.println(group.getName() + group.getId());
+                }    
             }
             tx.commit();
         } catch (HibernateException e) {

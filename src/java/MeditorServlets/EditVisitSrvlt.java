@@ -46,6 +46,7 @@ public class EditVisitSrvlt extends HttpServlet {
             visitServices.editVisitForm(Integer.parseInt(selectVisit));
             request.setAttribute("visitServices", visitServices);
             request.setAttribute("vId", vId);
+            request.setAttribute("uId", uId);
             request.setAttribute("revealForm2", "true");
 
             this.getServletConfig().getServletContext().getRequestDispatcher("/enter_visit_info.jsp").forward(request, response);

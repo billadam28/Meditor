@@ -145,14 +145,17 @@ public class VisitServices {
             List<Visit> visits  = session.createQuery(getVisitsQuery).list();
             for (Visit visit : visits) {
                 Hibernate.initialize(visit.getDoctor().getId());
-                Hibernate.initialize(visit.getDoctor().getAssignedVisitor().getId());
+                //Hibernate.initialize(visit.getDoctor().getAssignedVisitor().getId());
                 Hibernate.initialize(visit.getVisitors());
                 Hibernate.initialize(visit.getDate());
                 Hibernate.initialize(visit.getCycle().getCycle());
-                if((visit.getDoctor().getId())==docId){
-                    visitsList.add(visit);
-                }
                 
+                    if((visit.getDoctor().getId())==docId){
+                        visitsList.add(visit);
+                    } else {
+                        visitsList.isEmpty();
+                    }
+            
                 //System.out.println(group.getName() + group.getId());
             }
             tx.commit();

@@ -113,15 +113,15 @@
                                 <%if (visitServices.visitsList().isEmpty() == false) { 
                                 for (Visit obj : visitServices.visitsList()) { %>
                                     <tr>                            
-                                        <td><%= obj.getDoctor().getAssignedVisitor().getId()%></td> 
+                                        <td><%=request.getAttribute("vId")%></td> 
                                         <td><%= obj.getDoctor().getId()%></td> 
                                         <td><%= obj.getStatus()%></td> 
-                                        <td><%= obj.getDate()%></td>
+                                        <td><%if (obj.getDate()==null) {%> --- <%} else {%><%= obj.getDate()%><%}%></td>
                                         <td><%= obj.getCycle().getCycle()%></td>
                                         <td><%if(obj.getExtraVisit()==true) {%> 
                                             <input type="checkbox" name="extraVisit" id="extra_visit_yes" value="<%= obj.getExtraVisit()%>" form="selectVisit_form" checked="checked" disabled><%} else {%>
                                             <input type="checkbox" name="extraVisit" id="extra_visit_no" value="<%= obj.getExtraVisit()%>" form="selectVisit_form" disabled><%}%></td>
-                                        <td style="word-break:break-all; word-wrap:break-word; max-width:100px; "><%= obj.getComments()%></td>
+                                        <td style="word-break:break-all; word-wrap:break-word; max-width:100px; "><%if (obj.getComments()==null) {%> No comments <%} else {%><%= obj.getComments()%><%}%></td>
                                         <td><input type="radio" name="selectVisit" id="visit_radio" value="<%= obj.getId()%>" form="selectVisit_form"></td>
                                 <%}%>
                                 <%} else {%>
