@@ -159,6 +159,7 @@ public class GroupServices {
             List<Visitor> visitors = session.createQuery(getVisitorsQuery).list();
             for (Visitor visitor : visitors) {
                 Hibernate.initialize(visitor.getSuperior());
+                Hibernate.initialize(visitor.getGroup());
                 visitorsList.add(visitor);
                 //System.out.println(visitor.getId());
             }
