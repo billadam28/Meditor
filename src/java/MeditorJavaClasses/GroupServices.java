@@ -39,7 +39,7 @@ public class GroupServices {
                 
         getVisitorsQuery = "select v from Visitor v where group = null";
         getGroupsQuery = "from Group g order by g.name asc";
-        getVisitorsNoLeaderQuery = "select v from Visitor v where group != null";
+        getVisitorsNoLeaderQuery = "from Visitor v where group_id != null";
     }
 
 
