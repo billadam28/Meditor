@@ -167,7 +167,7 @@ public class GroupServices {
             for (Visitor vstr : visitorNoLeader) {
                 Hibernate.initialize(vstr.getSuperior());
                 //Hibernate.initialize(vstr.getGroup().getGroupLeader());
-                if(vstr.getGroup().getGroupLeader()==null &&vstr.getGroup()!=null){
+                if(vstr.getGroup().getGroupLeader() == null) {
                     visitorsNoLeaderList.add(vstr);
                 }
                 

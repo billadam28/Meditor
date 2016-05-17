@@ -40,7 +40,7 @@ public class UpdateVisitSrvlt extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
        
         HttpSession session = request.getSession(false);
-        
+        //String trainee = "0";
         if ((session == null) || (session.getAttribute("userId") == null)) {
             this.getServletConfig().getServletContext().getRequestDispatcher("/index.jsp?noSession=1").forward(request, response);
         } else {
@@ -57,6 +57,8 @@ public class UpdateVisitSrvlt extends HttpServlet {
                 //System.out.println(date);
                 String status = request.getParameter("status");
                 String comments = request.getParameter("comments");
+                String tr = request.getParameter("trainee");
+                int trainee = Integer.parseInt(tr);
                 boolean extra;
                 if (request.getParameterValues("extra1")!=null) {
                     extra = true;
@@ -64,11 +66,10 @@ public class UpdateVisitSrvlt extends HttpServlet {
                     extra = false;
                 }
                 //System.out.println(format.format(date)+status+extra+comments);
-                visitServices.updateVisit(date,status,extra,comments,visit);
+                visitServices.updateVisit(date,status,extra,comments,visit,trainee);
                 request.setAttribute("visitId", visit);
                 request.setAttribute("revealSuccessMsg", "true");
                 request.setAttribute("revealForm3", "true");
-
                 request.setAttribute("visitServices", visitServices);
                 this.getServletConfig().getServletContext().getRequestDispatcher("/enter_visit_info.jsp").forward(request, response);
             }

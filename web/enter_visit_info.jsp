@@ -121,7 +121,7 @@
                                         <td><%if(obj.getExtraVisit()==true) {%> 
                                             <input type="checkbox" name="extraVisit" id="extra_visit_yes" value="<%= obj.getExtraVisit()%>" form="selectVisit_form" checked="checked" disabled><%} else {%>
                                             <input type="checkbox" name="extraVisit" id="extra_visit_no" value="<%= obj.getExtraVisit()%>" form="selectVisit_form" disabled><%}%></td>
-                                        <td style="word-break:break-all; word-wrap:break-word; max-width:100px; "><%if (obj.getComments()==null) {%> No comments <%} else {%><%= obj.getComments()%><%}%></td>
+                                        <td style="word-break:break-all; word-wrap:break-word; max-width:100px; "><%if (obj.getComments()==null || obj.getComments().equals("null")) {%> No comments <%} else {%><%= obj.getComments()%><%}%></td>
                                         <td><input type="radio" name="selectVisit" id="visit_radio" value="<%= obj.getId()%>" form="selectVisit_form"></td>
                                 <%}%>
                                 <%} else {%>
@@ -192,6 +192,8 @@
                                 <input style="width:70%; margin-left:20px; text-align: center;" type="text" name="cycle" id="cycle" value="<%= obj.getCycle().getCycle()%>" form="update_visit_form" disabled>
                             </fieldset>
                             
+                            
+                            
                             <fieldset style="width:17%; margin-right: 33px; float:right;">
                                 <label style="width:80%; text-align: center; ">Extra Visit</label>
                                 <%if(obj.getExtraVisit()==true) {%> 
@@ -203,7 +205,15 @@
 				<label style="width:90%; text-align: center;">Comments</label>
 				<textarea style="width:90%;" rows="5" id="comments" form="update_visit_form" name="comments" maxlength="250"><%= obj.getComments()%></textarea>
                             </fieldset>
-                            
+                            <fieldset style="width: 40%;"> 
+                                <label>Accompanied by trainee</label>
+                                <select name="trainee" id="trainee" form="update_visit_form" style="width:84%;">
+                                        <option value="0">No trainee</option>
+                                        <%for (Visitor trainee : visitServices.traineesList()) { %>
+                                            <option value="<%= trainee.getId()%>"><%=trainee.getFirstname()+ " " + trainee.getSurname()%></option>
+                                        <%}%>
+                                </select>
+                            </fieldset>
                         </div>
                     <footer>
                         <div class="submit_link">

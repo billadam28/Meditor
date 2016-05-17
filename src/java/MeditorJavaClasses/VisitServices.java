@@ -10,7 +10,10 @@ import java.util.List;
 import java.util.ArrayList;
 import MeditorPersistence.NewHibernateUtil;
 import MeditorPersistence.Visit;
+import MeditorPersistence.Visitor;
 import java.util.Date;
+import java.util.Set;
+import java.util.HashSet;
 import org.hibernate.Hibernate;
 import org.hibernate.HibernateException;
 import org.hibernate.Query;
@@ -27,17 +30,43 @@ public class VisitServices {
     private List<Visit> visitsList;
     private final String getVisitsQuery;
     private Visit getVisit;
+    private List<Visitor> traineesList;
+    private final String getTraineesQuery;
     //private final String getVisitQuery;
     
     public VisitServices() {
+        traineesList= new ArrayList<>();
         doctorsList = new ArrayList<>(); 
         getDoctorsQuery = "select d from Doctor d where assignedVisitor!=null";
         
         visitsList = new ArrayList<>();
         getVisitsQuery = "select v from Visit v where status = 'pending'";
+        getTraineesQuery = "select v from Visitor v where visitor_level = 'trainee'";
     }
     
-    public void updateVisit(Date date, String status, boolean extra, String comments, int visitId) {
+    public void showTraineesList() {
+        Session session = NewHibernateUtil.getSessionFactory().openSession();
+        Transaction tx = null;
+        
+        try {
+            tx = session.beginTransaction();
+            List<Visitor> noOfTrainees  = session.createQuery(getTraineesQuery).list();
+            for (Visitor trainee : noOfTrainees) {
+                traineesList.add(trainee);    
+            }
+            tx.commit();
+        } catch (HibernateException e) {
+            if (tx != null) {
+                tx.rollback();
+            }
+            e.printStackTrace();
+        } finally {
+            session.close();
+        }
+                 
+    }
+    
+    public void updateVisit(Date date, String status, boolean extra, String comments, int visitId, int traineeId) {
             Session session = NewHibernateUtil.getSessionFactory().openSession();
             Transaction tx = null;
 
@@ -48,8 +77,16 @@ public class VisitServices {
                     visit.setStatus(status);
                     visit.setExtraVisit(extra);
                     visit.setComments(comments);
-                    session.saveOrUpdate(visit);
-                
+                    session.update(visit);
+                    
+                    if (traineeId != 0) {
+                        Visitor trainee = (Visitor) session.get(Visitor.class, traineeId);
+                        Set<Visitor> traineeSet = new HashSet<Visitor>();
+                        traineeSet.add(trainee);
+                        visit.setVisitors(traineeSet);
+                        session.save(visit);
+                    }
+                    
                 tx.commit();
             } catch (HibernateException e) {
                 if (tx != null) {
@@ -177,6 +214,10 @@ public class VisitServices {
     
     public List<Visit> visitsList () {
         return this.visitsList;
+    }
+    
+    public List<Visitor> traineesList () {
+        return this.traineesList;
     }
     
     public Visit getVisit () {

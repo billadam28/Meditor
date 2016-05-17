@@ -84,7 +84,7 @@
                                         <td><%if(obj.getExtraVisit()==true) {%> 
                                             <input type="checkbox" name="extraVisit" id="extra_visit_yes" value="<%= obj.getExtraVisit()%>" checked="checked" disabled><%} else {%>
                                             <input type="checkbox" name="extraVisit" id="extra_visit_no" value="<%= obj.getExtraVisit()%>" disabled><%}%></td>
-                                        <td style="word-break:break-all; word-wrap:break-word; max-width:100px; "><%if (obj.getComments()==null || obj.getComments().endsWith("null")) {%> No comments <%} else {%><%= obj.getComments()%><%}%></td>
+                                        <td style="word-break:break-all; word-wrap:break-word; max-width:100px; "><%if (obj.getComments()==null || obj.getComments().equals("null")) {%> No comments <%} else {%><%= obj.getComments()%><%}%></td>
                                         
                                 <%}%>
                             <%} else {%>
