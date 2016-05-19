@@ -66,30 +66,6 @@ public class VisitServices {
                  
     }
     
-    public void addTrainee (int visitId, int traineeId) {
-        Session session = NewHibernateUtil.getSessionFactory().openSession();
-        Transaction tx = null;
-        
-        try {
-                tx = session.beginTransaction();
-                Visit visit = (Visit) session.get(Visit.class, visitId);
-                Visitor trainee = (Visitor) session.get(Visitor.class, traineeId);
-                Set<Visitor> traineeSet = new HashSet<Visitor>();
-                traineeSet.add(trainee);
-                visit.setVisitors(traineeSet);
-                session.save(visit);
-                
-                tx.commit();
-            } catch (HibernateException e) {
-                if (tx != null) {
-                    tx.rollback();
-                }
-                e.printStackTrace();
-            } finally {
-                session.close();
-            }
-    }
-    
     public void updateVisit(Date date, String status, boolean extra, String comments, int visitId, int traineeId) {
             Session session = NewHibernateUtil.getSessionFactory().openSession();
             Transaction tx = null;
@@ -101,11 +77,13 @@ public class VisitServices {
                     visit.setStatus(status);
                     visit.setExtraVisit(extra);
                     visit.setComments(comments);
-                    session.update(visit);
-                    
+
                     if (traineeId != 0) {
-                        addTrainee(visitId,traineeId);
+                        Visitor trainee = (Visitor) session.get(Visitor.class, traineeId);
+                        visit.getVisitors().add(trainee);
+                        
                     }
+                    session.update(visit);
                     
                 tx.commit();
             } catch (HibernateException e) {

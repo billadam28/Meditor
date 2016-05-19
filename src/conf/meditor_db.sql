@@ -217,22 +217,6 @@ INSERT INTO User
 (firstname, surname, email, username, passwd, user_type)
 VALUES ('john', 'john','john@john.com','john',SHA1('1234'), 2);
 
-INSERT INTO User
-(firstname, surname, email, username, passwd, user_type)
-VALUES ('teo', 'teo','teo@teo.com','teo',SHA1('123'), 2);
-
-INSERT INTO User
-(firstname, surname, email, username, passwd, user_type)
-VALUES ('thodoris', 'thodoris','thodoris@thodoris.com','thodoris',SHA1('123'), 2);
-
-INSERT INTO `Visitor`
-(user_id, visitor_level, group_id)
-VALUES (8, 'senior', 41);
-
-INSERT INTO `Visitor`
-(user_id, visitor_level, group_id)
-VALUES (5, 'senior', 42);
-
 INSERT INTO `Visitor`
 (user_id, visitor_level)
 VALUES (2, 'senior');
