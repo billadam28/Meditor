@@ -36,10 +36,8 @@
 		</ul>
 		<h3>Reports</h3>
 		<ul class="toggle">
-			<li class="icn_folder"><a href="#" onclick="highlightCurrentLink();">1</a></li>
+			<li class="icn_folder"><a href="GenerateReport1" onclick="highlightCurrentLink();">Visitor Statistics</a></li>
 			<li class="icn_photo"><a href="#" onclick="highlightCurrentLink();">2</a></li>
-			<li class="icn_audio"><a href="#" onclick="highlightCurrentLink();">3</a></li>
-			<li class="icn_video"><a href="#" onclick="highlightCurrentLink();">4</a></li>
 		</ul>
 		
 		<footer>

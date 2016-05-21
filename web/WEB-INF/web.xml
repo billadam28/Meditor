@@ -68,6 +68,10 @@
         <servlet-name>DynamicListLoadSrvlt</servlet-name>
         <servlet-class>MeditorServlets.DynamicListLoadSrvlt</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>GenerateReport1Srvlt</servlet-name>
+        <servlet-class>MeditorServlets.GenerateReport1Srvlt</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>LoginSrvlt</servlet-name>
         <url-pattern>/Login</url-pattern>
@@ -139,6 +143,10 @@
     <servlet-mapping>
         <servlet-name>DynamicListLoadSrvlt</servlet-name>
         <url-pattern>/DynamicListLoad</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>GenerateReport1Srvlt</servlet-name>
+        <url-pattern>/GenerateReport1</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
