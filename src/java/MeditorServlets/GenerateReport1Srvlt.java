@@ -5,8 +5,10 @@
  */
 package MeditorServlets;
 
-import MeditorJavaClasses.AssignVisitorProcessor;
+import MeditorJavaClasses.Report1;
+import MeditorJavaClasses.VisitorList;
 import java.io.IOException;
+import java.io.PrintWriter;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -17,7 +19,7 @@ import javax.servlet.http.HttpSession;
  *
  * @author adamopoulo
  */
-public class AssignVisitorSrvlt extends HttpServlet {
+public class GenerateReport1Srvlt extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -36,21 +38,22 @@ public class AssignVisitorSrvlt extends HttpServlet {
         if ((session == null) || (session.getAttribute("userId") == null)) {
             this.getServletConfig().getServletContext().getRequestDispatcher("/index.jsp?noSession=1").forward(request, response);
         } else {
-            AssignVisitorProcessor assignVisitorProc = new AssignVisitorProcessor();
             
-            if (request.getParameterNames().hasMoreElements()) {
-                String visitorToAssign = request.getParameter("visitorToAssign");
-                String[] doctorToAssign = request.getParameterValues("doctorList");
-                assignVisitorProc.assignVisitor(doctorToAssign, Integer.parseInt(visitorToAssign));
-                request.setAttribute("revealSuccesMsg", "true");
-    
+            if (!request.getParameterNames().hasMoreElements()) {
+                VisitorList vstList = new VisitorList();
+                vstList.populateDefaultList();
+                request.setAttribute("vstList", vstList.getVisitorList());
+                this.getServletConfig().getServletContext().getRequestDispatcher("/visitor_list.jsp").forward(request, response);
             }
-            assignVisitorProc.loadLists();
-            request.setAttribute("assignVisitor", assignVisitorProc);
-            this.getServletConfig().getServletContext().getRequestDispatcher("/assign_visitor.jsp").forward(request, response);
-            
+            else {
+                Report1 report = new Report1();
+                report.setVstId(Integer.parseInt(request.getParameter("visitor")));
+                report.generateReport();
+                request.setAttribute("reportList", report.getReportList());
+                request.setAttribute("visitor", report.getVisitor());
+                this.getServletConfig().getServletContext().getRequestDispatcher("/report.jsp").forward(request, response);
+            }
         }
-        
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
