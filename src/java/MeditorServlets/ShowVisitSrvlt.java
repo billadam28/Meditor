@@ -46,6 +46,7 @@ public class ShowVisitSrvlt extends HttpServlet {
             visitServices.showVisitsList(Integer.parseInt(selectDoc));
             request.setAttribute("visitServices", visitServices);
             request.setAttribute("vId", vId);
+            request.setAttribute("uId", uId);
             request.setAttribute("revealForm1", "true");
             
             this.getServletConfig().getServletContext().getRequestDispatcher("/enter_visit_info.jsp").forward(request, response);

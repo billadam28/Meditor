@@ -39,7 +39,7 @@ public class GroupServices {
                 
         getVisitorsQuery = "select v from Visitor v where group = null";
         getGroupsQuery = "from Group g order by g.name asc";
-        getVisitorsNoLeaderQuery = "select v from Visitor v where group != null";
+        getVisitorsNoLeaderQuery = "from Visitor v where group != null";
     }
 
 
@@ -159,6 +159,7 @@ public class GroupServices {
             List<Visitor> visitors = session.createQuery(getVisitorsQuery).list();
             for (Visitor visitor : visitors) {
                 Hibernate.initialize(visitor.getSuperior());
+                Hibernate.initialize(visitor.getGroup());
                 visitorsList.add(visitor);
                 //System.out.println(visitor.getId());
             }
@@ -166,8 +167,8 @@ public class GroupServices {
             List<Visitor> visitorNoLeader = session.createQuery(getVisitorsNoLeaderQuery).list();
             for (Visitor vstr : visitorNoLeader) {
                 Hibernate.initialize(vstr.getSuperior());
-                //Hibernate.initialize(vstr.getGroup().getGroupLeader());
-                if(vstr.getGroup().getGroupLeader()==null &&vstr.getGroup()!=null){
+                Hibernate.initialize(vstr.getGroup().getGroupLeader());
+                if(vstr.getGroup().getGroupLeader() == null) {
                     visitorsNoLeaderList.add(vstr);
                 }
                 

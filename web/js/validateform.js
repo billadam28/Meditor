@@ -26,7 +26,16 @@ function validateForm() {
 }
 
 function validateAssignForm () {
-    if(document.getElementById('visitor_chbx').checked) { 
+    var isChecked = 0;
+    var checkbox = document.getElementsByName('assignedVisitor');
+    
+    for (i = 0; i < checkbox.length; i++) {
+        if (checkbox[i].checked) {
+            isChecked = isChecked +1;
+        }
+    }
+    
+    if(isChecked > 0) { 
         return true; 
     } else { 
         alert('You must select at least one Medical Visitor!'); 
