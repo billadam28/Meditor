@@ -21,6 +21,34 @@
         <servlet-class>MeditorServlets.AssignVisitorSrvlt</servlet-class>
     </servlet>
     <servlet>
+        <servlet-name>addDoctSrvlt</servlet-name>
+        <servlet-class>MeditorServlets.addDoctSrvlt</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>SubmitDocServlet</servlet-name>
+        <servlet-class>MeditorServlets.SubmitDocServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>SearchDocSrvlt</servlet-name>
+        <servlet-class>MeditorServlets.SearchDocSrvlt</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>SearchEditSrvlt</servlet-name>
+        <servlet-class>MeditorServlets.SearchEditSrvlt</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>CommitEditDocSrvlt</servlet-name>
+        <servlet-class>MeditorServlets.CommitEditDocSrvlt</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>AdminMedReportsSrvlt</servlet-name>
+        <servlet-class>MeditorServlets.AdminMedReportsSrvlt</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ProduceVstReportSrvlt</servlet-name>
+        <servlet-class>MeditorServlets.ProduceVstReportSrvlt</servlet-class>
+    </servlet>
+    <servlet>
         <servlet-name>VisitInfoSrvlt</servlet-name>
         <servlet-class>MeditorServlets.VisitInfoSrvlt</servlet-class>
     </servlet>
@@ -99,6 +127,34 @@
     <servlet-mapping>
         <servlet-name>AssignVisitorSrvlt</servlet-name>
         <url-pattern>/AssignVisitor</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>addDoctSrvlt</servlet-name>
+        <url-pattern>/addDoctSrvlt</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>SubmitDocServlet</servlet-name>
+        <url-pattern>/SubmitDocServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>SearchDocSrvlt</servlet-name>
+        <url-pattern>/SearchDocSrvlt</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>SearchEditSrvlt</servlet-name>
+        <url-pattern>/SearchEditSrvlt</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>CommitEditDocSrvlt</servlet-name>
+        <url-pattern>/CommitEditDocSrvlt</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AdminMedReportsSrvlt</servlet-name>
+        <url-pattern>/AdminMedReportsSrvlt</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ProduceVstReportSrvlt</servlet-name>
+        <url-pattern>/ProduceVstReportSrvlt</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>VisitInfoSrvlt</servlet-name>
