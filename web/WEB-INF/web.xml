@@ -5,10 +5,23 @@
         <servlet-class>MeditorServlets.LoginSrvlt</servlet-class>
     </servlet>
     <servlet>
+        <servlet-name>GroupProcessorSrvlt</servlet-name>
+        <servlet-class>MeditorServlets.GroupProcessorSrvlt</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>AssignVisitorGroupSrvlt</servlet-name>
+        <servlet-class>MeditorServlets.AssignVisitorGroupSrvlt</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>SetVisitorLeaderSrvlt</servlet-name>
+        <servlet-class>MeditorServlets.SetVisitorLeaderSrvlt</servlet-class>
+    </servlet>
+    <servlet>
         <servlet-name>AssignVisitorSrvlt</servlet-name>
         <servlet-class>MeditorServlets.AssignVisitorSrvlt</servlet-class>
     </servlet>
     <servlet>
+<<<<<<< HEAD
         <servlet-name>addDoctSrvlt</servlet-name>
         <servlet-class>MeditorServlets.addDoctSrvlt</servlet-class>
     </servlet>
@@ -35,6 +48,58 @@
     <servlet>
         <servlet-name>ProduceVstReportSrvlt</servlet-name>
         <servlet-class>MeditorServlets.ProduceVstReportSrvlt</servlet-class>
+=======
+        <servlet-name>VisitInfoSrvlt</servlet-name>
+        <servlet-class>MeditorServlets.VisitInfoSrvlt</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ShowVisitSrvlt</servlet-name>
+        <servlet-class>MeditorServlets.ShowVisitSrvlt</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>EditVisitSrvlt</servlet-name>
+        <servlet-class>MeditorServlets.EditVisitSrvlt</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>UpdateVisitSrvlt</servlet-name>
+        <servlet-class>MeditorServlets.UpdateVisitSrvlt</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ShowVisitsPerCycleSrvlt</servlet-name>
+        <servlet-class>MeditorServlets.ShowVisitsPerCycleSrvlt</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>DeleteDoctorSrvlt</servlet-name>
+        <servlet-class>MeditorServlets.DeleteDoctorSrvlt</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>FiltersSrvlt</servlet-name>
+        <servlet-class>MeditorServlets.AsyncUpdateDoctorList</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>AsyncUpdateDoctorList</servlet-name>
+        <servlet-class>MeditorServlets.AsyncUpdateDoctorList</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>AsyncUpdateVisitorList</servlet-name>
+        <servlet-class>MeditorServlets.AsyncUpdateVisitorList</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>CreateVisitsSrvlt</servlet-name>
+        <servlet-class>MeditorServlets.CreateVisitsSrvlt</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>SelectCycleSrvlt</servlet-name>
+        <servlet-class>MeditorServlets.SelectCycleSrvlt</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>DynamicListLoadSrvlt</servlet-name>
+        <servlet-class>MeditorServlets.DynamicListLoadSrvlt</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>GenerateReport1Srvlt</servlet-name>
+        <servlet-class>MeditorServlets.GenerateReport1Srvlt</servlet-class>
+>>>>>>> master
     </servlet>
     <servlet-mapping>
         <servlet-name>LoginSrvlt</servlet-name>
@@ -49,10 +114,23 @@
         <url-pattern>/Logout</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
+        <servlet-name>GroupProcessorSrvlt</servlet-name>
+        <url-pattern>/GroupProcessor</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AssignVisitorGroupSrvlt</servlet-name>
+        <url-pattern>/AssignVisitorGroup</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>SetVisitorLeaderSrvlt</servlet-name>
+        <url-pattern>/SetVisitorLeader</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
         <servlet-name>AssignVisitorSrvlt</servlet-name>
         <url-pattern>/AssignVisitor</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
+<<<<<<< HEAD
         <servlet-name>addDoctSrvlt</servlet-name>
         <url-pattern>/addDoctSrvlt</url-pattern>
     </servlet-mapping>
@@ -79,6 +157,54 @@
     <servlet-mapping>
         <servlet-name>ProduceVstReportSrvlt</servlet-name>
         <url-pattern>/ProduceVstReportSrvlt</url-pattern>
+=======
+        <servlet-name>VisitInfoSrvlt</servlet-name>
+        <url-pattern>/VisitInfo</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ShowVisitSrvlt</servlet-name>
+        <url-pattern>/ShowVisit</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>EditVisitSrvlt</servlet-name>
+        <url-pattern>/EditVisit</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>UpdateVisitSrvlt</servlet-name>
+        <url-pattern>/UpdateVisit</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ShowVisitsPerCycleSrvlt</servlet-name>
+        <url-pattern>/ShowVisitsPerCycle</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>DeleteDoctorSrvlt</servlet-name>
+        <url-pattern>/DeleteDoctor</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AsyncUpdateDoctorList</servlet-name>
+        <url-pattern>/AsyncUpdateDoctorList</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AsyncUpdateVisitorList</servlet-name>
+        <url-pattern>/AsyncUpdateVisitorList</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>CreateVisitsSrvlt</servlet-name>
+        <url-pattern>/CreateVisits</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>SelectCycleSrvlt</servlet-name>
+        <url-pattern>/SelectCycle</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>DynamicListLoadSrvlt</servlet-name>
+        <url-pattern>/DynamicListLoad</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>GenerateReport1Srvlt</servlet-name>
+        <url-pattern>/GenerateReport1</url-pattern>
+>>>>>>> master
     </servlet-mapping>
     <session-config>
         <session-timeout>

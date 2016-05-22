@@ -5,8 +5,10 @@
  */
 package MeditorServlets;
 
-import MeditorJavaClasses.AssignVisitorProcessor;
+import MeditorJavaClasses.CycleServices;
+import MeditorJavaClasses.VisitServices;
 import java.io.IOException;
+import java.io.PrintWriter;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -15,9 +17,9 @@ import javax.servlet.http.HttpSession;
 
 /**
  *
- * @author adamopoulo
+ * @author thodo
  */
-public class AssignVisitorSrvlt extends HttpServlet {
+public class ShowVisitsPerCycleSrvlt extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -30,27 +32,46 @@ public class AssignVisitorSrvlt extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        response.setContentType("text/html;charset=UTF-8");
         
         HttpSession session = request.getSession(false);
+        String period = "0";
         
         if ((session == null) || (session.getAttribute("userId") == null)) {
             this.getServletConfig().getServletContext().getRequestDispatcher("/index.jsp?noSession=1").forward(request, response);
         } else {
-            AssignVisitorProcessor assignVisitorProc = new AssignVisitorProcessor();
             
+            VisitServices visitServices = new VisitServices();
+            CycleServices cycleServices = new CycleServices();
+            String uId = session.getAttribute("userId").toString();
+            int vId = visitServices.getVisitorId(Integer.parseInt(uId));
+            cycleServices.showCyclesList();
             if (request.getParameterNames().hasMoreElements()) {
-                String visitorToAssign = request.getParameter("visitorToAssign");
-                String[] doctorToAssign = request.getParameterValues("doctorList");
-                assignVisitorProc.assignVisitor(doctorToAssign, Integer.parseInt(visitorToAssign));
-                request.setAttribute("revealSuccesMsg", "true");
-    
+                
+                period = request.getParameter("period");
+                cycleServices.getVisitorVisits(vId, Integer.parseInt(period));
+                //System.out.println(vId+" "+Integer.parseInt(period));
+                
+            } else {
+                cycleServices.getVisitorVisits(vId, Integer.parseInt(period));
+                //System.out.println(vId+" "+Integer.parseInt(period));
             }
-            assignVisitorProc.loadLists();
-            request.setAttribute("assignVisitor", assignVisitorProc);
-            this.getServletConfig().getServletContext().getRequestDispatcher("/assign_visitor.jsp").forward(request, response);
+            if (period.equals("0")) {
+                request.setAttribute("period", "All periods");
+                } else if (period.equals("1")) {
+                    request.setAttribute("period", "1 Jan. - 31 Mar.");
+                } else if (period.equals("2")) {
+                    request.setAttribute("period", "1 Apr. - 30 June");
+                }else if (period.equals("3")) {
+                    request.setAttribute("period", "1 July - 30 Sept.");
+                } else {
+                    request.setAttribute("period", "1 Oct. - 31 Dec");
+            }
+            request.setAttribute("visitServices", visitServices);
+            request.setAttribute("cycleServices", cycleServices);
+            this.getServletConfig().getServletContext().getRequestDispatcher("/show_visits_per_cycle.jsp").forward(request, response);
             
         }
-        
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

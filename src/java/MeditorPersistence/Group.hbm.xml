@@ -13,6 +13,9 @@
         <property name="name" type="java.lang.String">
             <column name="name" length="50" />
         </property>
+        <property name="description" type="java.lang.String">
+            <column name="description" length="250" />
+        </property>
         <many-to-one name="groupLeader" column="leader_id" 
            class="MeditorPersistence.Visitor" not-null="false" unique="true"/> 
     </class>

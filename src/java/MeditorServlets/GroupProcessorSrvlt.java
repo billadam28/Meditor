@@ -5,8 +5,10 @@
  */
 package MeditorServlets;
 
-import MeditorJavaClasses.AssignVisitorProcessor;
+import MeditorJavaClasses.GroupServices;
+import MeditorPersistence.Group;
 import java.io.IOException;
+import java.io.PrintWriter;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -15,9 +17,9 @@ import javax.servlet.http.HttpSession;
 
 /**
  *
- * @author adamopoulo
+ * @author thodo
  */
-public class AssignVisitorSrvlt extends HttpServlet {
+public class GroupProcessorSrvlt extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -30,27 +32,45 @@ public class AssignVisitorSrvlt extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        response.setContentType("text/html;charset=UTF-8");
         
         HttpSession session = request.getSession(false);
+        String nameOfGroup;
+        String descOfGroup;
+        String parentGroup = "0";
         
         if ((session == null) || (session.getAttribute("userId") == null)) {
             this.getServletConfig().getServletContext().getRequestDispatcher("/index.jsp?noSession=1").forward(request, response);
         } else {
-            AssignVisitorProcessor assignVisitorProc = new AssignVisitorProcessor();
+            GroupServices groupServices = new GroupServices();
             
             if (request.getParameterNames().hasMoreElements()) {
-                String visitorToAssign = request.getParameter("visitorToAssign");
-                String[] doctorToAssign = request.getParameterValues("doctorList");
-                assignVisitorProc.assignVisitor(doctorToAssign, Integer.parseInt(visitorToAssign));
-                request.setAttribute("revealSuccesMsg", "true");
-    
+                nameOfGroup = request.getParameter("nameOfGroup");
+                descOfGroup = request.getParameter("descOfGroup");
+                parentGroup = request.getParameter("parentGroup");
+                //System.out.println(parentGroup);
+                boolean result = groupServices.availableGroup(nameOfGroup);
+                if (result == true) {
+                    session.setAttribute("nameOfGroup", nameOfGroup);
+                    request.setAttribute("revealErrorMsg", "true");
+                } else {
+                    //System.out.println(result);
+                    groupServices.createGroup(nameOfGroup,descOfGroup,Integer.parseInt(parentGroup));
+                    session.setAttribute("nameOfGroup", nameOfGroup);
+                    if (!parentGroup.equals("0")) {
+                        String assignedGroupName = groupServices.assignedGroup(Integer.parseInt(parentGroup));    
+                        session.setAttribute("parentGroup", assignedGroupName);
+                    }
+                    request.setAttribute("revealSuccessMsg", "true");
+                    //System.out.println(descOfGroup);
+                }
+                
             }
-            assignVisitorProc.loadLists();
-            request.setAttribute("assignVisitor", assignVisitorProc);
-            this.getServletConfig().getServletContext().getRequestDispatcher("/assign_visitor.jsp").forward(request, response);
+            groupServices.showVisitorGroupLists();
+            request.setAttribute("groupServices", groupServices);
+            this.getServletConfig().getServletContext().getRequestDispatcher("/create_group.jsp").forward(request, response);
             
         }
-        
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

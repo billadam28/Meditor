@@ -23,8 +23,8 @@
 		<hr/>
 		<h3>My Visits</h3>
 		<ul class="toggle">
-			<li class="icn_alert_success"><a href="#" onclick="highlightCurrentLink();">Completed</a></li>
-			<li class="icn_categories"><a href="#" onclick="highlightCurrentLink();">Scheduled</a></li>
+			<li class="icn_alert_success"><a href="ShowVisitsPerCycle" onclick="highlightCurrentLink();">Completed</a></li>
+			<li class="icn_categories"><a href="VisitInfo" onclick="highlightCurrentLink();">Scheduled</a></li>
 		</ul>
 		<h3>Doctors</h3>
 		<ul class="toggle">

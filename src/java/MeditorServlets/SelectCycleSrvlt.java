@@ -5,7 +5,7 @@
  */
 package MeditorServlets;
 
-import MeditorJavaClasses.AssignVisitorProcessor;
+import MeditorJavaClasses.CycleList;
 import java.io.IOException;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -17,7 +17,7 @@ import javax.servlet.http.HttpSession;
  *
  * @author adamopoulo
  */
-public class AssignVisitorSrvlt extends HttpServlet {
+public class SelectCycleSrvlt extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -30,27 +30,18 @@ public class AssignVisitorSrvlt extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
         HttpSession session = request.getSession(false);
         
         if ((session == null) || (session.getAttribute("userId") == null)) {
             this.getServletConfig().getServletContext().getRequestDispatcher("/index.jsp?noSession=1").forward(request, response);
         } else {
-            AssignVisitorProcessor assignVisitorProc = new AssignVisitorProcessor();
+            CycleList cycleList = new CycleList();
+            cycleList.populateDefaultList();
             
-            if (request.getParameterNames().hasMoreElements()) {
-                String visitorToAssign = request.getParameter("visitorToAssign");
-                String[] doctorToAssign = request.getParameterValues("doctorList");
-                assignVisitorProc.assignVisitor(doctorToAssign, Integer.parseInt(visitorToAssign));
-                request.setAttribute("revealSuccesMsg", "true");
-    
-            }
-            assignVisitorProc.loadLists();
-            request.setAttribute("assignVisitor", assignVisitorProc);
-            this.getServletConfig().getServletContext().getRequestDispatcher("/assign_visitor.jsp").forward(request, response);
+            request.setAttribute("cycleList", cycleList);
+            this.getServletConfig().getServletContext().getRequestDispatcher("/select_cycle.jsp").forward(request, response);
             
         }
-        
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

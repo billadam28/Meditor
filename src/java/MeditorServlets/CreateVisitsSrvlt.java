@@ -5,8 +5,9 @@
  */
 package MeditorServlets;
 
-import MeditorJavaClasses.AssignVisitorProcessor;
+import MeditorJavaClasses.CreateVisitsProcessor;
 import java.io.IOException;
+import java.io.PrintWriter;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -17,7 +18,9 @@ import javax.servlet.http.HttpSession;
  *
  * @author adamopoulo
  */
-public class AssignVisitorSrvlt extends HttpServlet {
+public class CreateVisitsSrvlt extends HttpServlet {
+    private static Integer cycleId;
+    private static Integer numberOfVisits;
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -30,27 +33,29 @@ public class AssignVisitorSrvlt extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
         HttpSession session = request.getSession(false);
         
         if ((session == null) || (session.getAttribute("userId") == null)) {
             this.getServletConfig().getServletContext().getRequestDispatcher("/index.jsp?noSession=1").forward(request, response);
         } else {
-            AssignVisitorProcessor assignVisitorProc = new AssignVisitorProcessor();
             
-            if (request.getParameterNames().hasMoreElements()) {
-                String visitorToAssign = request.getParameter("visitorToAssign");
-                String[] doctorToAssign = request.getParameterValues("doctorList");
-                assignVisitorProc.assignVisitor(doctorToAssign, Integer.parseInt(visitorToAssign));
-                request.setAttribute("revealSuccesMsg", "true");
-    
+            CreateVisitsProcessor createVisitsProc = new CreateVisitsProcessor();
+            
+            if (request.getParameter("cycle") != null) {
+                cycleId = Integer.parseInt(request.getParameter("cycle"));
+                numberOfVisits = Integer.parseInt(request.getParameter("number_of_visits"));
             }
-            assignVisitorProc.loadLists();
-            request.setAttribute("assignVisitor", assignVisitorProc);
-            this.getServletConfig().getServletContext().getRequestDispatcher("/assign_visitor.jsp").forward(request, response);
+            
+            if (request.getParameterValues("doctorList") != null ) {
+                String[] doctorList = request.getParameterValues("doctorList");
+                createVisitsProc.createVisits(doctorList, numberOfVisits, cycleId);
+                request.setAttribute("revealSuccesMsg", "true");
+            }
+            createVisitsProc.loadLists(cycleId);
+            request.setAttribute("createVisits", createVisitsProc);
+            this.getServletConfig().getServletContext().getRequestDispatcher("/create_visits.jsp").forward(request, response);
             
         }
-        
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

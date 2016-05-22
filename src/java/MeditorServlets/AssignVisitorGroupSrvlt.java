@@ -5,8 +5,9 @@
  */
 package MeditorServlets;
 
-import MeditorJavaClasses.AssignVisitorProcessor;
+import MeditorJavaClasses.GroupServices;
 import java.io.IOException;
+import java.io.PrintWriter;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -15,9 +16,9 @@ import javax.servlet.http.HttpSession;
 
 /**
  *
- * @author adamopoulo
+ * @author thodo
  */
-public class AssignVisitorSrvlt extends HttpServlet {
+public class AssignVisitorGroupSrvlt extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -30,27 +31,28 @@ public class AssignVisitorSrvlt extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        response.setContentType("text/html;charset=UTF-8");
         
         HttpSession session = request.getSession(false);
         
         if ((session == null) || (session.getAttribute("userId") == null)) {
             this.getServletConfig().getServletContext().getRequestDispatcher("/index.jsp?noSession=1").forward(request, response);
         } else {
-            AssignVisitorProcessor assignVisitorProc = new AssignVisitorProcessor();
+            
+            GroupServices groupServices = new GroupServices();
             
             if (request.getParameterNames().hasMoreElements()) {
-                String visitorToAssign = request.getParameter("visitorToAssign");
-                String[] doctorToAssign = request.getParameterValues("doctorList");
-                assignVisitorProc.assignVisitor(doctorToAssign, Integer.parseInt(visitorToAssign));
-                request.setAttribute("revealSuccesMsg", "true");
-    
+                String [] assignedVisitor = request.getParameterValues("assignedVisitor");
+                String assignedGroup = request.getParameter("assignedGroup");
+                groupServices.assignVisitorToGroup(assignedVisitor, Integer.parseInt(assignedGroup));
+                //session.setAttribute("assignedGroup", assignedGroup);
+                //session.setAttribute("assignedVisitor", assignedVisitor);
+                request.setAttribute("revealSuccessMsg", "true");
             }
-            assignVisitorProc.loadLists();
-            request.setAttribute("assignVisitor", assignVisitorProc);
-            this.getServletConfig().getServletContext().getRequestDispatcher("/assign_visitor.jsp").forward(request, response);
-            
+            groupServices.showVisitorGroupLists();
+            request.setAttribute("groupServices", groupServices);
+            this.getServletConfig().getServletContext().getRequestDispatcher("/assign_visitor_group.jsp").forward(request, response);    
         }
-        
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

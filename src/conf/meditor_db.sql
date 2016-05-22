@@ -11,8 +11,6 @@
 set foreign_key_checks = 0;
 drop table `Group`;
 drop table Visit_Visitor_Lnk;
-drop table Extra_Visit_Visitor_Lnk;
-drop table Extra_Visit;
 drop table Visit;
 drop table Doctor;
 drop table Visitor;
@@ -54,9 +52,9 @@ CREATE TABLE Visitor (
   superior_id      int,
   group_id         int,
   PRIMARY KEY (user_id),
-  constraint fk_userid FOREIGN KEY (user_id) REFERENCES `User` (id),
-  constraint fk_supid FOREIGN KEY (superior_id) REFERENCES Visitor (user_id),
-  constraint fk_grpid FOREIGN KEY (group_id) REFERENCES `Group` (id)
+  constraint fk_userid FOREIGN KEY (user_id) REFERENCES `User` (id)
+  ON DELETE CASCADE ON UPDATE CASCADE,
+  constraint fk_supid FOREIGN KEY (superior_id) REFERENCES Visitor (user_id)
 );
 
 CREATE TABLE `Admin` (
@@ -87,7 +85,6 @@ CREATE TABLE `City` (
   geo_id           int not null,
   PRIMARY KEY (id),
   constraint fk_geo_id FOREIGN KEY (geo_id) REFERENCES Geographical_Area (id)
-  ON DELETE CASCADE ON UPDATE CASCADE
 ) ;
 
 CREATE TABLE `Institution` (
@@ -96,7 +93,6 @@ CREATE TABLE `Institution` (
   city_id          int not null,
   PRIMARY KEY (id),
   constraint fk_city_id FOREIGN KEY (city_id) REFERENCES City (id)
-  ON DELETE CASCADE ON UPDATE CASCADE
 ) ;
 
 CREATE TABLE Doctor (
@@ -114,7 +110,6 @@ CREATE TABLE Doctor (
    constraint fk_created_from FOREIGN KEY (created_from) REFERENCES Visitor (user_id),
   constraint fk_specialty_id FOREIGN KEY (specialty_id) REFERENCES Specialty (id),
   constraint fk_institution_id FOREIGN KEY (institution_id) REFERENCES Institution (id)
-  ON DELETE CASCADE ON UPDATE CASCADE
 );
 
 
@@ -128,21 +123,23 @@ CREATE TABLE Visit (
   id               int NOT NULL AUTO_INCREMENT,
   doctor_id        int not null,
   visit_offset     int not null,
-  status           varchar(10),
-  date             date not null,
+  status           varchar(12),
+  date             date,
   cycle_id         int not null,
-  extra_visit      bit, 
+  extra_visit      bit,
+  comments         varchar(250),
   PRIMARY KEY (id),
-  constraint fk_vst_doctor_id FOREIGN KEY (doctor_id) REFERENCES Doctor (id),
+  constraint fk_vst_doctor_id FOREIGN KEY (doctor_id) REFERENCES Doctor (id) 
+  ON DELETE CASCADE ON UPDATE CASCADE,
   constraint fk_vst_cycle_id FOREIGN KEY (cycle_id) REFERENCES Cycle (id)
-  ON DELETE CASCADE ON UPDATE CASCADE
 );
 
 CREATE TABLE Visit_Visitor_Lnk (
   visitor_id int not null,
   visit_id   int not null,
   PRIMARY  KEY (visitor_id, visit_id),
-  constraint fk_lnk_visit_id FOREIGN KEY (visit_id) REFERENCES Visit (id),
+  constraint fk_lnk_visit_id FOREIGN KEY (visit_id) REFERENCES Visit (id)
+  ON DELETE CASCADE ON UPDATE CASCADE,
   constraint fk_lnk_visitor_id FOREIGN KEY (visitor_id) REFERENCES Visitor (user_id)
   ON DELETE CASCADE ON UPDATE CASCADE
 );
@@ -173,6 +170,7 @@ CREATE TABLE `Group` (
   id               int NOT NULL AUTO_INCREMENT,
   parent_group_id  int,
   `name`           varchar(50) not null,
+  description      varchar(250),
   leader_id        int,
   PRIMARY KEY (id),
   unique(`name`),
@@ -236,8 +234,12 @@ INSERT INTO `Admin`
 VALUES (1, 1);
 
 INSERT INTO `Group`
+(parent_group_id, name, description, leader_id)
+VALUES (null , 'group1','123', 2);
+
+INSERT INTO `Group`
 (parent_group_id, name, leader_id)
-VALUES (null , 'group1', 2);
+VALUES (null , 'group2', null);
 
 insert into geographical_area (geo_name)values ('Attica');
 insert into geographical_area (geo_name)values ('Lakonia');
@@ -257,3 +259,17 @@ values (null,2, 'mark markus', 1, 'address1', '2101231231', 1, 'professor');
 
 insert into doctor (assigned_vst_id, created_from, name, specialty_id, address, phone, institution_id, position)
 values (null,2, 'pitsos pitsou', 2, 'address1', '2101231231', 2, 'professor');
+
+INSERT INTO `Cycle`
+(cycle)
+VALUES ('01-03');
+
+INSERT INTO `Visit`
+(doctor_id, visit_offset, status, date, cycle_id, extra_visit)
+VALUES (1 , 1, 'pending', null, 1, 1);
+
+INSERT INTO `Visit_Visitor_Lnk`
+(visitor_id, visit_id)
+VALUES (2 , 1);
+
+
