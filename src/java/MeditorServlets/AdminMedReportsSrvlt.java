@@ -5,6 +5,7 @@
  */
 package MeditorServlets;
 
+import MeditorJavaClasses.CycleList;
 import MeditorJavaClasses.ReportVstHandler;
 import MeditorJavaClasses.VisitorDAO;
 import java.io.IOException;
@@ -40,6 +41,9 @@ public class AdminMedReportsSrvlt extends HttpServlet {
             ReportVstHandler visitor = new ReportVstHandler();
             visitor.getAllVisitors();
             visitor.getVisitorResults();
+            CycleList cycle = new CycleList();
+            cycle.populateDefaultList();
+            request.setAttribute("cycleList", cycle.getCycleList());
             request.setAttribute("Visitors", visitor);
             this.getServletConfig().getServletContext().getRequestDispatcher("/medproducereports.jsp").forward(request, response);
         }

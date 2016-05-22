@@ -4,6 +4,9 @@
     Author     : glalas
 --%>
 
+<%@page import="java.util.List"%>
+<%@page import="MeditorPersistence.Cycle"%>
+<%@page import="MeditorJavaClasses.CycleList"%>
 <%@page import="MeditorJavaClasses.ReportVstHandler"%>
 <%@page import="MeditorPersistence.User"%>
 <%@page import="MeditorPersistence.Visitor"%>
@@ -27,6 +30,7 @@
                     <td> First Name</td>
                     <td> Surname </td>
                     <td> Level </td>
+  
                     </thead>
                     <tbody>
                         <% ReportVstHandler vst = (ReportVstHandler) request.getAttribute("Visitors");%>
@@ -36,13 +40,22 @@
                         <td><%=obj.getFirstname()%></td>
                         <td><%=obj.getSurname()%></td>
                         <td><%= obj.getVisitorLevel() %></td>
-                        </tr>
                         <%}%>
+                        
                         
  
                     </tbody>
                     
                 </table>
+                        <td><select style="width:20%;" name ="cycle">
+                                <option>Select A Cycle</option>
+                                <% List<Cycle> cycle = (List<Cycle>) request.getAttribute("cycleList");%>
+                                 <%for (Cycle cyc: cycle) {%>
+                                <option value="<%=cyc.getId()%>"><%=cyc.getCycle()%></option>
+                                <%}%>
+                            </select></td>
+                        
+                        
                         <input type="submit" name="submit" value="Get Reports">
             </div>
             </form>

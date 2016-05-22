@@ -78,7 +78,7 @@ public class SearchEditDoc {
             
             try{
             tx = session.beginTransaction();
-            Query query= session.createQuery("from Doctor d where d.specialty like :spec");
+            Query query= session.createQuery("from Doctor d where d.specialty.id = :spec");
             query.setParameter("spec", specid);
             List<Doctor> res = (List<Doctor>) query.list();
             for (Doctor dct : res) {
@@ -115,7 +115,7 @@ public class SearchEditDoc {
             
             try{
             tx = session.beginTransaction();
-            Query query= session.createQuery("from Doctor d where d.createdFrom = :visitorID");
+            Query query= session.createQuery("from Doctor d where d.createdFrom.id = :visitorID");
             query.setParameter("visitorID", vstId);
             List<Doctor> res = (List<Doctor>) query.list();
             for (Doctor dct : res) {
@@ -153,7 +153,7 @@ public class SearchEditDoc {
             
             try{
             tx = session.beginTransaction();
-            Query query= session.createQuery("from Doctor d where d.institution = :institutionID");
+            Query query= session.createQuery("from Doctor d where d.institution.id = :institutionID");
             query.setParameter("institutionID", instID);
             List<Doctor> res = (List<Doctor>) query.list();
             for (Doctor dct : res) {

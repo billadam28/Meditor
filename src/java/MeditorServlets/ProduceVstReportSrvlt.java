@@ -14,7 +14,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import org.hibernate.HibernateException;
 import org.hibernate.Session;
 
 /**
@@ -39,36 +38,21 @@ public class ProduceVstReportSrvlt extends HttpServlet {
         if ((session == null) || (session.getAttribute("userId") == null)) {
             this.getServletConfig().getServletContext().getRequestDispatcher("/index.jsp?noSession=1").forward(request, response);
         } else {
-            Session hibersession = NewHibernateUtil.getSessionFactory().openSession();
-            try {
-                String retrievedid = request.getParameter("selectvisitor");
-                int vstId= Integer.parseInt(retrievedid);
-                Visitor visitor = (Visitor) hibersession.get(Visitor.class, vstId);
-                System.out.println(visitor.getFirstname());
-                
+                Session hibersession = NewHibernateUtil.getSessionFactory().openSession();
+            
+                 int vstId= Integer.parseInt(request.getParameter("selectvisitor"));
+                 Visitor visitor = (Visitor) hibersession.get(Visitor.class, vstId);
+                 int cycId= Integer.parseInt(request.getParameter("cycle"));
+                 request.setAttribute("cycle", cycId);
+                 request.setAttribute("visitor", visitor);
                  ReportVstHandler reporthandler = new ReportVstHandler();
                  reporthandler.findByVstId(vstId);
-                 reporthandler.displayVisits();
+                 reporthandler.getStatics(visitor,cycId);
                  request.setAttribute("visit", reporthandler);
 
                 
-//                visitor.getFirstname();
-//                visitor.getSurname();
-//                visitor.getGroup();
-//                
 
-                
-                
-            }
-          
-            catch (HibernateException e) {
-           
-            e.printStackTrace();
-        } finally {
-            hibersession.close();
-            }
-      
-        
+
         this.getServletConfig().getServletContext().getRequestDispatcher("/reportsview.jsp").forward(request, response);
         }
     }

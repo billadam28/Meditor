@@ -57,7 +57,6 @@ public class CommitEditDocSrvlt extends HttpServlet {
                 String specialty = request.getParameter("specialty");
                 int specialid = Integer.parseInt(specialty);
                 String institution =request.getParameter("institution");
-//                System.err.println("paramater for institution = "+institution);
                 int institutionid = Integer.parseInt(institution);
                 String position = request.getParameter("docposition");
                 
@@ -74,8 +73,7 @@ public class CommitEditDocSrvlt extends HttpServlet {
                 doctor.setPosition(position);
                 doctor.setCreatedFrom(vstID);
                 
-//                hibersession.saveOrUpdate(doctor);
-//                tx.commit();
+
                 DoctorDAO doctordao= new DoctorDAO();
                 doctordao.updateDoctor(doctor);
             }

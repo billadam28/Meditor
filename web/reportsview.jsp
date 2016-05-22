@@ -24,18 +24,27 @@
             <header><h3><center>Statistics</center></h3></header>
             <div class="tab_container">
                 <table class="tablesorter" cellspacing="0">
+                    <% Integer cycid = (Integer) request.getAttribute("cycle");%>
+                    <% ReportVstHandler vst = (ReportVstHandler) request.getAttribute("visit");%>
+                    <% Visitor visitor= (Visitor) request.getAttribute("visitor");%>
                     <thead>
-                    <td>tobeadded</td>
-                    
+                      
+                    <td><center>Visitor Name</center></td>
+                    <td><center>Total Doctors</center></td>
+                    <td><center>Number Of Visits</center></td>
+                    <td><center>Coverage Percent</center></td>
+                    </tr>
+      
                     </thead>
                     <tbody>
-                      <% ReportVstHandler vst = (ReportVstHandler) request.getAttribute("visit");%>
-                        <% for (Visit obj: vst.displayVisits()){ %>
+                        
                         <tr>
-                        <td><%=obj.getVisitOffset()%></td>
-                        <td><%=obj.getStatus()%></td>
+                        <td><center><%=visitor.getFirstname()%> <%=visitor.getSurname()%></center></td>       
+                        <td><center><%=vst.totalDoctors(visitor) %></center></td>
+                        <td><center><%=vst.totalVisits(visitor) %></center></td>
+                       <td><center><%=vst.getStatics(visitor,cycid)%></center></td>
                         </tr>
-                        <%}%>
+                        
                         
  
                     </tbody>
