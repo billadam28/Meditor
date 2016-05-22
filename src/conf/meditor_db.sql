@@ -174,7 +174,7 @@ VALUES ('Vassilis', 'Adamopoulos','bill@bill.com','bill',SHA1('123'), 1);
 
 INSERT INTO User
 (firstname, surname, email, username, passwd, user_type)
-VALUES ('George', 'Lalas','george@george.com','george',SHA1('1234'), 1);
+VALUES ('George', 'Lalas','george@george.com','george',SHA1('123'), 1);
 
 INSERT INTO User
 (firstname, surname, email, username, passwd, user_type)
