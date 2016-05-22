@@ -21,7 +21,6 @@
         <servlet-class>MeditorServlets.AssignVisitorSrvlt</servlet-class>
     </servlet>
     <servlet>
-<<<<<<< HEAD
         <servlet-name>addDoctSrvlt</servlet-name>
         <servlet-class>MeditorServlets.addDoctSrvlt</servlet-class>
     </servlet>
@@ -48,7 +47,8 @@
     <servlet>
         <servlet-name>ProduceVstReportSrvlt</servlet-name>
         <servlet-class>MeditorServlets.ProduceVstReportSrvlt</servlet-class>
-=======
+    </servlet>
+    <servlet>
         <servlet-name>VisitInfoSrvlt</servlet-name>
         <servlet-class>MeditorServlets.VisitInfoSrvlt</servlet-class>
     </servlet>
@@ -99,7 +99,6 @@
     <servlet>
         <servlet-name>GenerateReport1Srvlt</servlet-name>
         <servlet-class>MeditorServlets.GenerateReport1Srvlt</servlet-class>
->>>>>>> master
     </servlet>
     <servlet-mapping>
         <servlet-name>LoginSrvlt</servlet-name>
@@ -130,7 +129,6 @@
         <url-pattern>/AssignVisitor</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-<<<<<<< HEAD
         <servlet-name>addDoctSrvlt</servlet-name>
         <url-pattern>/addDoctSrvlt</url-pattern>
     </servlet-mapping>
@@ -157,7 +155,8 @@
     <servlet-mapping>
         <servlet-name>ProduceVstReportSrvlt</servlet-name>
         <url-pattern>/ProduceVstReportSrvlt</url-pattern>
-=======
+    </servlet-mapping>
+    <servlet-mapping>
         <servlet-name>VisitInfoSrvlt</servlet-name>
         <url-pattern>/VisitInfo</url-pattern>
     </servlet-mapping>
@@ -204,7 +203,6 @@
     <servlet-mapping>
         <servlet-name>GenerateReport1Srvlt</servlet-name>
         <url-pattern>/GenerateReport1</url-pattern>
->>>>>>> master
     </servlet-mapping>
     <session-config>
         <session-timeout>
