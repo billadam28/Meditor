@@ -11,6 +11,8 @@ import java.util.ArrayList;
 import org.hibernate.Transaction;
 import MeditorPersistence.Cycle;
 import MeditorPersistence.Visit;
+import MeditorPersistence.Visitor;
+import java.util.Set;
 import org.hibernate.Hibernate;
 import org.hibernate.HibernateException;
 import org.hibernate.Query;
@@ -27,13 +29,14 @@ public class CycleServices {
     private List<Visit> getVisitorVisits;
     private final String getVisitorVisitsQuery;
     
-    
     public CycleServices() {
     
         getVisitorVisits = new ArrayList<>();
         cyclesList = new ArrayList<>();
         getCyclesQuery = "from Cycle c order by c.id asc";
-        getVisitorVisitsQuery = "from Visit v";
+        getVisitorVisitsQuery = "select v from Visit v join v.visitors vv where "
+                                  + "vv.id = :vst_id "
+                                  + "and (v.status=\'completed\' or v.status=\'unsuccessful\')";
     }
     
     
@@ -66,31 +69,20 @@ public class CycleServices {
         
         try {
             tx = session.beginTransaction();
-            List<Visit> visits  = session.createQuery(getVisitorVisitsQuery).list();
-            for (Visit visit : visits) {
-                Hibernate.initialize(visit.getDoctor().getId());
+            List<Visit> res =  (List<Visit>)session.createQuery(getVisitorVisitsQuery)
+                    .setParameter("vst_id", vId).list();
+            for (Visit visit: res) {
+                Hibernate.initialize(visit.getDoctor());
                 Hibernate.initialize(visit.getVisitors());
-                Hibernate.initialize(visit.getDate());
-                Hibernate.initialize(visit.getCycle().getCycle());
-                //Hibernate.initialize(visit.getDoctor().getAssignedVisitor().getId());
-                if (visit.getDoctor()== null || visit.getDoctor().getAssignedVisitor() == null || visit.getDoctor().getAssignedVisitor().getId()==null) {
-                    getVisitorVisits.isEmpty();
-                } else {    
-                    if(visit.getDoctor().getAssignedVisitor().getId()== vId){
-                        if (cycleId!= 0) {
-                            if((visit.getStatus().equals("completed") || visit.getStatus().equals("unsuccessful")) && (visit.getCycle().getId()== cycleId)){
-                                getVisitorVisits.add(visit);
-                                //System.out.println(visit.getId());
-                            }
-                        } else {
-                            if((visit.getStatus().equals("completed") || visit.getStatus().equals("unsuccessful"))){
-                                getVisitorVisits.add(visit);
-                                //System.out.println(visit.getId());
-                            }
-                        }
-                    } else {
-                        getVisitorVisits.isEmpty();
+                Hibernate.initialize(visit.getCycle());
+                
+                if (cycleId!= 0) {
+                    if((visit.getCycle().getId()== cycleId)){
+                        getVisitorVisits.add(visit);
+                        //System.out.println(visit.getId());
                     }
+                } else {
+                    getVisitorVisits.add(visit);
                 }    
             }
             tx.commit();
@@ -101,9 +93,7 @@ public class CycleServices {
             e.printStackTrace();
         } finally {
             session.close();
-        }
-        
-        
+        }   
     }
     
     public List<Cycle> cyclesList () {

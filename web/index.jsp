@@ -30,7 +30,7 @@
         <form id="login-form" method="post" action="Login">
             <input type="text" name="userId" id="login_text" placeholder="Username or email" />
             <input type="password" name="password" id="password" placeholder="Password" />
-            <input type="submit" value="Login" />
+            <input type="submit" value="Login" onclick="return validateLoginForm()"/>
         </form>
 
         <p><h7> <%if (session.getAttribute("invalidUser") == "true"){
@@ -55,6 +55,7 @@
         
          <!-- Scripts -->
         <!--[if lte IE 8]><script src="assets/js/ie/respond.min.js"></script><![endif]-->
+        <script type="text/javascript" src="js/validateform.js"></script>                    
         <script src="js/main.js"></script> 
     </body>                    
 </html>

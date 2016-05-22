@@ -26,6 +26,6 @@ function help4() {
 
 function help5() {
     
-        alert("In order to view information about completed or unsuccessful visits\nper cycle, select the cycle period and click Search button. If you do\nnot select a cycle period, all cycle's visitis will be displayed."); 
+        alert("In order to view information about completed or unsuccessful visits\nper cycle, select the cycle period and click the 'Search' button. If you do\nnot select a cycle period, all cycle's visits will be displayed."); 
 } 
 

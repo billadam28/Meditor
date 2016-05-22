@@ -1,3 +1,15 @@
+function validateLoginForm() {
+    var x = document.getElementById("login_text").value;
+    var y = document.getElementById("password").value;
+    if ((x == null || x == "" || x.match(/^\s*$/)) || (y==null || y=="")) {
+        alert("Username, email and password cannot be empty!");
+        return false;
+    } else {
+        return true;
+        
+    }
+}
+
 function validateForm() {
     var x = document.getElementById("name").value;
     var y = document.getElementById("desc").value;

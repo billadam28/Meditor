@@ -4,6 +4,7 @@
     Author     : thodo
 --%>
 
+<%@page import="java.util.Set"%>
 <%@page import="MeditorPersistence.Cycle"%>
 <%@page import="MeditorPersistence.Visit"%>
 <%@page import="MeditorPersistence.Doctor"%>
@@ -62,9 +63,11 @@
                     <div id="tab1" class="tab_content">
                         <table class="tablesorter" cellspacing="0"> 
                         <thead> 
-                            <tr>  
+                            <tr>
+                                <th>Visit Offset</th>
                                 <th>Doc's Name</th> 
                                 <th>Doc's Address</th>
+                                <th>Accomp. by Trainee</th>
                                 <th>Status</th> 
                                 <th>Date</th>
                                 <th>Cycle</th>
@@ -75,9 +78,17 @@
                         <tbody> 
                             <%if (cycleServices.getVisitorVisits().isEmpty() == false) { 
                                 for (Visit obj : cycleServices.getVisitorVisits()) { %>
-                                    <tr>                            
+                                    <tr>
+                                        <td><%=obj.getVisitOffset()%></td>
                                         <td><%= obj.getDoctor().getName()%></td> 
                                         <td><%= obj.getDoctor().getAddress()%></td> 
+                                        <td>
+                                            <%for (Visitor vst : (Set<Visitor>) obj.getVisitors()) {
+                                                if (vst.getVisitorLevel().equals("trainee")) {
+                                                    out.println(vst.getFirstname()+" "+vst.getSurname()+"\n");
+                                                }
+                                            }%>
+                                        </td>
                                         <td><%= obj.getStatus()%></td> 
                                         <td><%= obj.getDate()%></td>
                                         <td><%= obj.getCycle().getCycle()%></td>
@@ -89,6 +100,7 @@
                                 <%}%>
                             <%} else {%>
                                         <td><p style="color:red; font-weight: bold">There ara no visits for this period!</p></td>
+                                        <td></td>
                                         <td></td>
                                         <td></td>
                                         <td></td>
