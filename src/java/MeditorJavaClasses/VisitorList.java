@@ -27,7 +27,7 @@ public class VisitorList implements LoadListService {
     
     public VisitorList() {
         visitorList= new ArrayList<>();
-        visitorListQuery = "select v from Visitor v";
+        visitorListQuery = "select v from Visitor v where v.visitorLevel = 'senior'";
         visitorListWithParameters = "Select v from Visitor v where v.group.id = :group_id";
     }
     

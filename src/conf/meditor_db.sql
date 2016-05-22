@@ -144,28 +144,6 @@ CREATE TABLE Visit_Visitor_Lnk (
   ON DELETE CASCADE ON UPDATE CASCADE
 );
 
-/*CREATE TABLE Extra_Visit (
-  id               int NOT NULL AUTO_INCREMENT,
-  doctor_id        int not null,
-  visit_offset     int not null,
-  status           varchar(10),
-  date             date not null,
-  cycle_id         int not null,
-  PRIMARY KEY (id),
-  constraint fk_xvst_doctor_id FOREIGN KEY (doctor_id) REFERENCES Doctor (id),
-  constraint fk_xvst_cycle_id FOREIGN KEY (cycle_id) REFERENCES Cycle (id)
-  ON DELETE CASCADE ON UPDATE CASCADE
-);
-
-CREATE TABLE Extra_Visit_Visitor_Lnk (
-  visitor_id int not null,
-  visit_id   int not null,
-  PRIMARY  KEY (visitor_id, visit_id),
-  constraint fk_xt_lnk_visit_id FOREIGN KEY (visit_id) REFERENCES Visit (id),
-  constraint fk_xt_lnk_visitor_id FOREIGN KEY (visitor_id) REFERENCES Visitor (user_id)
-  ON DELETE CASCADE ON UPDATE CASCADE
-);*/
-
 CREATE TABLE `Group` (
   id               int NOT NULL AUTO_INCREMENT,
   parent_group_id  int,
@@ -177,17 +155,6 @@ CREATE TABLE `Group` (
   constraint fk_parent_group_id FOREIGN KEY (parent_group_id) REFERENCES `Group` (id),
   constraint fk_leader_id FOREIGN KEY (leader_id) REFERENCES Visitor (user_id)
 );
-
-
-/*CREATE TABLE Group_Member ( 
-  group_id         int NOT NULL,
-  member_id        int NOT NULL,
-  PRIMARY KEY (group_id, member_id),
-  UNIQUE (member_id),
-  constraint fk_mbr_group_id FOREIGN KEY (group_id) REFERENCES `Group` (id),
-  constraint fk_member_id FOREIGN KEY (member_id) REFERENCES Visitor (id)
-  ON DELETE CASCADE ON UPDATE CASCADE
-); */
 
 ALTER TABLE Visitor
 ADD CONSTRAINT fk_groupid
@@ -207,69 +174,123 @@ VALUES ('Vassilis', 'Adamopoulos','bill@bill.com','bill',SHA1('123'), 1);
 
 INSERT INTO User
 (firstname, surname, email, username, passwd, user_type)
-VALUES ('George', 'Lalas','george@george.com','george',SHA1('1234'), 2);
+VALUES ('George', 'Lalas','george@george.com','george',SHA1('1234'), 1);
 
 INSERT INTO User
 (firstname, surname, email, username, passwd, user_type)
-VALUES ('paul', 'paulopoulos','paul@paul.com','paul',SHA1('1234'), 2);
-
-INSERT INTO User
-(firstname, surname, email, username, passwd, user_type)
-VALUES ('john', 'john','john@john.com','john',SHA1('1234'), 2);
-
-INSERT INTO `Visitor`
-(user_id, visitor_level)
-VALUES (2, 'senior');
-
-INSERT INTO `Visitor`
-(user_id, visitor_level, superior_id)
-VALUES (3, 'senior', 2);
-
-INSERT INTO `Visitor`
-(user_id, visitor_level, superior_id)
-VALUES (4, 'trainee', 2);
+VALUES ('Thodoris', 'Efstathiou','teo@teo.com','teo',SHA1('123'), 1);
 
 INSERT INTO `Admin`
 (user_id, access_level)
 VALUES (1, 1);
 
-INSERT INTO `Group`
-(parent_group_id, name, description, leader_id)
-VALUES (null , 'group1','123', 2);
+INSERT INTO `Admin`
+(user_id, access_level)
+VALUES (2, 1);
+INSERT INTO `Admin`
+(user_id, access_level)
+VALUES (3, 1);
 
-INSERT INTO `Group`
-(parent_group_id, name, leader_id)
-VALUES (null , 'group2', null);
+INSERT INTO User
+(firstname, surname, email, username, passwd, user_type)
+VALUES ('Paul', 'Papadopoulos','paul@paul.com','paul',SHA1('1234'), 2);
 
-insert into geographical_area (geo_name)values ('Attica');
-insert into geographical_area (geo_name)values ('Lakonia');
+INSERT INTO User
+(firstname, surname, email, username, passwd, user_type)
+VALUES ('John', 'Johnie','john@john.com','john',SHA1('1234'), 2);
 
-insert into city (city_name, geo_id) values ('Athens', 1);
+INSERT INTO User
+(firstname, surname, email, username, passwd, user_type)
+VALUES ('Kostas', 'Konstantinou','kostas@kostas.com','kostas',SHA1('1234'), 2);
+
+INSERT INTO User
+(firstname, surname, email, username, passwd, user_type)
+VALUES ('Spiros', 'Spirou','spiros@spiros.com','spiros',SHA1('1234'), 2);
+
+INSERT INTO User
+(firstname, surname, email, username, passwd, user_type)
+VALUES ('Mitsos', 'Mitsou','mitsos@mitsos.com','mitsos',SHA1('1234'), 2);
+
+INSERT INTO User
+(firstname, surname, email, username, passwd, user_type)
+VALUES ('John', 'Rambo','jb@jb.com','jrambo',SHA1('1234'), 2);
+
+INSERT INTO `Visitor`
+(user_id, visitor_level)
+VALUES (4, 'senior');
+
+INSERT INTO `Visitor`
+(user_id, visitor_level)
+VALUES (5, 'senior');
+
+INSERT INTO `Visitor`
+(user_id, visitor_level)
+VALUES (6, 'senior');
+
+INSERT INTO `Visitor`
+(user_id, visitor_level, superior_id)
+VALUES (7, 'trainee', 4);
+INSERT INTO `Visitor`
+(user_id, visitor_level, superior_id)
+VALUES (8, 'trainee', 5);
+INSERT INTO `Visitor`
+(user_id, visitor_level, superior_id)
+VALUES (9, 'trainee', 6);
+
+insert into geographical_area (geo_name)values ('N. Attikis');
+insert into geographical_area (geo_name)values ('N. Lakonias');
+insert into geographical_area (geo_name)values ('N. Larisas');
+insert into geographical_area (geo_name)values ('N. Xaniwn');
+insert into geographical_area (geo_name)values ('N. Axaias');
+
+insert into city (city_name, geo_id) values ('Marousi', 1);
+insert into city (city_name, geo_id) values ('Voula', 1);
+insert into city (city_name, geo_id) values ('Penteli', 1);
+insert into city (city_name, geo_id) values ('Faliro', 1);
 insert into city (city_name, geo_id) values ('Sparti', 2);
+insert into city (city_name, geo_id) values ('Mani', 2);
+insert into city (city_name, geo_id) values ('Larisa', 3);
+insert into city (city_name, geo_id) values ('Farsala', 3);
+insert into city (city_name, geo_id) values ('Xania', 4);
+insert into city (city_name, geo_id) values ('Sfakia',4);
+insert into city (city_name, geo_id) values ('Patra', 5);
+insert into city (city_name, geo_id) values ('Aigio', 5);
+insert into city (city_name, geo_id) values ('Rio',5);
 
 insert into specialty (specialty_name) values ('Dentist');
 insert into specialty (specialty_name) values ('Cardiologist');
 insert into specialty (specialty_name) values ('Gastroenterologist');
+insert into specialty (specialty_name) values ('Pathologist');
+insert into specialty (specialty_name) values ('Dermatologist');
+insert into specialty (specialty_name) values ('Microbiologist');
+insert into specialty (specialty_name) values ('Pediatrician');
 
-insert into institution (institution_name, city_id) values ('ygeia', 1);
-insert into institution (institution_name, city_id) values ('Sparti General Hospital', 2);
-
-insert into doctor (assigned_vst_id, created_from, name, specialty_id, address, phone, institution_id, position)
-values (null,2, 'mark markus', 1, 'address1', '2101231231', 1, 'professor');
-
-insert into doctor (assigned_vst_id, created_from, name, specialty_id, address, phone, institution_id, position)
-values (null,2, 'pitsos pitsou', 2, 'address1', '2101231231', 2, 'professor');
+insert into institution (institution_name, city_id) values ('Ygeia', 1);
+insert into institution (institution_name, city_id) values ('Asklipeio Voulas', 2);
+insert into institution (institution_name, city_id) values ('Paidwn Pentelis', 3);
+insert into institution (institution_name, city_id) values ('Metropolitan', 4);
+insert into institution (institution_name, city_id) values ('Sparti General Hospital', 5);
+insert into institution (institution_name, city_id) values ('Mani General Hospital', 6);
+insert into institution (institution_name, city_id) values ('Larisa General Hospital', 7);
+insert into institution (institution_name, city_id) values ('Kentro Ygeias Farsalwn', 8);
+insert into institution (institution_name, city_id) values ('Agios Georgios General Hospital', 9);
+insert into institution (institution_name, city_id) values ('Kentro Ygeias Sfakiwn', 10);
+insert into institution (institution_name, city_id) values ('Patra General Hospital', 11);
+insert into institution (institution_name, city_id) values ('Nosileutiki Monada Aigiou', 12);
+insert into institution (institution_name, city_id) values ('Patra General Hospital', 13);
 
 INSERT INTO `Cycle`
 (cycle)
 VALUES ('01-03');
 
-INSERT INTO `Visit`
-(doctor_id, visit_offset, status, date, cycle_id, extra_visit)
-VALUES (1 , 1, 'pending', null, 1, 1);
+INSERT INTO `Cycle`
+(cycle)
+VALUES ('04-06');
 
-INSERT INTO `Visit_Visitor_Lnk`
-(visitor_id, visit_id)
-VALUES (2 , 1);
+INSERT INTO `Cycle`
+(cycle)
+VALUES ('07-09');
 
-
+INSERT INTO `Cycle`
+(cycle)
+VALUES ('10-12');
