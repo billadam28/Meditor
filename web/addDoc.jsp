@@ -6,7 +6,7 @@
 <%@page import="MeditorPersistence.Institution"%>
 <%@page import="MeditorPersistence.City"%>
 <%@page import="MeditorPersistence.GeographicalArea"%>
-<%@page import="MeditorJavaClasses.addDocQ"%>
+<%@page import="MeditorJavaClasses.AddDoctorLists"%>
 <%@page import="MeditorPersistence.Specialty"%>
 <%@page import="MeditorServlets.addDoctSrvlt"%>
 <%@page import="MeditorServlets.SubmitDocServlet"%>
@@ -53,7 +53,7 @@
             <label>Specialty: </label>
             <select style="width:90%;" name ="specialty">
                 <option>Select A Specialty</option>
-                <% addDocQ spec = (addDocQ) request.getAttribute("Specialty");%>
+                <% AddDoctorLists spec = (AddDoctorLists) request.getAttribute("Specialty");%>
                 <%for (Specialty obj : spec.getSpecialtyList()) { %>
                 <option value="<%=obj.getId()%>"><%=obj.getSpecialtyName()%></option>
                 <%}%>
@@ -65,7 +65,7 @@
             <label>Institution: </label>
             <select style="width:90%;" name="institution">
                 <option>Select Institution</option>
-            <% addDocQ inst =(addDocQ) request.getAttribute("Institution");%>
+            <% AddDoctorLists inst =(AddDoctorLists) request.getAttribute("Institution");%>
                 <% for (Institution obj: inst.getInstituteList()){ %>
                 <option value="<%= obj.getId() %>"><%=obj.getInstitutionName()%></option>
                 <%}%>

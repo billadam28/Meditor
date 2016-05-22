@@ -47,9 +47,31 @@
                        <td><center><%=vst.getStatics(visitor,cycid)%></center></td>
                         </tr>
                         
-                      <% if (request.getAttribute("Leader") == "true") { %>
-                      <td>He is a leader!</td>
-                      <%{%>
+                    
+                        
+                     <div class="tab_container">
+                     <table class="tablesorter" cellspacing="0">
+
+                    <thead>
+                      
+                    <td><center>Visitor Name</center></td>
+                    <td><center>Total Doctors</center></td>
+                    <td><center>Total Number Of Visits</center></td>
+                    <td><center>Number of Visits On This Cycle</center></td>
+                    <td><center>Coverage Percent of Current Cycle</center></td>
+                    </tr>
+      
+                    </thead>
+                    <tbody>
+                        
+                        <tr>
+                        <td><center><%=visitor.getFirstname()%> <%=visitor.getSurname()%></center></td>       
+                        <td><center><%=vst.totalDoctors(visitor) %></center></td>
+                        <td><center><%=vst.totalVisits(visitor) %></center></td>
+                        <td><center><%=vst.totalVisitsPerCycle(visitor, cycid)%></center></td>
+                       <td><center><%=vst.getStatics(visitor,cycid)%></center></td>
+                        </tr>   
+                        
                        
  
                     </tbody>
