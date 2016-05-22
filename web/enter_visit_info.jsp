@@ -165,20 +165,20 @@
                     <header><h3>Edit Visit with ID: #<%= obj.getId()%></h3></header>
                     <input type="hidden" name="visit" value="<%= obj.getId()%>" form="update_visit_form">
                         <div class="module_content">
-                            <fieldset style="width:20%; display: inline-block;">
-                                <label style="width:80%; text-align: center;">Visitor Id</label>
-                                <input style="width:60%; margin-left:18px;" type="text" id="vID" value="<%= request.getAttribute("vId")%>" form="update_visit_form" name="vID" disabled>
+                            <fieldset style="">
+                                <label style="">Visitor Id</label>
+                                <input style="" type="text" id="vID" value="<%= request.getAttribute("vId")%>" form="update_visit_form" name="vID" disabled>
                             </fieldset>
-                            <fieldset style="width:20%; display: inline-block; margin-left: 33px;">
-                                <label style="width:80%; text-align: center;">Doctor Id</label>
-                                <input style="width:60%; margin-left:18px;" type="text" id="dID" value="<%= obj.getDoctor().getId()%>" form="update_visit_form" name="dID" disabled>
+                            <fieldset style="">
+                                <label style="">Doctor Id</label>
+                                <input style="" type="text" id="dID" value="<%= obj.getDoctor().getId()%>" form="update_visit_form" name="dID" disabled>
                             </fieldset>
-                            <fieldset style="width:20%; display: inline-block; margin-left: 33px;">
-                                <label style="width:80%; text-align: center;">Date</label>
-                                <input style="width:60%; margin-left:18px;" type="text" name="date" id="date" value="<%= obj.getDate()%>" form="update_visit_form">
+                            <fieldset style="">
+                                <label style="">Date</label>
+                                <input style="" type="text" name="date" id="date" value="<%if (obj.getDate()==null || obj.getDate().equals("null")) {%> YYYY-MM-DD <%} else {%><%= obj.getDate()%><%}%>" form="update_visit_form">
                             </fieldset>
-                            <fieldset style="width:10%; display: inline-block; margin-left: 33px; margin-top: 10px; position: absolute; height: 36px;"> 
-                                <label style="width:85%; text-align: center; margin-top: -8px;">Change Status</label>
+                            <fieldset style=""> 
+                                <label style="">Change Status</label>
                                 <select name="status" id="status" form="update_visit_form" style="width:84%;">
                                         <option value="pending">Pending</option>
                                         <option value="completed">Completed</option>
@@ -187,25 +187,25 @@
                             </fieldset>
                             
                             
-                            <fieldset style="width:30%; float:right;">
-                                <label style="width:90%; text-align: center;">Cycle</label>
-                                <input style="width:70%; margin-left:20px; text-align: center;" type="text" name="cycle" id="cycle" value="<%= obj.getCycle().getCycle()%>" form="update_visit_form" disabled>
+                            <fieldset style="">
+                                <label style="">Cycle</label>
+                                <input style="" type="text" name="cycle" id="cycle" value="<%= obj.getCycle().getCycle()%>" form="update_visit_form" disabled>
                             </fieldset>
                             
                             
                             
-                            <fieldset style="width:17%; margin-right: 33px; float:right;">
-                                <label style="width:80%; text-align: center; ">Extra Visit</label>
+                            <fieldset style="">
+                                <label style="">Extra Visit</label>
                                 <%if(obj.getExtraVisit()==true) {%> 
-                                            <input style="width:60%; margin-left:18px;" type="checkbox" name="extra1" id="extrayes" value="<%= obj.getExtraVisit()%>" form="update_visit_form" checked="checked"><%} else {%>
-                                            <input style="width:60%; margin-left:18px;" type="checkbox" name="extra1" id="extrano" value="<%= obj.getExtraVisit()%>" form="update_visit_form"><%}%>
+                                            <input style="" type="checkbox" name="extra1" id="extrayes" value="<%= obj.getExtraVisit()%>" form="update_visit_form" checked="checked"><%} else {%>
+                                            <input style="" type="checkbox" name="extra1" id="extrano" value="<%= obj.getExtraVisit()%>" form="update_visit_form"><%}%>
                             </fieldset>
                             
-                            <fieldset style="width:40%;">
-				<label style="width:90%; text-align: center;">Comments</label>
-				<textarea style="width:90%;" rows="5" id="comments" form="update_visit_form" name="comments" maxlength="250"><%= obj.getComments()%></textarea>
+                            <fieldset style="">
+				<label style="">Comments</label>
+				<textarea style="" rows="5" id="comments" form="update_visit_form" name="comments" maxlength="250"><%if (obj.getComments()==null || obj.getComments().equals("null")) {%> No comments <%} else {%><%= obj.getComments()%><%}%></textarea>
                             </fieldset>
-                            <fieldset style="width: 40%;"> 
+                            <fieldset style=""> 
                                 <label>Accompanied by trainee</label>
                                 <select name="trainee" id="trainee" form="update_visit_form" style="width:84%;">
                                         <option value="0">No trainee</option>
