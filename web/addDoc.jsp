@@ -95,6 +95,7 @@
     <script type="text/javascript" src="js/currentlinkstyle.js"></script>  
 
         </article>
-        </section>>
+        </section>
+    </body>        
 </html>
     

@@ -1,3 +1,26 @@
+function validateNewDoctor() {
+    var name = document.getElementByName("name").value;
+    var address = document.getElementByName("address").value;
+    var phone = document.getElementByName("phone").value;
+    var specialty = document.getElementByName("specialty").value;
+    var institution = document.getElementByName("institution").value;
+    var position = document.getElementByName("position").value;
+    
+    if ((name == null || name == "") || 
+            (address==null || address=="") ||
+            (phone==null || phone=="") ||
+            (specialty=="Select A Specialty") ||
+            (institution=="Select Institution") ||
+            (position==null || position=="")) {
+        alert("All fields are required!");
+        return false;
+    } else {
+        return true;
+        
+    }
+    
+}
+
 function validateLoginForm() {
     var x = document.getElementById("login_text").value;
     var y = document.getElementById("password").value;
