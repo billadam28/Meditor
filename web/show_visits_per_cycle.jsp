@@ -85,7 +85,7 @@
                                         <td>
                                             <%for (Visitor vst : (Set<Visitor>) obj.getVisitors()) {
                                                 if (vst.getVisitorLevel().equals("trainee")) {
-                                                    out.println(vst.getFirstname()+" "+vst.getSurname()+"\n");
+                                                    out.println(vst.getFirstname()+" "+vst.getSurname()+"<br>");
                                                 }
                                             }%>
                                         </td>
