@@ -36,8 +36,8 @@
 		</ul>
 		<h3>Reports</h3>
 		<ul class="toggle">
-			<li class="icn_folder"><a href="GenerateReport1" onclick="highlightCurrentLink();">Visitor Statistics</a></li>
-			<li class="icn_photo"><a href="#" onclick="highlightCurrentLink();">2</a></li>
+                    <li class="icn_folder"><a href="GenerateReport1" onclick="highlightCurrentLink();">Visitor Statistics</a></li>
+                    <li class="icn_photo"><a href="AdminMedReportsSrvlt" onclick="highlightCurrentLink();">Visit Coverage</a></li>
 		</ul>
 		
 		<footer>
