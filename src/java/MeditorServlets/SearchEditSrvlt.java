@@ -7,7 +7,7 @@ package MeditorServlets;
 
 import MeditorJavaClasses.SearchEditDoc;
 import MeditorJavaClasses.VisitorDAO;
-import MeditorJavaClasses.addDocQ;
+import MeditorJavaClasses.AddDoctorLists;
 import java.io.IOException;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -38,7 +38,7 @@ public class SearchEditSrvlt extends HttpServlet {
             this.getServletConfig().getServletContext().getRequestDispatcher("/index.jsp?noSession=1").forward(request, response);
         } else {
             //Fetch The lists for Edit Results
-            addDocQ ad = new addDocQ();
+            AddDoctorLists ad = new AddDoctorLists();
             ad.makeLists();
             ad.getSpecialtyList();
             ad.getGeoAreaList();

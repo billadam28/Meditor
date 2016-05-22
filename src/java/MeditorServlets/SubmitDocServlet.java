@@ -6,7 +6,7 @@
 package MeditorServlets;
 
 import MeditorJavaClasses.DoctorDAO;
-import MeditorJavaClasses.addDocQ;
+import MeditorJavaClasses.AddDoctorLists;
 import MeditorPersistence.Doctor;
 import MeditorPersistence.Institution;
 import MeditorPersistence.NewHibernateUtil;
@@ -71,7 +71,7 @@ public class SubmitDocServlet extends HttpServlet {
                 doctor.setPosition(position);
                 doctor.setCreatedFrom(vstID);
                 //Fetch Lists for  Reload in Success-Error
-                addDocQ ad = new addDocQ();
+                AddDoctorLists ad = new AddDoctorLists();
                 ad.makeLists();
                 ad.getSpecialtyList();
                 ad.getGeoAreaList();

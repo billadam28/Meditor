@@ -5,7 +5,7 @@
  */
 package MeditorServlets;
 
-import MeditorJavaClasses.addDocQ;
+import MeditorJavaClasses.AddDoctorLists;
 import java.io.IOException;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -66,7 +66,7 @@ public class addDoctSrvlt extends HttpServlet {
         if ((session == null) || (session.getAttribute("userId") == null)) {
             this.getServletConfig().getServletContext().getRequestDispatcher("/index.jsp?noSession=1").forward(request, response);
         } else {
-            addDocQ ad = new addDocQ();
+            AddDoctorLists ad = new AddDoctorLists();
             ad.makeLists();
             ad.getSpecialtyList();
             ad.getGeoAreaList();

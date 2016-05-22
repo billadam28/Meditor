@@ -49,9 +49,9 @@ public class ProduceVstReportSrvlt extends HttpServlet {
                  reporthandler.findByVstId(vstId);
                  reporthandler.getStatics(visitor,cycId);
                  request.setAttribute("visit", reporthandler);
-
-                
-
+//                 if(visitor.getGroup().getGroupLeader().getId().equals(vstId)){
+//                     request.setAttribute("Leader", true);
+//                 }
 
         this.getServletConfig().getServletContext().getRequestDispatcher("/reportsview.jsp").forward(request, response);
         }

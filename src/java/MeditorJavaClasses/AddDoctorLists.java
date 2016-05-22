@@ -23,7 +23,7 @@ import org.hibernate.Transaction;
  *
  * @author glalas
  */
-public class addDocQ {
+public class AddDoctorLists {
     private String getSpecialtyListQuery;
     private List<Specialty> specialtylist;
     private String getGeographicalAreaListQuery;
@@ -36,7 +36,7 @@ public class addDocQ {
 
             
     
-    public addDocQ(){
+    public AddDoctorLists(){
         
            
     }

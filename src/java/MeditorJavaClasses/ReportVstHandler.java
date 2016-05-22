@@ -74,6 +74,14 @@ public class ReportVstHandler {
                     count++; 
                     }
                 }
+                else if (!visit.getCycle().getId().equals(cycId)){
+                    NumberFormat defaultFormat = NumberFormat.getPercentInstance();
+                    defaultFormat.setMinimumFractionDigits(1);
+                    defaultFormat.format(total);
+                    return defaultFormat.format(total);
+
+           
+                }
                 
           }
         total = count / (visits);
@@ -140,7 +148,21 @@ public class ReportVstHandler {
           }
         return doctors;
     }
-   
+
+    public Integer totalVisitsPerCycle(Visitor visitor, Integer cycId ){
+        int visits=0;
+        for (Iterator iterator = visitor.getVisits().iterator(); iterator.hasNext();){
+                Visit visit = (Visit) iterator.next();
+                if(visit.getCycle().getId().equals(cycId)){
+                    if(visit.getStatus().equals("pending") || (visit.getStatus().equals("completed")) ||(visit.getStatus().equals("unsuccessful"))){
+                        visits++;
+                    }
+        
+            }
+        }
+        return visits;
+    }   
+       
      public List<Visitor> getVisitorResults(){
      return this.results;
  }
