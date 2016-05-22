@@ -6,7 +6,6 @@
 package MeditorServlets;
 
 import MeditorJavaClasses.DoctorDAO;
-import MeditorJavaClasses.addDocQ;
 import MeditorPersistence.Doctor;
 import MeditorPersistence.Institution;
 import MeditorPersistence.NewHibernateUtil;
@@ -25,7 +24,7 @@ import org.hibernate.Session;
  *
  * @author glalas
  */
-public class SubmitDocServlet extends HttpServlet {
+public class CommitEditDocSrvlt extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -43,26 +42,30 @@ public class SubmitDocServlet extends HttpServlet {
         if ((session == null) || (session.getAttribute("userId") == null)) {
             this.getServletConfig().getServletContext().getRequestDispatcher("/index.jsp?noSession=1").forward(request, response);
         } else {
-            Session hibersession = NewHibernateUtil.getSessionFactory().openSession();
-
+             Session hibersession = NewHibernateUtil.getSessionFactory().openSession();
+            
             
             try {
-               
+                
                 Integer myuserid = (Integer) session.getAttribute("userId");
                 Visitor vstID = (Visitor)hibersession.get(Visitor.class, myuserid);
-                String name = request.getParameter("name");
-                String address =request.getParameter("address");
-                String phone = request.getParameter("phone");    
+                String retrievedid = request.getParameter("docId");
+                int docId= Integer.parseInt(retrievedid);
+                String name = request.getParameter("docname");
+                String address =request.getParameter("docaddress");
+                String phone = request.getParameter("docphone");    
                 String specialty = request.getParameter("specialty");
                 int specialid = Integer.parseInt(specialty);
                 String institution =request.getParameter("institution");
+//                System.err.println("paramater for institution = "+institution);
                 int institutionid = Integer.parseInt(institution);
-                String position = request.getParameter("position");
+                String position = request.getParameter("docposition");
                 
-                
-                Doctor doctor =new Doctor();
+                Doctor doctor = (Doctor) hibersession.get(Doctor.class, docId);
+
                 Specialty spec = (Specialty) hibersession.get(Specialty.class, specialid);
                 Institution inst = (Institution) hibersession.get(Institution.class, institutionid);
+
                 doctor.setName(name);
                 doctor.setAddress(address);
                 doctor.setPhone(phone);
@@ -70,40 +73,21 @@ public class SubmitDocServlet extends HttpServlet {
                 doctor.setInstitution(inst);
                 doctor.setPosition(position);
                 doctor.setCreatedFrom(vstID);
-                //Fetch Lists for  Reload in Success-Error
-                addDocQ ad = new addDocQ();
-                ad.makeLists();
-                ad.getSpecialtyList();
-                ad.getGeoAreaList();
-                ad.getCityList();
-                ad.getInstituteList();
-                request.setAttribute("City", ad);
-                request.setAttribute("Institution", ad);
-                request.setAttribute("GeographicalArea", ad);
-                request.setAttribute("Specialty",ad);
-                if (ad.checkForDoubles(name, address, phone) == true){
-
-                    request.setAttribute("revealCreateErrorMsg","true");
-                    this.getServletConfig().getServletContext().getRequestDispatcher("/addDoc.jsp").forward(request, response);
-                } else{
+                
+//                hibersession.saveOrUpdate(doctor);
+//                tx.commit();
                 DoctorDAO doctordao= new DoctorDAO();
-                doctordao.addDoctor(doctor);
-                request.setAttribute("revealCreateSuccessMsg", "true");
-                this.getServletConfig().getServletContext().getRequestDispatcher("/addDoc.jsp").forward(request, response);
-                }
-               
+                doctordao.updateDoctor(doctor);
             }
             catch (HibernateException e) {
-    
+           
             e.printStackTrace();
         } finally {
             hibersession.close();
         }
-                
-                
-        
+            request.setAttribute("revealEditSuccessMsg", "true");
+        this.getServletConfig().getServletContext().getRequestDispatcher("/addsuccess.jsp").forward(request, response);
         }
-        
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

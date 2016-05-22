@@ -6,6 +6,7 @@
 package MeditorJavaClasses;
 
 import MeditorPersistence.City;
+import MeditorPersistence.Doctor;
 import MeditorPersistence.GeographicalArea;
 import MeditorPersistence.Institution;
 import MeditorPersistence.NewHibernateUtil;
@@ -14,6 +15,7 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import org.hibernate.HibernateException;
+import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
@@ -30,6 +32,7 @@ public class addDocQ {
     private List<City> cityList;
     private String getInstitutionQuery;
     private List<Institution> instituteList;
+    
 
             
     
@@ -115,4 +118,20 @@ public class addDocQ {
     }
     
 
+    public boolean checkForDoubles(String name, String address, String phone){
+            Session session = NewHibernateUtil.getSessionFactory().openSession();
+
+            Query query= session.createQuery("from Doctor d where d.name = :name and d.address = :address and d.phone =:phone ");
+            query.setParameter("name", name);
+            query.setParameter("address", address);
+            query.setParameter("phone", phone);
+            query.setMaxResults(1);
+            Doctor dct = (Doctor) query.uniqueResult();
+            if (dct == null){
+                return false;
+            }
+            else return true;
+
+
+    }
 }

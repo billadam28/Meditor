@@ -14,13 +14,21 @@
 <!DOCTYPE html>
 
 <html>
+    <title>Add A Doctor</title>
     <%@ include file="includes/vst_common_head.jsp" %>
      
     <body>
         <%@ include file="includes/visitor_common.jsp" %>
-        
-
-        <h1>Add New Doctor</h1>
+        <section id="main" class="column">
+             <% if (request.getAttribute("revealCreateSuccessMsg") == "true") { %>
+            <h4 class="alert_success"> Doctor was created successfully!</h4>
+            <%}%>
+            <% if (request.getAttribute("revealCreateErrorMsg") == "true") { %>
+            <h4 class="alert_error"> Doctor Already Exists!</h4>
+            <%}%>
+            
+        <article class="module width_full">
+            <h1><center>Add New Doctor</center></h1>
         <form name="addform" action="SubmitDocServlet" method="get">
             <fieldset>
             <label>Doctor Name: </label>
@@ -82,14 +90,11 @@
         
         </form>
         
-            <% if (request.getAttribute("revealCreateSuccessMsg") == "true") { %>
-        <h1 class="alert_success"> Doctor was created successfully!</h1>
-            <%}%>
+           
             
     <script type="text/javascript" src="js/currentlinkstyle.js"></script>  
 
-   
-    
-   </body>
+        </article>
+        </section>>
 </html>
     
