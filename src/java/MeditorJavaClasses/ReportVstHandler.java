@@ -162,36 +162,42 @@ public class ReportVstHandler {
         return visits;
     }   
     
-    public Integer pendingVisits(Visitor visitor, Integer vstId){
+    public Integer pendingVisits(Visitor visitor, Integer vstId, Integer cycId){
         int visits=0;
         for (Iterator iterator = visitor.getVisits().iterator(); iterator.hasNext();){
                 Visit visit = (Visit) iterator.next();
+                if(visit.getCycle().getId().equals(cycId)){
                     if(visit.getStatus().equals("pending")){
                         visits++;
                     }
+                }
             }
         return visits; 
     }
     
-        public Integer completedVisits(Visitor visitor, Integer vstId){
+        public Integer completedVisits(Visitor visitor, Integer vstId, Integer cycId){
         int visits=0;
         for (Iterator iterator = visitor.getVisits().iterator(); iterator.hasNext();){
                 Visit visit = (Visit) iterator.next();
+                if(visit.getCycle().getId().equals(cycId)){
                     if(visit.getStatus().equals("complete")){
                         visits++;
                     }
+                }
             }
         return visits; 
     }
     
         
-        public Integer unsuccessfulVisits(Visitor visitor, Integer vstId){
+        public Integer unsuccessfulVisits(Visitor visitor, Integer vstId, Integer cycId){
         int visits=0;
         for (Iterator iterator = visitor.getVisits().iterator(); iterator.hasNext();){
                 Visit visit = (Visit) iterator.next();
+                if(visit.getCycle().getId().equals(cycId)){
                     if(visit.getStatus().equals("unsuccessful")){
                         visits++;
                     }
+                }
             }
         return visits; 
     }

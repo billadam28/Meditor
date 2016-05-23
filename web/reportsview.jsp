@@ -66,9 +66,9 @@
                     <tbody>
                         
                         <tr>
-                        <td><center><%=vst.pendingVisits(visitor, vstorId) %></center></td>       
-                        <td><center><%=vst.completedVisits(visitor, vstorId) %></center></td>
-                        <td><center><%=vst.unsuccessfulVisits(visitor, vstorId) %></center></td>
+                        <td><center><%=vst.pendingVisits(visitor, vstorId, cycid) %></center></td>       
+                        <td><center><%=vst.completedVisits(visitor, vstorId, cycid) %></center></td>
+                        <td><center><%=vst.unsuccessfulVisits(visitor, vstorId,cycid) %></center></td>
                         </tr>   
                         
                        
