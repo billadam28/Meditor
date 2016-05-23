@@ -25,6 +25,7 @@
             <div class="tab_container">
                 <table class="tablesorter" cellspacing="0">
                     <% Integer cycid = (Integer) request.getAttribute("cycle");%>
+                    <% Integer vstorId = (Integer) request.getAttribute("vstorId");%>
                     <% ReportVstHandler vst = (ReportVstHandler) request.getAttribute("visit");%>
                     <% Visitor visitor= (Visitor) request.getAttribute("visitor");%>
                     <thead>
@@ -45,6 +46,7 @@
                         <td><center><%=vst.totalVisits(visitor) %></center></td>
                         <td><center><%=vst.totalVisitsPerCycle(visitor, cycid)%></center></td>
                        <td><center><%=vst.getStatics(visitor,cycid)%></center></td>
+
                         </tr>
                         
                     
@@ -54,22 +56,19 @@
 
                     <thead>
                       
-                    <td><center>Visitor Name</center></td>
-                    <td><center>Total Doctors</center></td>
-                    <td><center>Total Number Of Visits</center></td>
-                    <td><center>Number of Visits On This Cycle</center></td>
-                    <td><center>Coverage Percent of Current Cycle</center></td>
+                    <td><center>Pending Visits</center></td>
+                    <td><center>Completed Visits</center></td>
+                    <td><center>Unsuccessful Visits</center></td>
+
                     </tr>
       
                     </thead>
                     <tbody>
                         
                         <tr>
-                        <td><center><%=visitor.getFirstname()%> <%=visitor.getSurname()%></center></td>       
-                        <td><center><%=vst.totalDoctors(visitor) %></center></td>
-                        <td><center><%=vst.totalVisits(visitor) %></center></td>
-                        <td><center><%=vst.totalVisitsPerCycle(visitor, cycid)%></center></td>
-                       <td><center><%=vst.getStatics(visitor,cycid)%></center></td>
+                        <td><center><%=vst.pendingVisits(visitor, vstorId) %></center></td>       
+                        <td><center><%=vst.completedVisits(visitor, vstorId) %></center></td>
+                        <td><center><%=vst.unsuccessfulVisits(visitor, vstorId) %></center></td>
                         </tr>   
                         
                        

@@ -7,7 +7,6 @@ package MeditorJavaClasses;
 
 import MeditorPersistence.Doctor;
 import MeditorPersistence.NewHibernateUtil;
-import MeditorPersistence.Specialty;
 import MeditorPersistence.Visit;
 import MeditorPersistence.Visitor;
 import java.text.NumberFormat;
@@ -141,7 +140,7 @@ public class ReportVstHandler {
        List dct = session.createQuery("From Doctor").list();
             for (Iterator iterator = 
                            dct.iterator(); iterator.hasNext();){
-            Doctor doctor = (Doctor) iterator.next(); 
+            Doctor doctor = (Doctor) iterator.next();
             if(doctor.getAssignedVisitor().getId().equals(visitor.getId())){
                     doctors++;
                 }
@@ -162,7 +161,47 @@ public class ReportVstHandler {
         }
         return visits;
     }   
-       
+    
+    public Integer pendingVisits(Visitor visitor, Integer vstId){
+        int visits=0;
+        for (Iterator iterator = visitor.getVisits().iterator(); iterator.hasNext();){
+                Visit visit = (Visit) iterator.next();
+                    if(visit.getStatus().equals("pending")){
+                        visits++;
+                    }
+            }
+        return visits; 
+    }
+    
+        public Integer completedVisits(Visitor visitor, Integer vstId){
+        int visits=0;
+        for (Iterator iterator = visitor.getVisits().iterator(); iterator.hasNext();){
+                Visit visit = (Visit) iterator.next();
+                    if(visit.getStatus().equals("complete")){
+                        visits++;
+                    }
+            }
+        return visits; 
+    }
+    
+        
+        public Integer unsuccessfulVisits(Visitor visitor, Integer vstId){
+        int visits=0;
+        for (Iterator iterator = visitor.getVisits().iterator(); iterator.hasNext();){
+                Visit visit = (Visit) iterator.next();
+                    if(visit.getStatus().equals("unsuccessful")){
+                        visits++;
+                    }
+            }
+        return visits; 
+    }
+    
+    
+
+    
+    
+    
+    
      public List<Visitor> getVisitorResults(){
      return this.results;
  }

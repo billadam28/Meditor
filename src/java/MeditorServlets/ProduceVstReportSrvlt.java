@@ -44,14 +44,13 @@ public class ProduceVstReportSrvlt extends HttpServlet {
                  Visitor visitor = (Visitor) hibersession.get(Visitor.class, vstId);
                  int cycId= Integer.parseInt(request.getParameter("cycle"));
                  request.setAttribute("cycle", cycId);
+                 request.setAttribute("vstorId", vstId);
                  request.setAttribute("visitor", visitor);
                  ReportVstHandler reporthandler = new ReportVstHandler();
                  reporthandler.findByVstId(vstId);
                  reporthandler.getStatics(visitor,cycId);
                  request.setAttribute("visit", reporthandler);
-//                 if(visitor.getGroup().getGroupLeader().getId().equals(vstId)){
-//                     request.setAttribute("Leader", true);
-//                 }
+
 
         this.getServletConfig().getServletContext().getRequestDispatcher("/reportsview.jsp").forward(request, response);
         }

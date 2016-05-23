@@ -32,19 +32,19 @@
         <form name="addform" action="SubmitDocServlet" method="get">
             <fieldset>
             <label>Doctor Name: </label>
-            <input type="text" name="name" value="" onfocus="if(!this._haschanged){this.value=''};this._haschanged=true;">
+            <input type="text" name="name"s>
             <br>
             </fieldset>
             
             <fieldset>
             <label>Address: </label>
-            <input type="text" name="address" value="" onfocus="if(!this._haschanged){this.value=''};this._haschanged=true;">
+            <input type="text" name="address">
             <br>
             </fieldset>
             
             <fieldset>
             <label>Phone: </label>
-            <input type="text" name="phone" value="" onfocus="if(!this._haschanged){this.value=''};this._haschanged=true;">
+            <input type="text" name="phone">
             <br>
             </fieldset>
             
@@ -75,7 +75,7 @@
 
             <fieldset>
             <label>Position: </label>
-            <input type="text" name="position" value="" onfocus="if(!this._haschanged){this.value=''};this._haschanged=true;">
+            <input type="text" name="position">
             <br>
             </fieldset>
             
@@ -95,7 +95,12 @@
     <script type="text/javascript" src="js/currentlinkstyle.js"></script>  
 
         </article>
+
         </section>
     </body>        
+
+        </section>>
+    </body>
+
 </html>
     

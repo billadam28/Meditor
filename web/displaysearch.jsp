@@ -3,8 +3,8 @@
     Created on : May 15, 2016, 7:15:16 PM
     Author     : glalas
 --%>
+<%@page import="MeditorJavaClasses.AddDoctorLists"%>
 <%@page import="MeditorPersistence.Institution"%>
-<%@page import="MeditorJavaClasses.addDocQ"%>
 <%@page import="MeditorPersistence.Specialty"%>
 <%@page import="MeditorServlets.addDoctSrvlt"%>
 <%@page import="MeditorServlets.CommitEditDocSrvlt"%>
@@ -90,7 +90,7 @@
                                     <label style="width:100%; text-align: center;">Specialty</label>
                                     <select style="width:80%;" name ="specialty" >
                                         <option value="<%=obj.getSpecialty().getId()%>"><%= obj.getSpecialty().getSpecialtyName() %></option>
-                                        <% addDocQ spec = (addDocQ) request.getAttribute("Specialty");%>
+                                        <% AddDoctorLists spec = (AddDoctorLists) request.getAttribute("Specialty");%>
                                         <%for (Specialty objs : spec.getSpecialtyList()) { %>
                                         <option value="<%=objs.getId()%>"><%=objs.getSpecialtyName()%></option>
                                         <%}%>
@@ -117,7 +117,7 @@
                                     <label style="width:100%; text-align: center;">Specialty</label>
                                     <select style="width:80%;" name ="institution" >
                                         <option value="<%=obj.getInstitution().getId()%>"><%= obj.getInstitution().getInstitutionName() %></option>
-                                        <% addDocQ inst = (addDocQ) request.getAttribute("Institution");%>
+                                        <% AddDoctorLists inst = (AddDoctorLists) request.getAttribute("Institution");%>
                                         <%for (Institution objs : inst.getInstituteList()) { %>
                                         <option value="<%=objs.getId()%>"><%=objs.getInstitutionName()%></option>
                                         <%}%>
@@ -125,10 +125,11 @@
                                     </fieldset>
                                     
                                     <input type="submit" name="submit" value="Submit">
+                                    <%}%>
                                 </tr> 
                                        
                         	
-                                 <%}%>
+                                 
 			</tbody> 
 			</table>
                         </form>
