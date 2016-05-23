@@ -69,7 +69,7 @@ public class ReportVstHandler {
                     if(visit.getStatus().equals("pending") || (visit.getStatus().equals("completed")) ||(visit.getStatus().equals("unsuccessful"))){
                         visits++;
                     }
-                    if(!visit.getStatus().equals("pending") && (visit.getStatus().equals("unsuccessful"))){
+                    if(visit.getStatus().equals("completed")){
                     count++; 
                     }
                 }
