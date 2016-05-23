@@ -69,18 +69,18 @@ public class ReportVstHandler {
                     if(visit.getStatus().equals("pending") || (visit.getStatus().equals("completed")) ||(visit.getStatus().equals("unsuccessful"))){
                         visits++;
                     }
-                    if(!visit.getStatus().equals("pending")){
+                    if(!visit.getStatus().equals("pending") && (visit.getStatus().equals("unsuccessful"))){
                     count++; 
                     }
                 }
-                else if (!visit.getCycle().getId().equals(cycId)){
-                    NumberFormat defaultFormat = NumberFormat.getPercentInstance();
-                    defaultFormat.setMinimumFractionDigits(1);
-                    defaultFormat.format(total);
-                    return defaultFormat.format(total);
-
-           
-                }
+//                else if (!visit.getCycle().getId().equals(cycId)){
+//                    NumberFormat defaultFormat = NumberFormat.getPercentInstance();
+//                    defaultFormat.setMinimumFractionDigits(1);
+//                    defaultFormat.format(total);
+//                    return defaultFormat.format(total);
+//
+//           
+//                }
                 
           }
         total = count / (visits);
