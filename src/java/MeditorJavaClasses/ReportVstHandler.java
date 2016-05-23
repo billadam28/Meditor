@@ -180,7 +180,7 @@ public class ReportVstHandler {
         for (Iterator iterator = visitor.getVisits().iterator(); iterator.hasNext();){
                 Visit visit = (Visit) iterator.next();
                 if(visit.getCycle().getId().equals(cycId)){
-                    if(visit.getStatus().equals("complete")){
+                    if(visit.getStatus().equals("completed")){
                         visits++;
                     }
                 }
