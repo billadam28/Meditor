@@ -73,14 +73,14 @@ public class ReportVstHandler {
                     count++; 
                     }
                 }
-                    else {
+                    /*else {
                     NumberFormat defaultFormat = NumberFormat.getPercentInstance();
                     defaultFormat.setMinimumFractionDigits(1);
                     defaultFormat.format(total);
                     return defaultFormat.format(total);
 
            
-                }
+                }*/
                
 
                 
