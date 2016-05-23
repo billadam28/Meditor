@@ -73,14 +73,16 @@ public class ReportVstHandler {
                     count++; 
                     }
                 }
-//                else if (!visit.getCycle().getId().equals(cycId)){
-//                    NumberFormat defaultFormat = NumberFormat.getPercentInstance();
-//                    defaultFormat.setMinimumFractionDigits(1);
-//                    defaultFormat.format(total);
-//                    return defaultFormat.format(total);
-//
-//           
-//                }
+                    else {
+                    NumberFormat defaultFormat = NumberFormat.getPercentInstance();
+                    defaultFormat.setMinimumFractionDigits(1);
+                    defaultFormat.format(total);
+                    return defaultFormat.format(total);
+
+           
+                }
+               
+
                 
           }
         total = count / (visits);
@@ -141,9 +143,10 @@ public class ReportVstHandler {
             for (Iterator iterator = 
                            dct.iterator(); iterator.hasNext();){
             Doctor doctor = (Doctor) iterator.next();
-            if(doctor.getAssignedVisitor().getId().equals(visitor.getId())){
+            if(Integer.valueOf(doctor.getAssignedVisitor().getId()).equals(visitor.getId())){
                     doctors++;
                 }
+            
           }
         return doctors;
     }
