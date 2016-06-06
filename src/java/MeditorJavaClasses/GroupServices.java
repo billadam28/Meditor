@@ -32,6 +32,10 @@ public class GroupServices {
     private final String getVisitorsNoLeaderQuery;
     
     
+    /**
+     * This method initializes the lists and declares the queries.
+     */
+    
     public GroupServices() {
         visitorsList = new ArrayList<>();
         groupsList= new ArrayList<>();
@@ -42,7 +46,12 @@ public class GroupServices {
         getVisitorsNoLeaderQuery = "from Visitor v where group != null";
     }
 
-
+    /**
+     * This method checks if the given name exists or not. 
+     * @param nameOfGroup
+     * @return True or False.
+     */
+    
     public boolean availableGroup (String nameOfGroup) {
         Session session = NewHibernateUtil.getSessionFactory().openSession();
         Group group = new Group();
@@ -50,6 +59,12 @@ public class GroupServices {
         Query query = session.createQuery("select name from Group where name='"+nameOfGroup+"'");
         return (query.uniqueResult() != null);
     }
+    
+    /**
+     * This method retrieves the name of this parent group.
+     * @param parentGroup
+     * @return String
+     */
     
     public String assignedGroup (int parentGroup) {
         Session session = NewHibernateUtil.getSessionFactory().openSession();
@@ -60,6 +75,14 @@ public class GroupServices {
         return name;
         
     }
+    
+    /**
+     * This method creates a new Group by inserting a new row in the 
+     * corresponding table.
+     * @param nameOfGroup
+     * @param descOfGroup
+     * @param parentGroup 
+     */
     
     public void createGroup(String nameOfGroup, String descOfGroup, int parentGroup) {
             Session session = NewHibernateUtil.getSessionFactory().openSession();
@@ -94,6 +117,13 @@ public class GroupServices {
             
     }    
     
+    /**
+     * This method assigns one or more visitors to a group by updating a row
+     * in the corresponding table.
+     * @param assignedVisitors
+     * @param groupId 
+     */
+    
     public void assignVisitorToGroup(String[] assignedVisitors, int groupId ) {
         Session session = NewHibernateUtil.getSessionFactory().openSession();
         Transaction tx = null;
@@ -120,6 +150,13 @@ public class GroupServices {
         
     }
     
+    /**
+     * This method sets a visitor as a group leader by updating a row in the
+     * corresponding table.
+     * @param groupId
+     * @param visitorId 
+     */
+    
     public void setVisitorAsLeader(int groupId,int visitorId) {
         Session session = NewHibernateUtil.getSessionFactory().openSession();
         Transaction tx = null;
@@ -141,6 +178,13 @@ public class GroupServices {
         }
         
     }
+    
+    /**
+     * This method retrieves the groups and stores them in a list, retrieves
+     * the visitors that they are not members of a group and stores them in a list 
+     * and retrieves the visitors that are members of a group but not leaders and
+     * stores them in a list.
+     */
     
     public void showVisitorGroupLists() {
         Session session = NewHibernateUtil.getSessionFactory().openSession();
@@ -186,13 +230,29 @@ public class GroupServices {
                  
     }
     
+    /**
+     * This method returns the list of visitors who are not members of a group.
+     * @return List
+     */
+    
     public List<Visitor> visitorsList () {
         return this.visitorsList;
     }
     
+    /**
+     * This method returns the list of available groups.
+     * @return List
+     */
+    
     public List<Group> groupsList () {
         return this.groupsList;
     }
+    
+    /**
+     * This method returns the list of visitors who are in a group which has no
+     * leader.
+     * @return List 
+     */
     
     public List<Visitor> visitorsNoLeaderList () {
         return this.visitorsNoLeaderList;

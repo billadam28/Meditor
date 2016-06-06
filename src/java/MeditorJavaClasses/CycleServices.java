@@ -29,6 +29,10 @@ public class CycleServices {
     private List<Visit> getVisitorVisits;
     private final String getVisitorVisitsQuery;
     
+    /**
+     * This method initializes the lists and declares the queries.
+     */
+    
     public CycleServices() {
     
         getVisitorVisits = new ArrayList<>();
@@ -39,6 +43,10 @@ public class CycleServices {
                                   + "and (v.status=\'completed\' or v.status=\'unsuccessful\')";
     }
     
+    /**
+     * This method retrieves all cycles from the database and stores them in a
+     * list.
+     */
     
     public void showCyclesList() {
         Session session = NewHibernateUtil.getSessionFactory().openSession();
@@ -63,6 +71,13 @@ public class CycleServices {
                  
     }
    
+    /**
+     * This method retrieves visitor's completed or unsuccessful visits per 
+     * cycle and stores them in a list.
+     * @param vId
+     * @param cycleId 
+     */
+    
     public void getVisitorVisits (int vId, int cycleId) {
         Session session = NewHibernateUtil.getSessionFactory().openSession();
         Transaction tx = null;
@@ -96,9 +111,19 @@ public class CycleServices {
         }   
     }
     
+    /**
+     * This method returns the list of cycles.
+     * @return List
+     */
+    
     public List<Cycle> cyclesList () {
         return this.cyclesList;
     }
+    
+    /**
+     * This method returns visitor's visits.
+     * @return List
+     */
     
     public List<Visit> getVisitorVisits () {
         return this.getVisitorVisits;

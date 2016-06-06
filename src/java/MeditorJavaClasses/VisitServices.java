@@ -34,6 +34,10 @@ public class VisitServices {
     private final String getTraineesQuery;
     //private final String getVisitQuery;
     
+    /**
+     * This method initializes the lists and declares the queries.
+     */
+    
     public VisitServices() {
         traineesList= new ArrayList<>();
         doctorsList = new ArrayList<>(); 
@@ -43,6 +47,10 @@ public class VisitServices {
         getVisitsQuery = "select v from Visit v where status = 'pending'";
         getTraineesQuery = "select v from Visitor v where visitor_level = 'trainee'";
     }
+    
+    /**
+     * This method retrieves all trainees and stores them in a list.
+     */
     
     public void showTraineesList() {
         Session session = NewHibernateUtil.getSessionFactory().openSession();
@@ -65,6 +73,17 @@ public class VisitServices {
         }
                  
     }
+    
+    /**
+     * This method updates information about a selected visit and adds and
+     * accompanied trainee, if available.
+     * @param date
+     * @param status
+     * @param extra
+     * @param comments
+     * @param visitId
+     * @param traineeId 
+     */
     
     public void updateVisit(Date date, String status, boolean extra, String comments, int visitId, int traineeId) {
             Session session = NewHibernateUtil.getSessionFactory().openSession();
@@ -97,6 +116,12 @@ public class VisitServices {
             
     } 
     
+    /**
+     * This method retrieves all the information about the visit that is going
+     * to be edited.
+     * @param visitId 
+     */
+    
     public void editVisitForm (int visitId) {
         Session session = NewHibernateUtil.getSessionFactory().openSession();
         Transaction tx = null;
@@ -127,6 +152,12 @@ public class VisitServices {
         }
     }
     
+    /**
+     * This method returns visitor's Id.
+     * @param userId
+     * @return Integer
+     */
+    
     public int getVisitorId (int userId) {
         Session session = NewHibernateUtil.getSessionFactory().openSession();
         Query query = session.createQuery("select id from Visitor where user_id='"+userId+"'");
@@ -135,6 +166,12 @@ public class VisitServices {
         //System.out.println(vstId);
         return vstId;
     }
+    
+    /**
+     * This method retrieves all doctors who have been assigned to the particular
+     * visitor and stores them in a list.
+     * @param userId 
+     */
     
     public void showDoctorsList(int userId) {
         Session session = NewHibernateUtil.getSessionFactory().openSession();
@@ -171,6 +208,12 @@ public class VisitServices {
                  
     }
     
+    /**
+     * This method retrieves the pending visits of the selected doctor and stores
+     * them in a list.
+     * @param docId 
+     */
+    
     public void showVisitsList (int docId) {
         Session session = NewHibernateUtil.getSessionFactory().openSession();
         Transaction tx = null;
@@ -206,17 +249,38 @@ public class VisitServices {
         
     }
     
+    /**
+     * This method returns a list of all doctors who have been assigned to the 
+     * particular visitor.
+     * @return List
+     */
+    
     public List<Doctor> doctorsList () {
         return this.doctorsList;
     }
+    
+    /**
+     * This method returns a list of the pending visits of the selected doctor.
+     * @return List
+     */
     
     public List<Visit> visitsList () {
         return this.visitsList;
     }
     
+    /**
+     * This method returns a list of all trainees.
+     * @return List 
+     */
+    
     public List<Visitor> traineesList () {
         return this.traineesList;
     }
+    
+    /**
+     * This method returns the visit that is going to be edited.
+     * @return Visit
+     */
     
     public Visit getVisit () {
         return this.getVisit;
