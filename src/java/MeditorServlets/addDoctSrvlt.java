@@ -14,7 +14,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 /**
- *
+ * The servlet which accepts the request from the client and serves the page where the logged in user creates a new Doctor.
  * @author glalas
  */
 public class addDoctSrvlt extends HttpServlet {

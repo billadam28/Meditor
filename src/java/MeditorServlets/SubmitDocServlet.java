@@ -5,7 +5,7 @@
  */
 package MeditorServlets;
 
-import MeditorJavaClasses.DoctorDAO;
+import MeditorJavaClasses.DoctorDAOImpl;
 import MeditorJavaClasses.AddDoctorLists;
 import MeditorPersistence.Doctor;
 import MeditorPersistence.Institution;
@@ -22,7 +22,7 @@ import org.hibernate.HibernateException;
 import org.hibernate.Session;
 
 /**
- *
+ * A servlet which accepts the request from the addDoc.jsp and adds the Doctor to the Database.
  * @author glalas
  */
 public class SubmitDocServlet extends HttpServlet {
@@ -86,7 +86,7 @@ public class SubmitDocServlet extends HttpServlet {
                     request.setAttribute("revealCreateErrorMsg","true");
                     this.getServletConfig().getServletContext().getRequestDispatcher("/addDoc.jsp").forward(request, response);
                 } else{
-                DoctorDAO doctordao= new DoctorDAO();
+                DoctorDAOImpl doctordao= new DoctorDAOImpl();
                 doctordao.addDoctor(doctor);
                 request.setAttribute("revealCreateSuccessMsg", "true");
                 this.getServletConfig().getServletContext().getRequestDispatcher("/addDoc.jsp").forward(request, response);

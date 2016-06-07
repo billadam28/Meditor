@@ -17,7 +17,7 @@ import javax.servlet.http.HttpSession;
 import org.hibernate.Session;
 
 /**
- *
+ * The servlet which accepts the request for the production of statistics.
  * @author glalas
  */
 public class ProduceVstReportSrvlt extends HttpServlet {
@@ -50,10 +50,17 @@ public class ProduceVstReportSrvlt extends HttpServlet {
                  reporthandler.findByVstId(vstId);
                  reporthandler.getStatics(visitor,cycId);
                  request.setAttribute("visit", reporthandler);
+                 if(visitor.getGroup().getId()==null){
+                    this.getServletConfig().getServletContext().getRequestDispatcher("/reportsview.jsp").forward(request, response); 
+                 }
+                 else if ((!visitor.getGroup().getGroupLeader().getId().equals(visitor.getId()))){ ///NULL CHECK!?
+                     this.getServletConfig().getServletContext().getRequestDispatcher("/reportsview.jsp").forward(request, response);
+                 }else{
 
-
-        this.getServletConfig().getServletContext().getRequestDispatcher("/reportsview.jsp").forward(request, response);
-        }
+                reporthandler.groupVisitorsStats(visitor, cycId);
+                request.setAttribute("groupvisitors", reporthandler);
+                this.getServletConfig().getServletContext().getRequestDispatcher("/reportsviewleader.jsp").forward(request, response);}
+                }
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

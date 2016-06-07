@@ -5,7 +5,7 @@
  */
 package MeditorServlets;
 
-import MeditorJavaClasses.DoctorDAO;
+import MeditorJavaClasses.DoctorDAOImpl;
 import MeditorPersistence.Doctor;
 import MeditorPersistence.Institution;
 import MeditorPersistence.NewHibernateUtil;
@@ -21,7 +21,7 @@ import org.hibernate.HibernateException;
 import org.hibernate.Session;
 
 /**
- *
+ * The servlet which accepts request for editing a Doctor.
  * @author glalas
  */
 public class CommitEditDocSrvlt extends HttpServlet {
@@ -74,7 +74,7 @@ public class CommitEditDocSrvlt extends HttpServlet {
                 doctor.setCreatedFrom(vstID);
                 
 
-                DoctorDAO doctordao= new DoctorDAO();
+                DoctorDAOImpl doctordao= new DoctorDAOImpl();
                 doctordao.updateDoctor(doctor);
             }
             catch (HibernateException e) {

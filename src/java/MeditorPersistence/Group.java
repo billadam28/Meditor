@@ -27,6 +27,10 @@ public class Group  implements java.io.Serializable {
         return this.id;
     }
     public void setId(Integer id) {
+            if(id==null)
+    {
+        this.id=0;
+    }else 
         this.id = id;
     }
     

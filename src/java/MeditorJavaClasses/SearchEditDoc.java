@@ -16,7 +16,8 @@ import org.hibernate.Session;
 import org.hibernate.Transaction;
 
 /**
- *
+ * This class is responsible for making the searches for doctors in the Database.
+ * It provides methods for Searching by name, specialty, assigned Visitor and Institution.
  * @author glalas
  */
 public class SearchEditDoc {
@@ -24,13 +25,16 @@ public class SearchEditDoc {
 
     
     
-    
+    /**
+     * Constructor
+     */
     public SearchEditDoc() {
-        
-        
-        
     }
     
+    /**
+     * Search by Name method
+     * @param name String
+     */
     public void SearchbyName(String name){
 
         Session session = NewHibernateUtil.getSessionFactory().openSession();
@@ -69,7 +73,11 @@ public class SearchEditDoc {
             }
             
    }
-
+    
+    /**
+     * Search by Specialty method
+     * @param specid Integer
+     */
     public void searchBySpecialty(Integer specid){
         Session session = NewHibernateUtil.getSessionFactory().openSession();
         Transaction tx = null;
@@ -106,7 +114,10 @@ public class SearchEditDoc {
                 session.close();
             }
     }
-  
+  /**
+   * Search by Assigned Visitor.
+   * @param vstId Integer
+   */
   public void searchByAssignedVisitor(Integer vstId){
       Session session = NewHibernateUtil.getSessionFactory().openSession();
         Transaction tx = null;
@@ -145,6 +156,10 @@ public class SearchEditDoc {
       
   }
   
+  /**
+   * Search by Institute
+   * @param instID Integer 
+   */
   public void searchByInstitution(Integer instID){
       Session session = NewHibernateUtil.getSessionFactory().openSession();
         Transaction tx = null;
@@ -181,7 +196,10 @@ public class SearchEditDoc {
                 session.close();
             }
   }
-    
+  /**
+   * Method for return the results made by a search
+   * @return List of Doctor objects
+   */
   public List<Doctor> getSearchResults(){
      return this.results;
  }

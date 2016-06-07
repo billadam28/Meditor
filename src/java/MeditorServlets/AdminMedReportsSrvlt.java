@@ -7,6 +7,7 @@ package MeditorServlets;
 
 import MeditorJavaClasses.CycleList;
 import MeditorJavaClasses.ReportVstHandler;
+import MeditorJavaClasses.VisitorDAO;
 import java.io.IOException;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -15,7 +16,8 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 /**
- *
+ * The servlet which accepts the request from the client to access
+ * the Visitor statistics page
  * @author glalas
  */
 public class AdminMedReportsSrvlt extends HttpServlet {
@@ -36,9 +38,8 @@ public class AdminMedReportsSrvlt extends HttpServlet {
         if ((session == null) || (session.getAttribute("userId") == null)) {
             this.getServletConfig().getServletContext().getRequestDispatcher("/index.jsp?noSession=1").forward(request, response);
         } else {
-            ReportVstHandler visitor = new ReportVstHandler();
+            VisitorDAO visitor = new VisitorDAO();
             visitor.getAllVisitors();
-            visitor.getVisitorResults();
             CycleList cycle = new CycleList();
             cycle.populateDefaultList();
             request.setAttribute("cycleList", cycle.getCycleList());

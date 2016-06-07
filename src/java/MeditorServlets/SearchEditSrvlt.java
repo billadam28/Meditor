@@ -16,7 +16,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 /**
- *
+ * The servlet which accepts the request for the search.
  * @author glalas
  */
 public class SearchEditSrvlt extends HttpServlet {

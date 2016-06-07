@@ -4,6 +4,7 @@
     Author     : glalas
 --%>
 
+<%@page import="MeditorJavaClasses.VisitorDAO"%>
 <%@page import="java.util.List"%>
 <%@page import="MeditorPersistence.Cycle"%>
 <%@page import="MeditorJavaClasses.CycleList"%>
@@ -33,8 +34,8 @@
   
                     </thead>
                     <tbody>
-                        <% ReportVstHandler vst = (ReportVstHandler) request.getAttribute("Visitors");%>
-                        <% for (Visitor obj: vst.getVisitorResults()){ %>
+                        <% VisitorDAO vst = (VisitorDAO) request.getAttribute("Visitors");%>
+                        <% for (Visitor obj: vst.getAllVisitors()){ %>
                         <tr>
                         <td><input type="radio" name="selectvisitor" value="<%= obj.getId()%>"></td>
                         <td><%=obj.getFirstname()%></td>
